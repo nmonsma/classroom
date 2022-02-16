@@ -1,5 +1,5 @@
 // Global Variables
-let imageList = ['', 'Europe.png', 'WWI.png', 'EasternEurope.png', 'Europe.png']
+let imageList = ['', 'Europe.png', 'WWI.png', 'Eastern Europe.png', 'Italy.png']
 let imageIndex = 0
 
 // Main Functions
