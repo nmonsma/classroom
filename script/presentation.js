@@ -6,13 +6,13 @@ let imageIndex = 0
 function advanceImage () {
     imageIndex++;
     console.log(`${imageList[imageIndex]}`);
-    document.getElementById('body').style.backgroundImage=`${imageList[imageIndex]}`;
+    document.getElementsByTagName('body')[0].style.backgroundImage=`url("${imageList[imageIndex]}")`;
 }
 
 function reverseImage () {
     imageIndex--;
     console.log(`${imageList[imageIndex]}`);
-    document.getElementById('body').style.backgroundImage=`${imageList[imageIndex]}`;
+    document.getElementsByTagName('body')[0].style.backgroundImage=`url("${imageList[imageIndex]}")`;
 }
 
 // Main Actions
