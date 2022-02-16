@@ -4,6 +4,7 @@ body {
     background-color: black;
     background-size: contain;
     background-repeat: no-repeat;
+}
 
 a {
     all: unset;
