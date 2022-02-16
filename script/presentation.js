@@ -1,18 +1,18 @@
 // Global Variables
-let imageList = ['', 'img/Europe.png', 'img/WWI.png']
+let imageList = ['', 'Europe.png', 'WWI.png', 'EasternEurope.png', 'Europe.png']
 let imageIndex = 0
 
 // Main Functions
 function advanceImage () {
     imageIndex++;
     console.log(`${imageList[imageIndex]}`);
-    document.getElementsByTagName('body')[0].style.backgroundImage=`url("${imageList[imageIndex]}")`;
+    document.getElementsByTagName('body')[0].style.backgroundImage=`url("img/${imageList[imageIndex]}")`;
 }
 
 function reverseImage () {
     imageIndex--;
     console.log(`${imageList[imageIndex]}`);
-    document.getElementsByTagName('body')[0].style.backgroundImage=`url("${imageList[imageIndex]}")`;
+    document.getElementsByTagName('body')[0].style.backgroundImage=`url("img/${imageList[imageIndex]}")`;
 }
 
 // Main Actions
