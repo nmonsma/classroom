@@ -27,11 +27,27 @@ a {
     all: unset;
 }
 
-main {
+body {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header {
+    width: 100vw;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -58,6 +74,16 @@ main {
         hsl(43,88%,52%) 100%);
     color: #000;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    font-size: 5em;
+}
+
+.item {
+    padding: 10%;
+    border-radius: 25%;
+    background-color: white;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 800;
     font-size: 5em;
 }
