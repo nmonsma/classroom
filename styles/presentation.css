@@ -1,0 +1,16 @@
+/* Definitions: */
+body {
+    margin: 0 auto;
+    background-color: black;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+a {
+    all: unset;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+}
