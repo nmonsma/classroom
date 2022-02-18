@@ -26,14 +26,14 @@ function gatherScores () {
 }
 
 function addTeam1 () {
-    team1 = team1 + averageScore;
+    team1 = +Math.round(10 * (team1 + averageScore)) / 10;
     console.log("adding to team 1");
     document.getElementById('score-1').innerText = team1;
     lastAdd = 1;
 }
 
 function addTeam2 () {
-    team2 = team2 + averageScore;
+    team2 = +Math.round(10 * (team2 + averageScore)) / 10;
     console.log("adding to team 2");
     document.getElementById('score-2').innerText = team2;
     lastAdd = 2;
