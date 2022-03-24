@@ -1,0 +1,87 @@
+body {
+    all: unset;
+    margin: 0 auto;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 700;
+}
+
+header {
+    display: none;
+}
+
+.fullscreen {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(5, 19%);
+    grid-template-rows: 20% 15% 15% 15% 15% 15%;
+    grid-template-areas: 
+        "t1 t2 t3 t4 t5"
+        "a b c d e"
+        "f g h i j"
+        "k l m n o"
+        "p q r s t"
+        "u v w x y";
+    gap: 1%;
+}
+
+p {
+    all: unset;
+}
+
+.item {
+    border: 3px solid white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: #082774;
+    color: #f0b219;
+    text-align: center;
+}
+
+.title {
+    background-color: #f0b219;
+    color: black;
+    margin-bottom: 7%;
+    font-size: 40px;
+}
+
+#answers {
+    font-size: 75px;
+    z-index: 50;
+    background-color: #000
+}
+
+.prompt {
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: #082774;
+    color: white;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    font-size: 100px;    
+}
+
+.front {
+    z-index: 100;
+}
+
+.hidden {
+    opacity: 0;
+}
