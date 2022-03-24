@@ -55,11 +55,11 @@ p {
     background-color: #f0b219;
     color: black;
     margin-bottom: 7%;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 #answers {
-    font-size: 75px;
+    font-size: 50px;
     z-index: 50;
     background-color: #000
 }
