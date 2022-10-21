@@ -12,6 +12,9 @@ function processKey (keyPressed) {
         document.getElementById(`question-${answerDisplayed}`).classList.remove('front');
         answerDisplayed = '';
     }
+    else if (keyPressed=="/"){
+        window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ&mode=theatre")
+    }
     else if (answerDisplayed=='') {
         document.getElementById(`question-${keyPressed}`).classList.add('front');
         answerDisplayed = `${keyPressed}`;
