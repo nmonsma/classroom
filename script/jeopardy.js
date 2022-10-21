@@ -15,6 +15,9 @@ function processKey (keyPressed) {
     else if (keyPressed=="/"){
         window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ&mode=theatre")
     }
+    else if (keyPressed=="1"){
+        window.location.replace("https://www.youtube.com/watch?v=njPzMyRGq9c&mode=theatre")
+    }
     else if (answerDisplayed=='') {
         document.getElementById(`question-${keyPressed}`).classList.add('front');
         answerDisplayed = `${keyPressed}`;
