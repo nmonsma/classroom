@@ -28,4 +28,4 @@ function toggleDisappearance () {
 // Main Actions
 document.getElementById('main-image').addEventListener('click', elementSwitch);
 document.getElementById('peek').addEventListener('click', toggleDisappearance);
-setInterval(elementSwitch, 10000);
+setInterval(elementSwitch, 240000);
