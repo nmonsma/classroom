@@ -10,10 +10,133 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <header>         
-        </header>
         <main>
+            <p id="peek">Hide and Seek</p>   
+            <div id="main-image">
+                <svg id="square-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" style="background-color:fff">
+                    <defs>
+                        <symbol id="arrow" viewBox="0 0 30 60" transform-origin="center" height="50" width="50" >
+                            <path fill="none" stroke-width="10" d="M10,10 L25,30 L10,50"/>
+                        </symbol>
+                    </defs>
+                    <polygon points="200,200 800,200 800,800 200,800" stroke-width="10" stroke="black" fill="none"/>
+                    <text class="element label" id="a" x="30" y="150">A</text>
+                    <text class="element label" id="e" x="840" y="150">E</text>
+                    <text class="element label" id="i" x="70" y="970">I</text>
+                    <text class="element label" id="o" x="830" y="970">O</text>
 
+
+                    <g class="contrariety" id="contrariety-universal" transform="translate(500,125)">
+                        <text class="element relationship-label" transform="translate(-75,8)">contrariety</text>
+                 
+                        <g class="element">
+                            <path fill="none" stroke="#47f" stroke-width="10" d="M-250,-25 L250,-25"/>
+                            <text class="t" transform="translate(-310,-5)">T</text>
+                            <!-- <use transform="translate(-270,-50) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(220,-50)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="f" transform="translate(270,-5)">F</text>
+                        </g>
+
+                        <g class="element">
+                            <path fill="none" stroke="#47f" stroke-width="10" d="M-250,25 L250,25"/>
+                            <text class="f" transform="translate(-310,45)">F</text>
+                            <use transform="translate(-270,0) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                            <!-- <use transform="translate(220,0)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <text class="t" transform="translate(270,45)">T</text>
+                        </g>
+                    </g>
+                    <g class="contrariety" id="contrariety-universal" transform="translate(500,875)">
+                        <text class="element relationship-label" transform="translate(-75,8)">subcontrariety</text>
+
+                        <g class="element">
+                            <path fill="none" stroke="#f00" stroke-width="10" d="M-250,25 L250,25"/>
+                            <text class="t" transform="translate(-310,45)">T</text>
+                            <!-- <use transform="translate(-270,-50) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(-270,0) rotate(180)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="f" transform="translate(270,45)">F</text>
+                        </g>
+                        <g class="element">                     
+                            <path fill="none" stroke="#f00" stroke-width="10" d="M-250,-25 L250,-25"/>
+                            <text class="f" transform="translate(-310,-5)">F</text>
+                            <use transform="translate(220,-50)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                            <!-- <use transform="translate(220,0)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->                        
+                            <text class="t" transform="translate(270,-5)">T</text>
+                        </g>
+                    </g>
+
+                    <g class="alternation" id="superimplication" transform="translate(500,500) rotate(270)">
+                        <g class="element">                                             
+                            <text class="relationship-label" transform="translate(-100,-417)">superimplication</text>
+                            <path fill="none" stroke="#f00" stroke-width="10" d="M-250,-400 L250,-400"/>
+                            <text class="f" transform="translate(-310,-380)">F</text>
+                            <!-- <use transform="translate(-270,-50) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(220,-425)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="f" transform="translate(270,-380)">F</text>
+                        </g>
+
+                        <g class="element">                                          
+                            <text class="relationship-label" transform="translate(-100,333)">superimplication</text>
+                            <path fill="none" stroke="#f00" stroke-width="10" d="M-250,350 L250,350"/>
+                            <text class="f" transform="translate(-310,370)">F</text>
+                            <!-- <use transform="translate(-270,0) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(220,325)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="f" transform="translate(270,370)">F</text>
+                        </g>
+                    </g>
+
+                    <g class="alternation" id="subimplication" transform="translate(500,500) rotate(90)">
+                        <g class="element">                     
+                            <text class="relationship-label" transform="translate(-100,-417)">subimplication</text>
+                            <path fill="none" stroke="#47f" stroke-width="10" d="M-250,-400 L250,-400"/>
+                            <text class="t" transform="translate(-310,-380)">T</text>
+                            <!-- <use transform="translate(-270,-50) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(220,-425)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="t" transform="translate(270,-380)">T</text>
+                        </g>
+                        <g class="element">                     
+                            <text class="relationship-label" transform="translate(-100,333)">subimplication</text>
+                            <path fill="none" stroke="#47f" stroke-width="10" d="M-250,350 L250,350"/>
+                            <text class="t" transform="translate(-310,370)">T</text>
+                            <!-- <use transform="translate(-270,0) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" /> -->
+                            <use transform="translate(220,325)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                            <text class="t" transform="translate(270,370)">T</text>
+                        </g>
+                    </g>
+
+                    <g class="contradiction element" transform="translate(500,500) rotate(45)">
+                        <text class="relationship-label" transform="translate(-225,8)">contradiction</text>
+                        <path fill="none" stroke="#b0f" stroke-width="10" d="M-250,25 L250,25"/>
+                        <path fill="none" stroke="#b0f" stroke-width="10" d="M-250,-25 L250,-25"/>
+
+                        <text class="t" transform="translate(-310,-5)">T</text>
+                        <use transform="translate(-270,-50) rotate(180)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                        <use transform="translate(220,-50)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                        <text class="f" transform="translate(270,-5)">F</text>
+
+                        <text class="f" transform="translate(-310,45)">F</text>
+                        <use transform="translate(-270,0) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                        <use transform="translate(220,0)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                        <text class="t" transform="translate(270,45)">T</text>
+                    </g>
+
+                    <g class="contradiction element" transform="translate(500,500) rotate(-45)">
+                        <text class="relationship-label" transform="translate(-225,8)">contradiction</text>
+                        <path fill="none" stroke="#b0f" stroke-width="10" d="M-250,25 L250,25"/>
+                        <path fill="none" stroke="#b0f" stroke-width="10" d="M-250,-25 L250,-25"/>
+
+                        <text class="f" transform="translate(-310,-5)">F</text>
+                        <use transform="translate(-270,-50) rotate(180)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                        <use transform="translate(220,-50)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                        <text class="t" transform="translate(270,-5)">T</text>
+
+                        <text class="t" transform="translate(-310,45)">T</text>
+                        <use transform="translate(-270,0) rotate(180)" stroke="#47f" xlink:href="#arrow" transform-origin="25 25" />
+                        <use transform="translate(220,0)" stroke="#f00" xlink:href="#arrow" transform-origin="25 25" />
+                        <text class="f" transform="translate(270,45)">F</text>
+                    </g>
+
+                </svg>
+            </div>    
         </main>
         <footer>
         </footer>
