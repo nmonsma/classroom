@@ -4,9 +4,10 @@ const elements = document.getElementsByClassName('element')
 // Main Functions
 function elementSwitch () {
     if (document.getElementById('peek').classList.contains('checked')) {
+        console.log('randomly hiding');
         for (let i=0; i < elements.length; i++) {
             let r = Math.random() * 7;
-            console.log(r)
+            console.log(r);
             if (r>2) {
                 elements[i].classList.add('hidden');
             } else {
@@ -18,11 +19,15 @@ function elementSwitch () {
 
 function toggleDisappearance () {
     document.getElementById('peek').classList.toggle('checked');
-    if (!document.getElementById('peek').classList.contains('checked')) {
+    console.log('toggling button')
+    if (document.getElementById('peek').classList.contains('checked')) {
+        elementSwitch();
+    } else {
         for (let i=0; i < elements.length; i++) {
             elements[i].classList.remove('hidden');       
         }
-    }    
+        console.log('revealing all');
+    }   
 }
 
 // Main Actions
