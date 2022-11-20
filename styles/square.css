@@ -1,4 +1,8 @@
 /* Definitions: */
+body {
+    margin: 0;
+}
+
 p {
     height: 30px;
     width: 300px;
@@ -18,9 +22,9 @@ main {
     width: 100vw;
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    align-items: top;
 }
 
 a {
@@ -89,7 +93,8 @@ div {
 }
 
 #square-image {
-    height: 75vh;
+    height: 100vh;
+    margin: 0;
 }
 
 .nav-button {

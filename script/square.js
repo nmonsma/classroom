@@ -6,9 +6,9 @@ function elementSwitch () {
     if (document.getElementById('peek').classList.contains('checked')) {
         console.log('randomly hiding');
         for (let i=0; i < elements.length; i++) {
-            let r = Math.random() * 7;
+            let r = Math.random() * 10;
             console.log(r);
-            if (r>2) {
+            if (r>1.6) {
                 elements[i].classList.add('hidden');
             } else {
                 elements[i].classList.remove('hidden');
