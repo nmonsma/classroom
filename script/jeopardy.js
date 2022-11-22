@@ -8,7 +8,7 @@ function processKey (keyPressed) {
         document.getElementsByClassName(`${answerDisplayed}`)[0].classList.add('hidden');
         answerDisplayed = '';
     }
-    else if (keyPressed=="z") {
+    else if (keyPressed=="Escape") {
         document.getElementById(`question-${answerDisplayed}`).classList.remove('front');
         answerDisplayed = '';
     }
