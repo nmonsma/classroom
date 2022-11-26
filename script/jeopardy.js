@@ -6,11 +6,18 @@ const items = document.getElementsByClassName('item');
 const scoresElements = document.getElementsByClassName('scores');
 
 //Helper Functions
-function updateScores(i) {
+function increaseScores(i) {
     scoresElements[i].innerText = scores[i];
-    scoresElements[i].classList.add('updated');
-    setTimeout(()=>{scoresElements[i].classList.remove('updated')},600);
+    scoresElements[i].classList.add('increased');
+    setTimeout(()=>{scoresElements[i].classList.remove('increased')},600);
 }
+
+function decreaseScores(i) {
+    scoresElements[i].innerText = scores[i];
+    scoresElements[i].classList.add('decreased');
+    setTimeout(()=>{scoresElements[i].classList.remove('decreased')},600);
+}
+
 
 function processClick() {
     processChoice(this.id.substr(5,6));
@@ -32,11 +39,11 @@ function processChoice(choiceCode) {
     }
     else if ((choiceCode>0)&&(choiceCode<5)) {
         scores[choiceCode-1]=scores[choiceCode-1]+valueDisplayed;
-        updateScores(choiceCode-1);
+        increaseScores(choiceCode-1);
     }
     else if ((choiceCode>4)&&(choiceCode<9)) {
         scores[choiceCode-5]=scores[choiceCode-5]-valueDisplayed;
-        updateScores(choiceCode-5);
+        decreaseScores(choiceCode-5);
     }
     else if (answerDisplayed=='') {
         document.getElementById(`question-${choiceCode}`).classList.add('front');

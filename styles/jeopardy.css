@@ -1,17 +1,29 @@
-@keyframes update-tile {
+@import url(colors.css);
+
+@keyframes increase {
     20% {transform: scale(1.2, 1.5) rotate(-2deg)}
     80% {transform: scale(1.5, 1.2) rotate(2deg)}
 }
 
-@keyframes flip-tile {
-    20% {background-color: hsl(223,87%,72%)}
-    100% {background-color: hsl(223,87%,40%)}
+@keyframes decrease {
+    20% {transform: scale(0.8, 0.6) rotate(-2deg)}
+    80% {transform: scale(0.6, 0.8) rotate(2deg)}
+}
+
+@keyframes highlight-tile {
+    20% {background-color: var(--lightBlue)}
+    100% {background-color: var(--darkBlue); color: var(--lightGray)}
 }
 
 
-.updated {
-    animation: update-tile 0.5s;
+.increased {
+    animation: increase 0.5s;
 }
+
+.decreased {
+    animation: decrease 0.5s;
+}
+
 
 body {
     all: unset;
@@ -68,17 +80,17 @@ p {
 }
 
 .item {
-    background: #082774;
-    color: #f0b219;
+    background: var(--darkBlue);
+    color: var(--lightOrange);
 }
 
 .item:hover {
-    animation: flip-tile 0.5s 1 forwards;
+    animation: highlight-tile 0.5s 1 forwards;
     cursor: pointer;
 }
 
 .title {
-    background-color: #f0b219;
+    background-color: var(--lightOrange);
     color: black;
     margin-bottom: 7%;
     font-size: 30px;
@@ -96,12 +108,12 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background: #082774;
+    background: var(--darkBlue);
     color: white;
     text-align: center;
-    width: 100vw;
-    height: 100vh;
-    font-size: 80px;    
+    font-size: 80px;
+    width: 96vw;
+    padding: 0 2vw;    
 }
 
 .front {
@@ -121,7 +133,7 @@ header {
     top: 0;
     width: 100vw;
     height: 13vh;
-    background: #fff;
+    background: #000;
     z-index: 49;   
 }
 
@@ -141,22 +153,22 @@ header {
 }
 
 #score1 {
-    background-color: #dd6666;
-    color: #000;
+    background-color: var(--darkRed);
+    color: #fff;
 }
 
 #score2 {
-    background-color: #dddd33;
-    color: #000;
+    background-color: var(--darkOrange);
+    color: #fff;
 }
 
 #score3 {
-    background-color: #66aa66;
-    color: #000;
+    background-color: var(--darkGreen);
+    color: #fff;
 }
 
 #score4 {
-    background-color: #7777dd;
-    color: #000;
+    background-color: var(--darkBlue);
+    color: #fff;
 }
 
