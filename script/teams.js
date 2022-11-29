@@ -8,29 +8,37 @@ let lastAdd = 0;
 // Main Functions
 function addTeam1 () {
     team1++;
-    console.log("adding to team 1");
-    document.getElementById('score-1').innerText = team1;
+    const scoreBox = document.getElementById('score-1');
+    scoreBox.innerText = team1;
+    scoreBox.classList.add('increased');
+    setTimeout(()=>{scoreBox.classList.remove('increased')},600);
     lastAdd = 1;
 }
 
 function addTeam2 () {
     team2++;
-    console.log("adding to team 2");
-    document.getElementById('score-2').innerText = team2;
+    const scoreBox = document.getElementById('score-2');
+    scoreBox.innerText = team2;
+    scoreBox.classList.add('increased');
+    setTimeout(()=>{scoreBox.classList.remove('increased')},600);
     lastAdd = 2;
 }
 
 function addTeam3 () {
     team3++;
-    console.log("adding to team 3");
-    document.getElementById('score-3').innerText = team3;
+    const scoreBox = document.getElementById('score-3');
+    scoreBox.innerText = team3;
+    scoreBox.classList.add('increased');
+    setTimeout(()=>{scoreBox.classList.remove('increased')},600);
     lastAdd = 3;
 }
 
 function addTeam4 () {
     team4++;
-    console.log("adding to team 4");
-    document.getElementById('score-4').innerText = team4;
+    const scoreBox = document.getElementById('score-4');
+    scoreBox.innerText = team4;
+    scoreBox.classList.add('increased');
+    setTimeout(()=>{scoreBox.classList.remove('increased')},600);
     lastAdd = 4;
 }
 
