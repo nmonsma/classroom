@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title>Categorical Syllogisms</title>
+        <link rel="stylesheet" href="styles/catsyl.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <main>
+            <div id="main-image">
+                <svg id="categorical-syllogism" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" style="background-color:fff">
+                    <defs>
+                        <symbol id="triangle" viewBox="0 0 36 26" transform-origin="center" height="100" >
+                            <path fill="none" stroke="black" stroke-width="1" d="M18,1 L35,25 L1,25 Z"/>
+                        </symbol>
+                        <symbol id="circle" viewBox="0 0 26 26" transform-origin="center" height="100">
+                            <circle fill="none" stroke="black" stroke-width="1" cx="13" cy="13" r="12"/>
+                        </symbol>
+                        <symbol id="rectangle" viewBox="0 0 40 26" transform-origin="center" height="100">
+                            <path fill="none" stroke="black" stroke-width="1" d="M1,1 L39,1 L39,25 L1,25 Z"/>
+                        </symbol>
+                        
+                    </defs>
+                    <g class="proposition premise" id="major-premise">
+                        <use x="-300" y="100" xlink:href="#triangle"/>
+                        <path fill="none" stroke="black" stroke-width="4" d="M233,150 L325,150" />
+                        <use x="-100" y="100" xlink:href="#rectangle"/>
+                        <use x="100" y="100" xlink:href="#circle"/>
+                        <use x="300" y="100" xlink:href="#rectangle"/>    
+                    </g>
+
+                    <g class="proposition premise" id="minor-premise">
+                        <use x="-300" y="300" xlink:href="#triangle"/>
+                        <path fill="none" stroke="black" stroke-width="4" d="M233,350 L325,350" />
+                        <use x="-100" y="300" xlink:href="#rectangle"/>
+                        <use x="100" y="300" xlink:href="#circle"/>
+                        <use x="300" y="300" xlink:href="#rectangle"/>    
+                    </g>
+                    <g class="proposition" id="conclusion">
+                        <path fill="none" stroke="black" stroke-width="4" d="M100,500 L900,500"/>
+                        <use x="-300" y="550" xlink:href="#triangle"/>
+                        <path fill="none" stroke="black" stroke-width="4" d="M233,600 L325,600" />
+                        <use x="-100" y="550" xlink:href="#rectangle"/>
+                        <use x="100" y="550" xlink:href="#circle"/>
+                        <use x="300" y="550" xlink:href="#rectangle"/>    
+                    </g>
+                </svg>
+            </div>
+        </main>
+        <footer>
+        </footer>
+        <script src="script/catsyl.js"></script>
+    </body>
+</html>
