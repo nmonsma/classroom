@@ -23,15 +23,15 @@ const key = {
         {"problem": "F \u2261 F", "solution":"T"}
     ],
     "resolutions": [
-        {"problem": "? \u2022 ? = T", "solution": "TT"},
-        {"problem": "? \u2022 ? = F", "solution": "??"},
-        {"problem": "? \u2022 T = F", "solution": "?"},
+        {"problem": "? \u2022 ? = T", "solution": "T T"},
+        {"problem": "? \u2022 ? = F", "solution": "? ?"},
+        {"problem": "? \u2022 T = F", "solution": "F"},
         {"problem": "? \u2022 F = F", "solution": "?"},
-        {"problem": "T \u2022 ? = F", "solution": "?"},
+        {"problem": "T \u2022 ? = F", "solution": "F"},
         {"problem": "F \u2022 ? = F", "solution": "?"},
 
-        {"problem": "? \u2228 ? = F", "solution": "FF"},
-        {"problem": "? \u2228 ? = T", "solution": "??"},
+        {"problem": "? \u2228 ? = F", "solution": "F F"},
+        {"problem": "? \u2228 ? = T", "solution": "? ?"},
         {"problem": "T \u2228 ? = T", "solution": "?"},
         {"problem": "F \u2228 ? = T", "solution": "T"},
         {"problem": "F \u2228 ? = F", "solution": "F"},
@@ -39,8 +39,8 @@ const key = {
         {"problem": "? \u2228 F = T", "solution": "T"},
         {"problem": "? \u2228 F = F", "solution": "F"},
 
-        {"problem": "? \u2283 ? = F", "solution": "TF"},
-        {"problem": "? \u2283 ? = T", "solution": "??"},
+        {"problem": "? \u2283 ? = F", "solution": "T F"},
+        {"problem": "? \u2283 ? = T", "solution": "? ?"},
         {"problem": "T \u2283 ? = T", "solution": "T"},
         {"problem": "T \u2283 ? = F", "solution": "F"},
         {"problem": "F \u2283 ? = T", "solution": "?"},
@@ -48,8 +48,8 @@ const key = {
         {"problem": "? \u2283 F = T", "solution": "F"},
         {"problem": "? \u2283 F = F", "solution": "T"},
 
-        {"problem": "? \u2261 ? = T", "solution": "??"},
-        {"problem": "? \u2261 ? = F", "solution": "??"},
+        {"problem": "? \u2261 ? = T", "solution": "? ?"},
+        {"problem": "? \u2261 ? = F", "solution": "? ?"},
         {"problem": "T \u2261 ? = T", "solution": "T"},
         {"problem": "T \u2261 ? = F", "solution": "F"},
         {"problem": "F \u2261 ? = T", "solution": "F"},
@@ -154,18 +154,18 @@ function toggleSolutions() {
  }
 
 // Main Actions
-for (i=0;i<10;i++) {
+for (i=0;i<7;i++) {
     const childElement = createCalculationQuestion();
     calcSpace.appendChild(childElement);
 }
-for (i=0;i<10;i++) {
+for (i=0;i<13;i++) {
     const childElement = createResolutionQuestion();
     calcSpace.appendChild(childElement);
 }
 const titleSpace = document.createElement('p');
 titleSpace.innerHTML = `Name: ________________<br><br>Date: __________`;
 orderSpace.appendChild(titleSpace);
-for (i=0;i<5;i++) {
+for (i=0;i<6;i++) {
     const childElement = createOrderQuestion();
     orderSpace.appendChild(childElement);
 }

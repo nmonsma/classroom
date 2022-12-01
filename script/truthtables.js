@@ -89,6 +89,6 @@ document.addEventListener('keydown', (e)=> {
     console.log(keyName);
     if (keyName==="PageDown") separateSteps();
     if (keyName==="PageUp") combineSteps();
-    if (keyName==="End") zoomSteps();
-    if (keyName==="Home") unzoomSteps();
+    if (keyName==="ArrowDown") zoomSteps();
+    if (keyName==="ArrowUp") unzoomSteps();
 })
