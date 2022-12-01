@@ -86,6 +86,7 @@ function createCalculationQuestion() {
     const solutionParagraph = document.createElement('p');
     const solutionText = key.calculations[questionNumber].solution;
     solutionParagraph.classList.add('solution');
+    solutionParagraph.classList.add('invisible');
     solutionParagraph.innerText = `${solutionText}`;
 
     createdDiv.appendChild(problemParagraph);
@@ -109,6 +110,7 @@ function createResolutionQuestion() {
     const solutionParagraph = document.createElement('p');
     const solutionText = key.resolutions[questionNumber].solution;
     solutionParagraph.classList.add('solution');
+    solutionParagraph.classList.add('invisible');
     solutionParagraph.innerText = `${solutionText}`;
 
     createdDiv.appendChild(problemParagraph);
@@ -133,6 +135,7 @@ function createOrderQuestion() {
     const solutionParagraph = document.createElement('p');
     const solutionText = key.order[questionNumber].problem.charAt(key.order[questionNumber].solution[stepNumber]);
     solutionParagraph.classList.add('solution');
+    solutionParagraph.classList.add('invisible');
     solutionParagraph.innerText = `${solutionText}`;
 
     createdDiv.appendChild(problemParagraph);
