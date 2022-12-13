@@ -18,11 +18,11 @@ body {
 }
 
 .black {
-    stroke: black"
+    stroke: black;
 }
 
 .red {
-    stroke: red
+    stroke: red;
 }
 
 .blue {
@@ -31,4 +31,5 @@ body {
 
 .highlight {
     fill: yellow;
+    stroke: black;
 }
