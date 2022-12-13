@@ -10,6 +10,7 @@ const minors = document.getElementsByClassName('minor');
 
 // Helper Functions
 function highlightTerms(figure) {
+    colorMajorMinor();
     if (figure=="`") {
         for (i=0; i<terms.length; i++) {terms[i].classList.remove('highlight')}
     } else {
