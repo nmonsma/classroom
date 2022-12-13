@@ -19,14 +19,15 @@ body {
 
 .black {
     stroke: black;
+    fill: none;
 }
 
 .red {
-    stroke: red;
+    fill: red;
 }
 
 .blue {
-    stroke: blue;
+    fill: blue;
 }
 
 .highlight {
