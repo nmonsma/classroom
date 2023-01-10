@@ -71,6 +71,7 @@ p {
 
 .invisible {
     color: rgba(0,0,0,0);
+    user-select: none;
 }
 
 .order-problem, .order-solution {

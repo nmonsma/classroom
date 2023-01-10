@@ -147,11 +147,14 @@ function createOrderQuestion() {
 // Main Functions
 
 function toggleSolutions() {
-    const solutionsObjects = document.getElementsByClassName('solution');
     for (i=0;i<solutionsObjects.length;i++) {
         solutionsObjects[i].classList.toggle('invisible');
     }
  }
+
+function toggleSolution () {
+    this.classList.toggle('invisible');
+}
 
 // Main Actions
 for (i=0;i<7;i++) {
@@ -170,4 +173,8 @@ for (i=0;i<6;i++) {
     orderSpace.appendChild(childElement);
 }
 
-document.addEventListener('click', toggleSolutions);
+const solutionsObjects = document.getElementsByClassName('solution');
+titleSpace.addEventListener('dblclick', toggleSolutions);
+for (i=0;i<solutionsObjects.length;i++) {
+    solutionsObjects[i].addEventListener('dblclick', toggleSolution)
+}
