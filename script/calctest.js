@@ -168,7 +168,7 @@ for (i=0;i<13;i++) {
 const titleSpace = document.createElement('p');
 titleSpace.innerHTML = `Name: ________________<br><br>Date: __________`;
 orderSpace.appendChild(titleSpace);
-for (i=0;i<6;i++) {
+for (i=0;i<5;i++) {
     const childElement = createOrderQuestion();
     orderSpace.appendChild(childElement);
 }
