@@ -1,0 +1,51 @@
+@import url(colors.css);
+
+html {
+    width: 98vw;
+    height: 98vh;
+}
+
+body {
+    width: 98vw;
+    height: 98vh;
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.black {
+    stroke: black;
+    fill: none;
+}
+
+.red {
+    fill: red;
+}
+
+.blue {
+    fill: blue;
+}
+
+.highlight {
+    fill: yellow;
+    stroke: black;
+}
+
+@keyframes flip {
+    50% {
+        fill: #000;
+        transform: matrix(1,0,0,0.1,0,45);
+    }
+    100% {
+        fill: none;
+        transform: matrix(1,0,0,0.1,0,45);
+    }
+}
+
+.flip {
+    animation: flip 1s;
+}
