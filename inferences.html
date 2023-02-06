@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title>Categorical Syllogisms</title>
+        <link rel="stylesheet" href="styles/inferences.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <div id="main-image">
+                <svg width="98vh" id="categorical-syllogism" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900" style="background-color:fff">
+                    <defs>
+                        <symbol id="triangle" viewBox="0 0 36 26" transform-origin="center" height="250" >
+                            <path stroke-width="1" d="M18,1 L35,25 L1,25 Z"/>
+                        </symbol>
+                        <symbol id="circle" viewBox="0 0 26 26" transform-origin="center" height="250">
+                            <circle stroke-width="1" cx="13" cy="13" r="12"/>
+                        </symbol>
+                        <symbol id="rectangle" viewBox="0 0 40 26" transform-origin="center" height="250">
+                            <path stroke-width="1" d="M1,1 L39,1 L39,25 L1,25 Z"/>
+                        </symbol>
+                        
+                    </defs>
+                    <g class="proposition premise" stroke="black" fill="none" id="major-premise">
+                        <use x="-600" y="25" xlink:href="#triangle"/>
+                        <!-- <path fill="none" stroke="black" stroke-width="4" d="M233,150 L325,150" /> -->
+                        <use x="-175" y="25" id="major-subject" class="major term figure-1 figure-3" xlink:href="#rectangle"/>
+                        <use x="200" y="25" xlink:href="#circle"/>
+                        <use x="600" y="25" id="major-predicate" class="major term figure-4 figure-2" xlink:href="#rectangle"/>    
+                    </g>
+
+                    <g class="proposition premise" stroke="black" fill="none" id="minor-premise">
+                        <use x="-600" y="300" xlink:href="#triangle"/>
+                        <!-- <path fill="none" stroke="black" stroke-width="4" d="M233,350 L325,350" /> -->
+                        <use x="-175" y="300" id="minor-subject" class="minor term figure-4 figure-3" xlink:href="#rectangle"/>
+                        <use x="200" y="300" xlink:href="#circle"/>
+                        <use x="600" y="300" id="minor-predicate" class="minor term figure-1 figure-2" xlink:href="#rectangle"/>    
+                    </g>
+                    <g class="proposition" id="conclusion" fill="none" >
+                        <path fill="none" stroke="black" stroke-width="10" d="M100,600 L1500,600"/>
+                        <use x="-600" y="650" stroke="black" xlink:href="#triangle"/>
+                        <!-- <path fill="none" stroke="black" stroke-width="4" d="M233,600 L325,600" /> -->
+                        <use x="-175" y="650" id="minor-term" class="minor term black" xlink:href="#rectangle"/>
+                        <use x="200" y="650" stroke="black" xlink:href="#circle"/>
+                        <use x="600" y="650" id="major-term" class="major term black" xlink:href="#rectangle"/>    
+                    </g>
+                </svg>
+            </div>
+    </body>
+    <script src="script/inferences.js"></script>
+</html>
