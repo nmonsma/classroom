@@ -1,0 +1,38 @@
+@import url(colors.css);
+
+html {
+    width: 98vw;
+    height: 98vh;
+}
+
+body {
+    width: 98vw;
+    height: 98vh;
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+form, .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#term1, #term2, button {
+    font-size: 36px;
+}
+
+textarea {
+    font-size: 24px;
+}
+
