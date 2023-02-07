@@ -87,8 +87,8 @@ function createStatement (){
     const type = document.getElementById('statement-creator').elements['word1'].value;
     let affirmative = true;
     let universal = true;
-    if (type=='E'||statementType=='O') {affirmative=false};
-    if (type=='I'||statementType=='O') {universal=false};
+    if (type=='E'||type=='O') {affirmative=false};
+    if (type=='I'||type=='O') {universal=false};
     const subject = document.getElementById('term1').value;
     const predicate = document.getElementById('term2').value;
     activeStatement = new Statement(affirmative,universal,subject,false,predicate,false);

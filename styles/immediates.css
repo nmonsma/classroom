@@ -1,5 +1,12 @@
 @import url(colors.css);
 
+@keyframes bubble {
+    100% {
+        transform: scale(1.5, 1.5);
+        opacity: 0;
+    }
+}
+
 html {
     width: 98vw;
     height: 98vh;
@@ -10,7 +17,7 @@ body {
     height: 98vh;
     background-color: white;
     color: black;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Trebuchet MS', serif;
     font-weight: bold;
     font-size: 24px;
     margin: 0;
@@ -25,14 +32,42 @@ main {
 form, .buttons {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 }
+
 
 #term1, #term2, button {
     font-size: 36px;
 }
 
 textarea {
-    font-size: 24px;
+    font-family: 'Trebuchet MS', serif;
+    font-size: 30px;
 }
+
+.input-part {
+    margin: 15px;
+}
+
+button {
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 15px;
+    margin: 15px;
+    transition: all 0.4s ease-out;
+}
+
+
+button:hover {
+
+}
+
+button:active {
+    transform: scale(1.2, 1.2);
+    opacity: 0.2;
+    transition: all 0s;
+}
+
 
