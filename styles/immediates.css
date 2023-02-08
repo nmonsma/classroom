@@ -36,7 +36,7 @@ form, .buttons {
 }
 
 
-#term1, #term2, button {
+#term1, #term2, button, #type-indicator {
     font-size: 36px;
 }
 
@@ -49,25 +49,36 @@ textarea {
     margin: 15px;
 }
 
-button {
+button, #type-indicator {
     border-radius: 10px;
     border: none;
-    background-color: blue;
     color: white;
     padding: 15px;
     margin: 15px;
     transition: all 0.4s ease-out;
 }
 
-
-button:hover {
-
+button {
+    background-color: blue;
 }
 
 button:active {
-    transform: scale(1.2, 1.2);
+    transform: scale(0.8, 0.8) rotate(-1deg);
     opacity: 0.2;
-    transition: all 0s;
+    transition: all 0.1s;
+}
+
+#type-indicator {
+    background-color: blueviolet;
+    width: 18px;
+}
+
+.red {
+    background: red;
+}
+
+.gray {
+    background-color: #555;
 }
 
 

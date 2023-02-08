@@ -12,7 +12,27 @@ let activeStatement = {
         "complement": false
     }
 };
+
+const names = [
+    'Jeremiah',
+    'Rowan',
+    'Caleb',
+    'Levi',
+    'Abby',
+    'Eli',
+    'Ireland',
+    'Brogan',
+    'Isaac',
+    'Asher',
+    'Maddie',
+    'Ave',
+    'Danny',
+    'Jules'
+]
+
 const consoleBox = document.getElementById('console');
+const converseButton = document.getElementById('converse');
+const contrapositiveButton = document.getElementById('contrapositive');
 
 // Helper Functions
 function Term(term,complement) {
@@ -60,8 +80,9 @@ function converse(statement){
         `${statement.p.term}`,
         statement.p.complement,
         `${statement.s.term}`,
-        statement.s.complement,)
-    if (type=="E"||type=="I") {newStatement.invalid=false} else {newStatement.invalid=true}; 
+        statement.s.complement);
+    newStatement.invalid = statement.invalid;
+    if (type=="A"||type=="O") {newStatement.invalid=true}; 
     return newStatement;
 }    
 
@@ -73,12 +94,24 @@ function obverse(statement){
 }
 
 function contrapositive(statement){
+    const type = statementType(statement);
+    if (type=="E"||type=="I") {statement.invalid=true};
     statement = obverse(statement);
     statement = converse(statement);
     statement = obverse(statement);
-    const type = statementType(statement);
-    // if (type=="A"||type=="O") {}
     return statement;   
+}
+
+function updatePossibilities () {
+    const type = statementType(activeStatement);
+    document.getElementById('type-indicator').innerText = `${type}`;
+    if (type=="E"||type=="I") {
+        contrapositiveButton.classList.add('gray');
+        converseButton.classList.remove('gray');
+    } else {
+        contrapositiveButton.classList.remove('gray');
+        converseButton.classList.add('gray');
+    }
 }
 
 // Main Functions
@@ -93,23 +126,36 @@ function createStatement (){
     const predicate = document.getElementById('term2').value;
     activeStatement = new Statement(affirmative,universal,subject,false,predicate,false);
     consoleBox.value+=naturalLanguage(activeStatement)+'\n';
+    updatePossibilities();
 }
 
 function createConverse () {
     activeStatement = converse(activeStatement); 
     consoleBox.value+=naturalLanguage(activeStatement)+'\n';
+    updatePossibilities();
 }
 function createObverse () {
     activeStatement = obverse(activeStatement); 
     consoleBox.value+=naturalLanguage(activeStatement)+'\n';
+    updatePossibilities();
 }
+
 function createContrapositive () {
     activeStatement = contrapositive(activeStatement); 
     consoleBox.value+=naturalLanguage(activeStatement)+'\n';
+    updatePossibilities();
 }
 
+function insertName() {
+    const selector = Math.floor(Math.random()*names.length);
+    activeStatement.s.term = `${names[selector]}`     
+}
+
+
+
 document.getElementById('create-statement').addEventListener('click', createStatement);
-document.getElementById('converse').addEventListener('click', createConverse);
+document.getElementById('type-indicator').addEventListener('click', insertName);
+converseButton.addEventListener('click', createConverse);
 document.getElementById('obverse').addEventListener('click', createObverse);
-document.getElementById('contrapositive').addEventListener('click', createContrapositive);
+contrapositiveButton.addEventListener('click', createContrapositive);
 document.getElementById('clear').addEventListener('click',()=>{consoleBox.value=''})
