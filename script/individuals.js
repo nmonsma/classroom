@@ -43,9 +43,9 @@ document.addEventListener('keydown', (e)=> {
 
 for (let i=0; i<16; i++) {
     if (i/2==Math.floor(i/2) ) {
-        document.getElementById(`score-${i}`).style.backgroundColor = `hsl(${54-3*i*(i/2+1)},100%,80%)`;
+        document.getElementById(`score-${i}`).style.backgroundColor = `hsl(${54-3*i*(i/2+1)},100%,70%)`;
     } else {
-        document.getElementById(`score-${16-i}`).style.backgroundColor = `hsl(${36-3*(i-0.5)*(i/2+1)},100%,67%)`;
+        document.getElementById(`score-${16-i}`).style.backgroundColor = `hsl(${30-3*(i-0.5)*(i/2+1)},100%,50%)`;
         // document.getElementById(`score-${16-i}`).style.color = `white`;
     }
     scoresArray.push(0);
