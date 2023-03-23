@@ -17,6 +17,10 @@ body {
     padding: 0;
 }
 
+#categorical-syllogism {
+    width: 98vw;
+}
+
 .black {
     stroke: black;
     fill: none;
