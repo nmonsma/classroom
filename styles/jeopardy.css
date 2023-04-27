@@ -131,7 +131,8 @@ header {
     justify-content: space-evenly;
     left: 0;
     top: 0;
-    width: 100vw;
+    padding-left: 15vw;
+    width: 85vw;
     height: 13vh;
     background: #000;
     z-index: 49;   
