@@ -10,54 +10,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <header>
-            <div class="scores" id="score1">0</div>
-            <div class="scores" id="score2">0</div>
-            <div class="scores" id="score3">0</div>
-            <div class="scores" id="score4">0</div>
-        </header>
         <main>
-            <div id="answers" class="gameboard">
-                <p class="title">Humanists</p>
-                <p class="title">Middle<br>East</p>
-                <p class="title">Italy</p>
-                <p class="title">Spain</p>
-                <p class="title">Explorers<br></p>
+            <div id="answers" class="fullscreen gameboard">
+                <p class="item title">Humanists</p>
+                <p class="item title">Middle<br>East</p>
+                <p class="item title">Italy</p>
+                <p class="item title">Spain</p>
+                <p class="item title">Explorers<br></p>
 
-                <p class="item" id="item-a">100</p>
-                <p class="item" id="item-f">100</p>
-                <p class="item" id="item-k">100</p>
-                <p class="item" id="item-p">100</p>
-                <p class="item" id="item-u">100</p>
+                <p class="item a">$100</p>
+                <p class="item f">$100</p>
+                <p class="item k">$100</p>
+                <p class="item p">$100</p>
+                <p class="item u">$100</p>
                 
-                <p class="item" id="item-b">200</p>
-                <p class="item" id="item-g">200</p>
-                <p class="item" id="item-l">200</p>
-                <p class="item" id="item-q">200</p>
-                <p class="item" id="item-v">200</p>
+                <p class="item b">$200</p>
+                <p class="item g">$200</p>
+                <p class="item l">$200</p>
+                <p class="item q">$200</p>
+                <p class="item v">$200</p>
                 
-                <p class="item" id="item-c">300</p>
-                <p class="item" id="item-h">300</p>
-                <p class="item" id="item-m">300</p>
-                <p class="item" id="item-r">300</p>
-                <p class="item" id="item-w">300</p>
+                <p class="item c">$300</p>
+                <p class="item h">$300</p>
+                <p class="item m">$300</p>
+                <p class="item r">$300</p>
+                <p class="item w">$300</p>
                 
-                <p class="item" id="item-d">400</p>
-                <p class="item" id="item-i">400</p>
-                <p class="item" id="item-n">400</p>
-                <p class="item" id="item-s">400</p>
-                <p class="item" id="item-x">400</p>
+                <p class="item d">$400</p>
+                <p class="item i">$400</p>
+                <p class="item n">$400</p>
+                <p class="item s">$400</p>
+                <p class="item x">$400</p>
                 
-                <p class="item" id="item-e">500</p>
-                <p class="item" id="item-j">500</p>
-                <p class="item" id="item-o">500</p>
-                <p class="item" id="item-t">500</p>
-                <p class="item" id="item-y">500</p>
+                <p class="item e">$500</p>
+                <p class="item j">$500</p>
+                <p class="item o">$500</p>
+                <p class="item t">$500</p>
+                <p class="item y">$500</p>
             </div>
+
             <!-- Humanists -->
             <div id="question-a" class="fullscreen prompt">Cosimo de Medici was able to give Europeans access to these from ancient Greece.</div>
             <div id="question-b" class="fullscreen prompt">Humanists were known for studying this.</div>
-            <div id="question-c" class="fullscreen prompt">The author of "In Praise of Folly" did not endorse classic Christian theology, but appreciated this about Jesus.</div>
+            <div id="question-c" class="fullscreen prompt">The author of "In Priase of Folly" did not endorse classic Christian theology, but appreciated this about Jesus.</div>
             <div id="question-d" class="fullscreen prompt">Savonarola preached against worldliness during the rule of this humanist in Florence.</div>
             <div id="question-e" class="fullscreen prompt">He was called the "Prince of the Humanists".</div>
             
@@ -77,7 +72,7 @@
 
             <!-- Spain -->            
             <div id="question-p" class="fullscreen prompt">The Spanish Inquisition was a court process, targeting heretics, run by this institution.</div> 
-            <div id="question-q" class="fullscreen prompt">Catherine of Aragon, Henry the VIII, and their daughter Mary belonged to this royal house, created when Henry's father united the houses of Lancaster and York.</div> 
+            <div id="question-q" class="fullscreen prompt">NOT SPAIN: Henry VII united the English houses of Lancaster and York, creating this new ruling house.</div> 
             <div id="question-r" class="fullscreen prompt">Magellan sailed from Spain on a trip that was designed to find a new route to this place.</div> 
             <div id="question-s" class="fullscreen prompt">Ferdinand and Isabella instituted the brutal Spanish Inquisition to continue this process in Spain.</div> 
             <div id="question-t" class="fullscreen prompt">Hernan Cortes, a Spanish governor of Cuba, was greedy for gold and destroyed Tenochtitlan and these people who lived there.</div> 
@@ -88,9 +83,9 @@
             <div id="question-w" class="fullscreen prompt">Ferdinand and Isabella sponsored this famous explorer.</div>
             <div id="question-x" class="fullscreen prompt">Pizarro made contact with and defeated this South American civilization.</div>
             <div id="question-y" class="fullscreen prompt">Magellan died halfway through his trip in what is today this country.</div>
-            
-            <!-- Additional -->
-            <div id="question-z" class="fullscreen prompt">This Englishman translated the Bible into English from Germany during the time of Henry VIII and smuggled copies back into England.</div>
+
+
+                
             
         </main>
         <script src="script/jeopardy.js"></script>
