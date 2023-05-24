@@ -141,7 +141,7 @@ header {
 .scores {
     margin: 0;
     padding: 1vh;
-    width: 16vw;
+    width: 10vw;
     border-radius: 1vh;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 800;
@@ -173,3 +173,7 @@ header {
     color: #fff;
 }
 
+#score5 {
+    background-color: #712a79;
+    color: #fff;
+}
