@@ -14,7 +14,7 @@
     </head>
     <body>
             <div id="main-image">
-                <svg width="98vh" id="categorical-syllogism" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900" style="background-color:fff">
+                <svg id="categorical-syllogism" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900">
                     <defs>
                         <symbol id="triangle" viewBox="0 0 36 26" transform-origin="center" height="225" >
                             <path stroke-width="1" d="M18,1 L35,25 L1,25 Z"/>
@@ -30,12 +30,28 @@
                         </symbol>
                         <symbol id="square" viewBox="0 0 80 31.2" transform-origin="center" height="270">
                             <path stroke-width="1" d="M25,25 L1,25 L1,1 L25,1 Z"/>  
-                            <path class="not-link" style="opacity:0.12" d="M25,25 Q50,32 70,22 L70,18 L74,18 L74,22 L70,22"/>
                         </symbol>                            
+                        <symbol id="not" viewBox="0 0 80 31.2" transform-origin="center" height="270">
+                            <path class="not-link" d="M25,25 Q50,32 70,22 L70,18 L74,18 L74,22 L70,22"/>
+                        </symbol>     
+                        <radialGradient id="red" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="33%" style="stop-color:red; stop-opacity:0.2" />
+                            <stop offset="87%" style="stop-color:red; stop-opacity:0" />
+                          </radialGradient>          
+                          <radialGradient id="blue" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="33%" style="stop-color:blue; stop-opacity:0.2" />
+                            <stop offset="87%" style="stop-color:blue; stop-opacity:0" />
+                          </radialGradient>          
+                          <radialGradient id="yellow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="33%" style="stop-color:yellow; stop-opacity:0.5" />
+                            <stop offset="87%" style="stop-color:yellow; stop-opacity:0" />
+                          </radialGradient>          
+
+
                     </defs>
                     
                     <!-- Year 1 - Triangle, Square, Circle, Square -->
-                    <g class="proposition premise" stroke="black" fill="none" id="major-premise">
+                    <!-- <g class="proposition premise" stroke="black" fill="none" id="major-premise">
                         <use x="-600" y="25" xlink:href="#triangle"/>
                         <use x="-175" y="25" id="major-subject" class="major term figure-1 figure-3" xlink:href="#rectangle"/>
                         <use x="200" y="25" xlink:href="#circle"/>
@@ -53,31 +69,43 @@
                         <use x="-175" y="650" id="minor-term" class="minor term black" xlink:href="#rectangle"/>
                         <use x="200" y="650" stroke="black" xlink:href="#circle"/>
                         <use x="600" y="650" id="major-term" class="major term black" xlink:href="#rectangle"/>    
-                    </g>
-
-                    <!-- Later Years - Square, Circle, Diamond, Circle -->
-                    <!-- <g class="proposition premise" stroke="black" fill="none" id="major-premise">
-                        <use x="-125" y="25" xlink:href="#square"/>
-                        <use x="-100" y="25" id="major-subject" class="major term figure-1 figure-3" xlink:href="#circle"/>
-                        <use x="100" y="25" xlink:href="#diamond"/>
-                        <use x="300" y="25" id="major-predicate" class="major term figure-4 figure-2" xlink:href="#circle"/>    
-                    </g>
-                    <g class="proposition premise" stroke="black" fill="none" id="minor-premise">
-                        <use x="-125" y="300" xlink:href="#square"/>
-                        <use x="-100" y="300" id="minor-subject" class="minor term figure-4 figure-3" xlink:href="#circle"/>
-                        <use x="100" y="300" xlink:href="#diamond"/>
-                        <use x="300" y="300" id="minor-predicate" class="minor term figure-1 figure-2" xlink:href="#circle"/>    
-                    </g>
-                    <g class="proposition" id="conclusion" fill="none" >
-                        <path fill="none" stroke="black" stroke-width="10" d="M100,600 L1500,600"/>
-                        <use x="-125" y="650" stroke="black" xlink:href="#square"/>
-                        <use x="-100" y="650" id="minor-term" class="minor term black" xlink:href="#circle"/>
-                        <use x="100" y="650" stroke="black" xlink:href="#diamond"/>
-                        <use x="300" y="650" id="major-term" class="major term black" xlink:href="#circle"/>    
                     </g> -->
 
+                    <!-- Later Years - Square, Circle, Diamond, Circle -->
+                    <g class="proposition premise" stroke="black" fill="none" id="major-premise">
+                        <use x="-125" y="25" id="major-square" class="square" xlink:href="#square"/>
+                        <use x="-100" y="25" id="major-subject" class="major term" xlink:href="#circle"/>
+                        <use x="100" y="25" id="major-copula" xlink:href="#diamond"/>
+                        <use x="300" y="25" id="major-predicate" class="major term" xlink:href="#circle"/>    
+                        <use x="-125" y="25" id="major-not" class="not-indicator" opacity="0.05" xlink:href="#not"/>
+                    </g>
+                    <g class="proposition premise" stroke="black" fill="none" id="minor-premise">
+                        <use x="-125" y="300" id="minor-square" class="square" xlink:href="#square"/>
+                        <use x="-100" y="300" id="minor-subject" class="minor term" xlink:href="#circle"/>
+                        <use x="100" y="300" id="minor-copula" xlink:href="#diamond"/>
+                        <use x="300" y="300" id="minor-predicate" class="minor term" xlink:href="#circle"/>    
+                        <use x="-125" y="300" id="minor-not" class="not-indicator" opacity="0.05" xlink:href="#not"/>
+                        <path class="premise" fill="none" stroke="black" stroke-width="10" d="M100,600 L1500,600"/>
+                    </g>
+                    <g class="proposition shown" id="conclusion" stroke="black" fill="none">
+                        <use x="-125" y="150" id="statement-square" class="conclusion square" xlink:href="#square"/>
+                        <use x="-100" y="150" id="statement-subject" class="minor conclusion term" xlink:href="#circle"/>
+                        <use x="100" y="150" id="statement-copula" class="conclusion" xlink:href="#diamond"/>
+                        <use x="300" y="150" id="statement-predicate" class="major conclusion term" xlink:href="#circle"/>    
+                        <use x="-125" y="150" id="statement-not" class="not-indicator conclusion" opacity="0.05" xlink:href="#not"/>
+                    </g>
                 </svg>
             </div>
     </body>
+    <footer>
+        <button class="toggle" id="syllogism-button">Statement</button>
+        <button class="toggle" id="spm-button">Form</button>
+        <button class="toggle" id="distribution-button">Distribution</button>
+        <button id="mood-1" class="form-button premise">A</button>
+        <button id="mood-2" class="form-button premise">A</button>
+        <button id="mood-3" class="form-button">A</button>
+        <div id="form-dash" class="form-button premise">-</div>
+        <button id="figure" class="form-button premise">1</button>
+    </footer>
     <script src="script/catsyl.js"></script>
 </html>
