@@ -58,3 +58,9 @@ a:hover {
 .omni7th-8th {
     background-image: repeating-linear-gradient(45deg, #97DB24, #db2497 25%, #97DB24 50%)
 }
+
+@media (prefers-color-scheme: dark) {
+    .body {
+      background-color: white;
+    }
+}
