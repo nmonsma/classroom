@@ -15,7 +15,12 @@ const links = [
         "label": "Homework 11/15",
        "course": "7th",
           "due": "2023-11-15"
-    }
+    },{
+        "link": "odysseyXVII.pdf",
+        "label": "Homework 11/8",
+       "course": "7th",
+          "due": "2023-11-10"
+        }
 ]
 
 //Populate main with links based on due date
