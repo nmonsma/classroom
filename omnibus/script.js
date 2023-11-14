@@ -1,15 +1,20 @@
 //Define Links
 const links = [
     {
-        "link": "aeneidIV.pdf",
+         "link": "novreport.pdf",
+        "label": "Nov. Book Report",
+       "course": "7th-8th",
+          "due": "2023-12-07"
+    },{
+         "link": "aeneidIV.pdf",
         "label": "Homework 11/16",
-       "course": "2",
+       "course": "8th",
           "due": "2023-11-16"
     },{
-        "link": "bookreportnov.pdf",
-        "label": "Nov. Book Report",
-       "course": "2",
-          "due": "2023-12-07"
+        "link": "odysseyXVIII.pdf",
+        "label": "Homework 11/15",
+       "course": "7th",
+          "due": "2023-11-15"
     }
 ]
 
@@ -17,7 +22,7 @@ const links = [
 function populate (referenceDate) {
     console.log(referenceDate)
     const main = document.getElementsByTagName('main')[0];
-    for (let i = 0; i < links.length; i++) {
+    for (let i = links.length - 1; i > -1; i--) {
         const dueDate = new Date(links[i].due);
         console.log(dueDate)
         if (dueDate>referenceDate) {

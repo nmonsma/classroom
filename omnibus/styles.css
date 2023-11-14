@@ -25,6 +25,7 @@ a {
 }
 
 a:hover {
+    background-image: none;
     background-color: #2497DB;
     color: #000;
     animation-name: card-flip;
@@ -44,12 +45,16 @@ a:hover {
     font-size: 1.5em;
 }
 
-.omni1 {
+.omni7th {
     background-color: #97DB24;
 
 }
 
-.omni2 {
+.omni8th {
     background-color: #db2497;
 
+}
+
+.omni7th-8th {
+    background-image: repeating-linear-gradient(45deg, #97DB24, #db2497 25%, #97DB24 50%)
 }
