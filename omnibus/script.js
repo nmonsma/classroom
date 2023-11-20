@@ -29,7 +29,7 @@ const links = [
         "link": "odysseyXVII.pdf",
         "label": "Homework 11/8",
        "course": "7th",
-          "due": "2023-11-10"
+          "due": "2023-11-21"
     }
 ]
 
