@@ -6,7 +6,12 @@ const links = [
        "course": "7th-8th",
           "due": "2023-12-07"
     },{
-         "link": "aeneidV.jpg",
+         "link": "odysseyxx.jpg",
+        "label": "Odyssey Final 11/29",
+       "course": "7th",
+          "due": "2023-11-29"
+    },{
+        "link": "aeneidV.jpg",
         "label": "Homework 11/21",
        "course": "8th",
           "due": "2023-11-21"
