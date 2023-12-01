@@ -26,7 +26,7 @@ a {
 
 a:hover {
     background-image: none;
-    background-color: #2497DB;
+    background-color: #db2497;
     color: #000;
     animation-name: card-flip;
     animation-duration: 1s;
@@ -51,10 +51,10 @@ a:hover {
 }
 
 .omni8th {
-    background-color: #db2497;
+    background-color: #2497db;
 
 }
 
 .omni7th-8th {
-    background-image: repeating-linear-gradient(45deg, #97DB24, #db2497 25%, #97DB24 50%)
+    background-image: repeating-linear-gradient(45deg, #97DB24, #2497db 25%, #97DB24 50%)
 }

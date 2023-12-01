@@ -1,10 +1,25 @@
 //Define Links
 const links = [
     {
+         "link": "aeneidviii.jpg",
+        "label": "Essay on Hell 12/7",
+       "course": "8th",
+          "due": "2023-12-07"
+    },{
+         "link": "outline.jpg",
+        "label": "Practice Outline 12/6",
+       "course": "7th",
+          "due": "2023-12-06"
+    },{
+         "link": "magiciansii.jpg",
+        "label": "Essay on Curiosity 12/6",
+       "course": "7th",
+          "due": "2023-12-06"
+    },{
          "link": "novreport.pdf",
         "label": "Nov. Book Report",
        "course": "7th-8th",
-          "due": "2023-12-07"
+          "due": "2023-12-06"
     },{
          "link": "odysseyxx.jpg",
         "label": "Odyssey Final 11/29",
