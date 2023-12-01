@@ -17,7 +17,7 @@ const links = [
           "due": "2023-12-06"
     },{
          "link": "novreport.pdf",
-        "label": "Nov. Book Report",
+        "label": "Nov. Book Report 12/6 and 12/7",
        "course": "7th-8th",
           "due": "2023-12-06"
     },{
