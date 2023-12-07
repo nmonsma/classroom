@@ -11,6 +11,27 @@ body {
     height: 100vh;
 }
 
+header {   
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+div {
+    width: 100%;
+}
+
+.assignments {
+    margin: 0;
+    padding: 20px;
+    width: 50vw;
+    color: #000;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    font-size: 1em;
+}
+
 main {
     margin: 0;
     padding: 20px;
@@ -28,12 +49,14 @@ a:hover {
     background-image: none;
     background-color: #db2497;
     color: #000;
-    animation-name: card-flip;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
     cursor: pointer;
 }
 
+.box:hover {
+    animation-name: card-flip;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
 
 .box {
     margin: 25px;
