@@ -1,6 +1,10 @@
 //Define Links
 const links = [
-    {
+    {    "link": "magicianstest.jpg",
+        "label": "Magician's Nephew Test 12/13",
+       "course": "7th",
+          "due": "2023-12-13"
+},{
          "link": "aeneidviii.jpg",
         "label": "Essay on Hell 12/7",
        "course": "8th",
