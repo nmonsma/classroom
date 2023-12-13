@@ -5,6 +5,11 @@ const links = [
        "course": "7th-8th",
           "due": "2024-01-10"
 },{
+         "link": "aeneidxi.jpg",
+        "label": "Why Try Essay 12/21",
+       "course": "8th",
+          "due": "2023-12-21"
+},{
          "link": "magicianstest.jpg",
         "label": "Magician's Nephew Test 12/13",
        "course": "7th",
