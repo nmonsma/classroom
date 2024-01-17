@@ -164,18 +164,23 @@ const wordMax = document.getElementById('max');
 function revealWord() {
     console.log(wordList[currentWord].word);
     wordDisplay.innerText = wordList[currentWord].word;
+    wordList[currentWord].used = true;
     spelling = false;
 }
 
 function newWord() {
     wordDisplay.innerText = "";
     spellingBox.value = "";
+    let used = true;
+    let inside = false;
+    const minimum = Number(wordMin.value);
+    const maximum = Number(wordMax.value);
     do {
-        currentWord = Math.floor(Math.random()*wordList.length)
-        console.log(currentWord);
-
-    } 
-    while (!((wordList[currentWord].number>(wordMin.value-1))&&(wordList[currentWord].number<(wordMax.value+1))));
+        currentWord = Math.floor(Math.random()*wordList.length);
+        used = wordList[currentWord].used;
+        inside = ((wordList[currentWord].number>minimum-1)&&(wordList[currentWord].number<maximum+1));
+        console.log(currentWord, used, wordMin.value, wordMax.value, inside);
+    } while (!inside);
     console.log(`${wordList[currentWord].number}, ${wordList[currentWord].word}`);
     wordNumber.innerText = wordList[currentWord].number;
     spelling = true;
