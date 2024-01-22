@@ -1,7 +1,7 @@
 @import url(colors.css);
 
 * {
-    transition: opacity 2s, transform 2s;
+    transition: opacity 1s, stroke 1s, transform 2s;
 }
 
 html {
