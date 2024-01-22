@@ -4,6 +4,7 @@ const terms = document.getElementsByClassName('term')
 const squares = document.getElementsByClassName('square');
 const notIndicators = document.getElementsByClassName('not-indicator');
 
+const propositions = document.getElementsByClassName('proposition')
 const premises = document.getElementsByClassName('premise');
 const conclusion = document.getElementById('conclusion');
 
@@ -34,12 +35,13 @@ let categoricalSyllogism = {
 
 
     //set the toggle buttons as constants to allow easier use
+const aeioButton = document.getElementById('aeio-button');
 const syllogismButton = document.getElementById('syllogism-button');
 const spmButton = document.getElementById('spm-button');
 const distributionButton = document.getElementById('distribution-button');
 const formButton = document.getElementsByClassName('form-button');
 
-
+let showAEIO = 0;
 
 
 
@@ -77,8 +79,9 @@ function isFigure() {
 
 
 // Main Functions
-    //go through each of the terms and update the colors
+    //go through each of the terms and update the markup
 function updateColors () {
+    console.log('updating display');
     //create a list trues and falses that corresponds to whether each term is middle    
     let middleFinder = [
         categoricalSyllogism.statements[0].middle[0],
@@ -99,9 +102,27 @@ function updateColors () {
         categoricalSyllogism.statements[2].distribution[1]
     ]
     
+    //iterate through the quantifer indicators and update the opacities
+    if (aeioButton.classList.contains('depressed')) {showAEIO = 1} else {showAEIO = 0};
+
     for (i=0;i<notIndicators.length;i++) {
-        if(categoricalSyllogism.form[i]=='O') notIndicators[i].setAttribute('opacity',1); 
-        else notIndicators[i].setAttribute('opacity',0.05);
+
+        //create a list of the current statement's aeios
+        const aeios = propositions[i].getElementsByClassName('aeio');
+        
+        //set the aeios and notIndicator to showAEIO opacity based on the form
+        if(categoricalSyllogism.form[i]=='A') { aeios[0].setAttribute('opacity',showAEIO) }
+            else { aeios[0].setAttribute('opacity',0); }
+        if(categoricalSyllogism.form[i]=='E') { aeios[1].setAttribute('opacity',showAEIO) } 
+            else { aeios[1].setAttribute('opacity',0); }
+        if(categoricalSyllogism.form[i]=='I') { aeios[2].setAttribute('opacity',showAEIO) }
+            else { aeios[2].setAttribute('opacity',0); }
+        if(categoricalSyllogism.form[i]=='O') {
+            notIndicators[i].setAttribute('opacity',showAEIO); 
+            aeios[3].setAttribute('opacity',showAEIO) }
+        else {
+            aeios[3].setAttribute('opacity',0);
+            notIndicators[i].setAttribute('opacity',0); }
     }
 
 
@@ -170,6 +191,11 @@ function toggleSyllogismMode() {
     conclusion.classList.toggle('bottom');
 }
 
+function toggleAEIOMode () {
+    aeioButton.classList.toggle('depressed');
+    updateColors();
+}
+
 function toggleSpmMode () {
     spmButton.classList.toggle('depressed');
     updateColors();
@@ -207,9 +233,10 @@ function changeType() {
 }
 
 //Main Actions
-document.getElementById('syllogism-button').addEventListener('click', toggleSyllogismMode);
-document.getElementById('spm-button').addEventListener('click', toggleSpmMode);
-document.getElementById('distribution-button').addEventListener('click', toggleDistributionMode);
+aeioButton.addEventListener('click', toggleAEIOMode);
+syllogismButton.addEventListener('click', toggleSyllogismMode);
+spmButton.addEventListener('click', toggleSpmMode);
+distributionButton.addEventListener('click', toggleDistributionMode);
 for (i=0;i<terms.length;i++) {
     terms[i].addEventListener('click',changeMiddle);
     terms[i].addEventListener('dblclick',changeDistribution)

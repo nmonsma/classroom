@@ -62,8 +62,8 @@ footer {
     top: 85vh;
     width: 100vw;
     display: grid;
-    grid-template-rows: fr repeat(20vw,3) fr repeat(5vw,2) fr;
-    grid-template-areas: 'emptySpace syllogismToggle spmToggle distributionToggle moreEmptySpace moodA moodB moodC moodD moodE anotherEmptySpace';    
+    grid-template-rows: fr repeat(15vw,3) fr repeat(5vw,2) fr;
+    grid-template-areas: 'emptySpace aeioToggle syllogismToggle spmToggle distributionToggle moreEmptySpace moodA moodB moodC moodD moodE anotherEmptySpace';    
 }
 
 .form-button {
@@ -78,7 +78,7 @@ footer {
 }
 
 .toggle {
-    width: 20vw;
+    width: 14vw;
     background-color: #ddd;
     color: black;
 }
@@ -96,6 +96,10 @@ button {
 button:hover {
     background-color: #712a79;
     color: white;
+}
+
+#aeio-button {
+    grid-area: aeioToggle;
 }
 
 #syllogism-button {
