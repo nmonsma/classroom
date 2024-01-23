@@ -63,7 +63,7 @@ footer {
     width: 100vw;
     display: grid;
     grid-template-rows: fr repeat(15vw,3) fr repeat(5vw,2) fr;
-    grid-template-areas: 'emptySpace aeioToggle syllogismToggle spmToggle distributionToggle moreEmptySpace moodA moodB moodC moodD moodE anotherEmptySpace';    
+    grid-template-areas: 'emptySpace syllogismToggle aeioToggle spmToggle distributionToggle moreEmptySpace moodA moodB moodC moodD moodE anotherEmptySpace';    
 }
 
 .form-button {
