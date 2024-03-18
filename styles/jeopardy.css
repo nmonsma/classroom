@@ -131,7 +131,8 @@ header {
     justify-content: space-evenly;
     left: 0;
     top: 0;
-    width: 100vw;
+    padding-left: 15vw;
+    width: 85vw;
     height: 13vh;
     background: #000;
     z-index: 49;   
@@ -140,7 +141,7 @@ header {
 .scores {
     margin: 0;
     padding: 1vh;
-    width: 16vw;
+    width: 10vw;
     border-radius: 1vh;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 800;
@@ -172,3 +173,7 @@ header {
     color: #fff;
 }
 
+#score5 {
+    background-color: #712a79;
+    color: #fff;
+}

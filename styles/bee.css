@@ -1,0 +1,22 @@
+body {
+    margin: 0 auto;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 40vh 40vh 1fr;
+}
+
+div {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#spelling-box {
+    font-size: 4em;
+    text-align: center;
+}
+
+#word-display {
+    font-size: 4em;
+}

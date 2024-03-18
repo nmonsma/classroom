@@ -6,6 +6,11 @@ let team4 = 0;
 let lastAdd = 0;
 const scoresObjects = document.getElementsByClassName('score');
 let scoresArray = [];
+const colorsObject = {
+    "h": [  0,  0, 30, 60,110,   150,215,235,288,324],
+    "s": [  0,100,100,100, 80,   100,100, 60,100,100],
+    "l": [100, 50, 50, 50, 50,    67, 45, 77, 45, 50]
+}
 
 //Helper Functions
 
@@ -25,7 +30,7 @@ function undo () {
 }
 
 function processClick() {
-    console.log(`id-selector:${this.id.substr(6,2)}`);
+    console.log(`id-selector:${this.id.substr(6,1)}`);
     addTo(this.id.substr(6,2));
 }
 
@@ -33,6 +38,8 @@ function processClick() {
 // Main Actions
 for (i=0;i<scoresObjects.length;i++) {
     scoresObjects[i].addEventListener('click',processClick);
+    document.getElementById(`score-${i}`).style.backgroundColor = `hsl(${colorsObject.h[i]},${colorsObject.s[i]}%,${colorsObject.l[i]}%)`;
+    scoresArray.push(0);
 }
 
 document.addEventListener('keydown', (e)=> {
@@ -40,13 +47,3 @@ document.addEventListener('keydown', (e)=> {
     console.log(keyName);
     if (keyName==="0") undo();
 });
-
-for (let i=0; i<16; i++) {
-    if (i/2==Math.floor(i/2) ) {
-        document.getElementById(`score-${i}`).style.backgroundColor = `hsl(${54-3*i*(i/2+1)},100%,80%)`;
-    } else {
-        document.getElementById(`score-${16-i}`).style.backgroundColor = `hsl(${36-3*(i-0.5)*(i/2+1)},100%,67%)`;
-        // document.getElementById(`score-${16-i}`).style.color = `white`;
-    }
-    scoresArray.push(0);
-}

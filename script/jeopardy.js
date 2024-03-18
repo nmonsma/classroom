@@ -1,5 +1,5 @@
 // Global Variables
-let scores = [0,0,0,0];
+let scores = [0,0,0,0,0];
 let answerDisplayed = '';
 let valueDisplayed = 0;
 const items = document.getElementsByClassName('item');
@@ -37,13 +37,13 @@ function processChoice(choiceCode) {
         answerDisplayed = '';
         valueDisplayed = 0;
     }
-    else if ((choiceCode>0)&&(choiceCode<5)) {
+    else if ((choiceCode>0)&&(choiceCode<6)) {
         scores[choiceCode-1]=scores[choiceCode-1]+valueDisplayed;
         increaseScores(choiceCode-1);
     }
-    else if ((choiceCode>4)&&(choiceCode<9)) {
-        scores[choiceCode-5]=scores[choiceCode-5]-valueDisplayed;
-        decreaseScores(choiceCode-5);
+    else if ((choiceCode>5)&&(choiceCode<11)) {
+        scores[choiceCode-6]=scores[choiceCode-6]-valueDisplayed;
+        decreaseScores(choiceCode-6);
     }
     else if (answerDisplayed=='') {
         document.getElementById(`question-${choiceCode}`).classList.add('front');
@@ -56,6 +56,7 @@ function processChoice(choiceCode) {
 // Main Actions
 document.addEventListener('keydown', (e)=> {
     let keyPressed = e.key;
+    if (keyPressed==0) {keyPressed=10};
     processChoice(keyPressed);
 });
 
