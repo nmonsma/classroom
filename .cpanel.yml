@@ -3,3 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/nickjufg/public_html/classroom
     - /bin/cp -R omnibus $DEPLOYPATH/omnibus
+    - /bin/cp -R img     $DEPLOYPATH/img
+    - /bin/cp -R script  $DEPLOYPATH/script
+    - /bin/cp -R styles  $DEPLOYPATH/styles
+    - /bin/cp *.html     $DEPLOYPATH
+    - /bin/cp *.htm      $DEPLOYPATH
