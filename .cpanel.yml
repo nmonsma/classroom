@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/nickjufg/public_html/classroom
-    - /bin/cp omnibus $DEPLOYPATH
+    - /bin/cp -R /omnibus $DEPLOYPATH
