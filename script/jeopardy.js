@@ -20,8 +20,9 @@ function decreaseScores(i) {
 
 
 function processClick() {
-    processChoice(this.id.substr(5,6));
+    // console.log(this);
     console.log(this.id.substr(5,6));
+    processChoice(this.id.substr(5,6));
 }
 
 // Main Functions
@@ -48,7 +49,7 @@ function processChoice(choiceCode) {
     else if (answerDisplayed=='') {
         document.getElementById(`question-${choiceCode}`).classList.add('front');
         answerDisplayed = `${choiceCode}`;
-        valueDisplayed = parseInt(document.getElementById(`item-${choiceCode}`).innerText, 10);
+        valueDisplayed = parseInt(document.getElementById(`item-${choiceCode}`).innerText,10);
         console.log(valueDisplayed);
     }    
 }
