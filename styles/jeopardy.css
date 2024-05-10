@@ -169,7 +169,7 @@ header {
 }
 
 #score4 {
-    background-color: var(--darkBlue);
+    background-color: var(--darkGray);
     color: #fff;
 }
 
@@ -177,3 +177,24 @@ header {
     background-color: #712a79;
     color: #fff;
 }
+
+.red {
+    background-color: var(--darkRed) !important;
+}
+
+.orange {
+    background-color: var(--darkOrange) !important;
+}
+
+.green {
+    background-color: var(--darkGreen) !important;
+}
+
+.blue {
+    background-color: var(--darkGray) !important;
+}
+
+.heliotrope {
+    background-color: #712a79 !important;
+}
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title>Jeopardy!</title>
+        <link rel="stylesheet" href="styles/jeopardy.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="scores" id="score1">0</div>
+            <div class="scores" id="score2">0</div>
+            <div class="scores" id="score3">0</div>
+            <div class="scores" id="score4">0</div>
+            <div class="scores" id="score5">0</div>
+        </header>
+        <main>
+            <div id="answers" class="fullscreen gameboard">
+                <p class="item title">Eli, Brogan, Caleb</p>
+                <p class="item title">Levi, Ella, Daniel</p>
+                <p class="item title">Madalynn, Jules, Rowan</p>
+                <p class="item title">Ireland, Jeremiah, Madisyn</p>
+                <p class="item title">Asher, Isaac, Ave<br></p>
+
+                <p id="item-a" class="item a">100</p>
+                <p id="item-f" class="item f">100</p>
+                <p id="item-k" class="item k">100</p>
+                <p id="item-p" class="item p">100</p>
+                <p id="item-u" class="item u">100</p>
+                
+                <p id="item-b" class="item b">200</p>
+                <p id="item-g" class="item g">200</p>
+                <p id="item-l" class="item l">200</p>
+                <p id="item-q" class="item q">200</p>
+                <p id="item-v" class="item v">200</p>
+                
+                <p id="item-c" class="item c">300</p>
+                <p id="item-h" class="item h">300</p>
+                <p id="item-m" class="item m">300</p>
+                <p id="item-r" class="item r">300</p>
+                <p id="item-w" class="item w">300</p>
+                
+                <p id="item-d" class="item d red">400</p>
+                <p id="item-i" class="item i orange">400</p>
+                <p id="item-n" class="item n green">400</p>
+                <p id="item-s" class="item s blue">400</p>
+                <p id="item-x" class="item x heliotrope">400</p>
+                
+                <p id="item-e" class="item e red">500</p>
+                <p id="item-j" class="item j orange">500</p>
+                <p id="item-o" class="item o green">500</p>
+                <p id="item-t" class="item t blue">500</p>
+                <p id="item-y" class="item y heliotrope">500</p>
+            </div>
+
+            <!-- Red -->
+            <div id="question-a" class="fullscreen prompt red">Who did Little John enter the service of?</div>
+            <div id="question-b" class="fullscreen prompt red">What did the cook end up doing?</div>
+            <div id="question-c" class="fullscreen prompt red">What was the name of the inn near Sherwood?</div>
+            <div id="question-d" class="fullscreen prompt red">What did Little John and the cook get in a fight over?</div>
+            <div id="question-e" class="fullscreen prompt red">Where was the tanner from?</div>
+            
+            <!-- Orange -->
+            <div id="question-f" class="fullscreen prompt orange">Who won the fight between Robin and Will Scarlet?</div> 
+            <div id="question-g" class="fullscreen prompt orange">Who did the miller beat the Merry men?</div> 
+            <div id="question-h" class="fullscreen prompt orange">What did Robin think the miller had?</div> 
+            <div id="question-i" class="fullscreen prompt orange">What was the miller's name?</div>
+            <div id="question-j" class="fullscreen prompt orange">What color was Will Scarlet's hair?</div> 
+
+            <!-- Green -->
+            <div id="question-k" class="fullscreen prompt green">What was the prize at the county fair?</div>
+            <div id="question-l" class="fullscreen prompt green">Where did the Sheriff go to see the King?</div>
+            <div id="question-m" class="fullscreen prompt green">What was the color of Robins' disguise at the county fair?</div>
+            <div id="question-n" class="fullscreen prompt green">Who did Robin send to spy on the Sheriff?</div>
+            <div id="question-o" class="fullscreen prompt green">What did Robin and the Tinker eat?</div>
+
+            <!-- Gray -->            
+            <div id="question-p" class="fullscreen prompt blue">Who did Robin Hood push into the water?</div> 
+            <div id="question-q" class="fullscreen prompt blue">How did Robin Hood become and outlaw?</div> 
+            <div id="question-r" class="fullscreen prompt blue">Who is the strongest in Robin Hood's gang?</div> 
+            <div id="question-s" class="fullscreen prompt blue">Who is Robin Hood's right hand man?</div> 
+            <div id="question-t" class="fullscreen prompt blue">Who is the best at quarter staff fighting?</div> 
+
+            <!-- Purple -->
+            <div id="question-u" class="fullscreen prompt heliotrope">What did Robin charge a bonny lass for meat?</div> 
+            <div id="question-v" class="fullscreen prompt heliotrope">What did Robin name himself as a butcher?</div> 
+            <div id="question-w" class="fullscreen prompt heliotrope">What did Little John call himself at the fair?</div>
+            <div id="question-x" class="fullscreen prompt heliotrope">How much money did the Sheriff charge Robin for the bull?</div>
+            <div id="question-y" class="fullscreen prompt heliotrope">Who did Little John fight at the Fair?</div>
+
+
+            <!-- Final Jeopardy -->
+            <div id="question-z" class="fullscreen prompt">To hit or strike, especially with the hand or by the wind</div> 
+            
+        </main>
+        <script src="script/jeopardy.js"></script>
+    </body>
+</html>
