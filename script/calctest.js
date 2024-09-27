@@ -130,7 +130,7 @@ function createOrderQuestion() {
     const problemParagraph = document.createElement('p');
     const problemText = key.order[questionNumber].problem;
     problemParagraph.classList.add('order-problem');
-    problemParagraph.innerHTML = `${problemText}<br>If assigning truth values to the propositions is step 0, what is step ${stepNumber+1}?`;
+    problemParagraph.innerHTML = `${problemText}<br>Once you know the values of the variables, which operator would be step ${stepNumber+1} in the order of operations?`;
     
     const solutionParagraph = document.createElement('p');
     const solutionText = key.order[questionNumber].problem.charAt(key.order[questionNumber].solution[stepNumber]);
