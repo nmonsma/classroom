@@ -59,6 +59,26 @@
         hsl(33,88%,52%) 100%);
 }
 
+.cobaltleaf {
+    background-image: linear-gradient(180deg,
+        hsl(200,88%,52%) 0%,
+        hsl(200,88%,32%) 7%,
+        hsl(200,88%,52%) 14%,
+        hsl(200,88%,72%) 20%,
+        hsl(200,88%,52%) 24%,
+        hsl(200,88%,72%) 30%,
+        hsl(200,88%,52%) 31%,
+        hsl(200,88%,32%) 36%,
+        hsl(200,88%,72%) 55%,
+        hsl(200,88%,32%) 57%,
+        hsl(200,88%,72%) 72%,
+        hsl(200,88%,32%) 79%,
+        hsl(200,88%,52%) 80%,
+        hsl(200,88%,72%) 94%,
+        hsl(200,88%,52%) 100%);
+}
+
+
 @keyframes increase {
     20% {transform: scale(1.2, 1.5) rotate(-2deg)}
     80% {transform: scale(1.5, 1.2) rotate(2deg)}
@@ -125,8 +145,7 @@ body {
 }
 
 #score-4 {
-    background-color: var(--darkBlue);
-    color: #fff;
+    color: #000;
 }
 
 #score-1, #score-2, #score-3, #score-4 {
