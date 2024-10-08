@@ -5,79 +5,89 @@ const orderSpace = document.getElementById('order-space');
 
 const key = {
     "calculations": [
-        {"problem": "T \u2022 T", "solution": "T"},
-        {"problem": "T \u2022 F", "solution":"F"},
-        {"problem": "F \u2022 T", "solution":"F"},
-        {"problem": "F \u2022 F", "solution":"F"},
-        {"problem": "T \u2228 T", "solution":"T"},
-        {"problem": "T \u2228 F", "solution":"T"},
-        {"problem": "F \u2228 T", "solution":"T"},
-        {"problem": "F \u2228 F", "solution":"F"},
-        {"problem": "T \u2283 T", "solution":"T"},
-        {"problem": "T \u2283 F", "solution":"F"},
-        {"problem": "F \u2283 T", "solution":"T"},
-        {"problem": "F \u2283 F", "solution":"T"},
-        {"problem": "T \u2261 T", "solution":"T"},
-        {"problem": "T \u2261 F", "solution":"F"},
-        {"problem": "F \u2261 T", "solution":"F"},
-        {"problem": "F \u2261 F", "solution":"T"}
+        {"problem": "T \u2022 T", "solution":"T", "used": 0},
+        {"problem": "T \u2022 F", "solution":"F", "used": 0},
+        {"problem": "F \u2022 T", "solution":"F", "used": 0},
+        {"problem": "F \u2022 F", "solution":"F", "used": 0},
+        {"problem": "T \u2228 T", "solution":"T", "used": 0},
+        {"problem": "T \u2228 F", "solution":"T", "used": 0},
+        {"problem": "F \u2228 T", "solution":"T", "used": 0},
+        {"problem": "F \u2228 F", "solution":"F", "used": 0},
+        {"problem": "T \u2283 T", "solution":"T", "used": 0},
+        {"problem": "T \u2283 F", "solution":"F", "used": 0},
+        {"problem": "F \u2283 T", "solution":"T", "used": 0},
+        {"problem": "F \u2283 F", "solution":"T", "used": 0},
+        {"problem": "T \u2261 T", "solution":"T", "used": 0},
+        {"problem": "T \u2261 F", "solution":"F", "used": 0},
+        {"problem": "F \u2261 T", "solution":"F", "used": 0},
+        {"problem": "F \u2261 F", "solution":"T", "used": 0}
     ],
     "resolutions": [
-        {"problem": "? \u2022 ? = T", "solution": "T T"},
-        {"problem": "? \u2022 ? = F", "solution": "? ?"},
-        {"problem": "? \u2022 T = F", "solution": "F"},
-        {"problem": "? \u2022 F = F", "solution": "?"},
-        {"problem": "T \u2022 ? = F", "solution": "F"},
-        {"problem": "F \u2022 ? = F", "solution": "?"},
+        {"problem": "? \u2022 ? = T", "solution": "T T", "used": 0},
+        {"problem": "? \u2022 ? = F", "solution": "? ?", "used": 0},
+        {"problem": "? \u2022 T = F", "solution": "F", "used": 0},
+        {"problem": "? \u2022 F = F", "solution": "?", "used": 0},
+        {"problem": "T \u2022 ? = F", "solution": "F", "used": 0},
+        {"problem": "F \u2022 ? = F", "solution": "?", "used": 0},
 
-        {"problem": "? \u2228 ? = F", "solution": "F F"},
-        {"problem": "? \u2228 ? = T", "solution": "? ?"},
-        {"problem": "T \u2228 ? = T", "solution": "?"},
-        {"problem": "F \u2228 ? = T", "solution": "T"},
-        {"problem": "F \u2228 ? = F", "solution": "F"},
-        {"problem": "? \u2228 T = T", "solution": "?"},
-        {"problem": "? \u2228 F = T", "solution": "T"},
-        {"problem": "? \u2228 F = F", "solution": "F"},
+        {"problem": "? \u2228 ? = F", "solution": "F F", "used": 0},
+        {"problem": "? \u2228 ? = T", "solution": "? ?", "used": 0},
+        {"problem": "T \u2228 ? = T", "solution": "?", "used": 0},
+        {"problem": "F \u2228 ? = T", "solution": "T", "used": 0},
+        {"problem": "F \u2228 ? = F", "solution": "F", "used": 0},
+        {"problem": "? \u2228 T = T", "solution": "?", "used": 0},
+        {"problem": "? \u2228 F = T", "solution": "T", "used": 0},
+        {"problem": "? \u2228 F = F", "solution": "F", "used": 0},
 
-        {"problem": "? \u2283 ? = F", "solution": "T F"},
-        {"problem": "? \u2283 ? = T", "solution": "? ?"},
-        {"problem": "T \u2283 ? = T", "solution": "T"},
-        {"problem": "T \u2283 ? = F", "solution": "F"},
-        {"problem": "F \u2283 ? = T", "solution": "?"},
-        {"problem": "? \u2283 T = T", "solution": "?"},
-        {"problem": "? \u2283 F = T", "solution": "F"},
-        {"problem": "? \u2283 F = F", "solution": "T"},
+        {"problem": "? \u2283 ? = F", "solution": "T F", "used": 0},
+        {"problem": "? \u2283 ? = T", "solution": "? ?", "used": 0},
+        {"problem": "T \u2283 ? = T", "solution": "T", "used": 0},
+        {"problem": "T \u2283 ? = F", "solution": "F", "used": 0},
+        {"problem": "F \u2283 ? = T", "solution": "?", "used": 0},
+        {"problem": "? \u2283 T = T", "solution": "?", "used": 0},
+        {"problem": "? \u2283 F = T", "solution": "F", "used": 0},
+        {"problem": "? \u2283 F = F", "solution": "T", "used": 0},
 
-        {"problem": "? \u2261 ? = T", "solution": "? ?"},
-        {"problem": "? \u2261 ? = F", "solution": "? ?"},
-        {"problem": "T \u2261 ? = T", "solution": "T"},
-        {"problem": "T \u2261 ? = F", "solution": "F"},
-        {"problem": "F \u2261 ? = T", "solution": "F"},
-        {"problem": "F \u2261 ? = F", "solution": "T"},
-        {"problem": "? \u2261 T = T", "solution": "T"},
-        {"problem": "? \u2261 T = F", "solution": "F"},
-        {"problem": "? \u2261 F = T", "solution": "F"},
-        {"problem": "? \u2261 F = F", "solution": "T"}
+        {"problem": "? \u2261 ? = T", "solution": "? ?", "used": 0},
+        {"problem": "? \u2261 ? = F", "solution": "? ?", "used": 0},
+        {"problem": "T \u2261 ? = T", "solution": "T", "used": 0},
+        {"problem": "T \u2261 ? = F", "solution": "F", "used": 0},
+        {"problem": "F \u2261 ? = T", "solution": "F", "used": 0},
+        {"problem": "F \u2261 ? = F", "solution": "T", "used": 0},
+        {"problem": "? \u2261 T = T", "solution": "T", "used": 0},
+        {"problem": "? \u2261 T = F", "solution": "F", "used": 0},
+        {"problem": "? \u2261 F = T", "solution": "F", "used": 0},
+        {"problem": "? \u2261 F = F", "solution": "T", "used": 0}
     ],
     "order": [
-        {"problem": "(p\u2283q)\u2261~r", "solution": [6,2,5]},
-        {"problem": "~(p\u2261q)", "solution": [3,0]},
-        {"problem": "~(p\u2228q)\u2283r", "solution": [3,0,6]},
-        {"problem": "[p\u2228(q\u2283r)]\u2022~s", "solution": [10,5,2,9]},
-        {"problem": "p\u2283~(q\u2228r)", "solution": [5,2,1]},
-        {"problem": "(~p\u2022q)\u2228r", "solution": [1,3,6]}
+        {"problem": "(p\u2283q)\u2261~r", "solution": [6,2,5], "used": 0},
+        {"problem": "~(p\u2261q)", "solution": [3,0], "used": 0},
+        {"problem": "~(p\u2228q)\u2283r", "solution": [3,0,6], "used": 0},
+        {"problem": "[p\u2228(q\u2283r)]\u2022~s", "solution": [10,5,2,9], "used": 0},
+        {"problem": "p\u2283~(q\u2228r)", "solution": [5,2,1], "used": 0},
+        {"problem": "(~p\u2022q)\u2228r", "solution": [1,3,6], "used": 0}
     ]
 }
 
 
 // Helper Functions
 function createCalculationQuestion() {
+
+    //Create major DOM elements
     const createdDiv = document.createElement('div');
     createdDiv.classList.add('question');
     createdDiv.classList.add('calculation');
 
-    const questionNumber = Math.floor(Math.random()*key.calculations.length);
+    //Find a question that hasn't been used yet, and select that question.
+    let questionNumber = 0;
+    let StillNeedAQuestion = 1;
+    while (StillNeedAQuestion==1) {
+        questionNumber = Math.floor(Math.random()*key.calculations.length);
+        StillNeedAQuestion = key.calculations[questionNumber].used;
+    }
+    key.calculations[questionNumber].used = 1;
     
+    //Create minor DOM elements
     const problemParagraph = document.createElement('p');
     const problemText = key.calculations[questionNumber].problem;
     problemParagraph.classList.add('problem');
@@ -89,6 +99,7 @@ function createCalculationQuestion() {
     solutionParagraph.classList.add('invisible');
     solutionParagraph.innerText = `${solutionText}`;
 
+    //Put all DOM elements together
     createdDiv.appendChild(problemParagraph);
     createdDiv.appendChild(solutionParagraph);
 
@@ -96,12 +107,21 @@ function createCalculationQuestion() {
 }
 
 function createResolutionQuestion() {
+    //Create major DOM elements
     const createdDiv = document.createElement('div');
     createdDiv.classList.add('question');
     createdDiv.classList.add('resolution');
 
-    const questionNumber = Math.floor(Math.random()*key.resolutions.length);
+    //Find a question that hasn't been used yet, and select that question.
+    let questionNumber = 0;
+    let StillNeedAQuestion = 1;
+    while (StillNeedAQuestion==1) {
+        questionNumber = Math.floor(Math.random()*key.resolutions.length);
+        StillNeedAQuestion = key.resolutions[questionNumber].used;
+    }
+    key.resolutions[questionNumber].used = 1;
     
+    //Create minor DOM elements
     const problemParagraph = document.createElement('p');
     const problemText = key.resolutions[questionNumber].problem;
     problemParagraph.classList.add('problem');
@@ -113,6 +133,7 @@ function createResolutionQuestion() {
     solutionParagraph.classList.add('invisible');
     solutionParagraph.innerText = `${solutionText}`;
 
+    //Put all the DOM elements together
     createdDiv.appendChild(problemParagraph);
     createdDiv.appendChild(solutionParagraph);
 
@@ -124,7 +145,16 @@ function createOrderQuestion() {
     createdDiv.classList.add('order-question');
     createdDiv.classList.add('order');
 
-    const questionNumber = Math.floor(Math.random()*key.order.length);
+    //Find a question that hasn't been used yet, and select that question.
+    let questionNumber = 0;
+    let StillNeedAQuestion = 1;
+    while (StillNeedAQuestion==1) {
+        questionNumber = Math.floor(Math.random()*key.order.length);
+        StillNeedAQuestion = key.order[questionNumber].used;
+    }
+    key.order[questionNumber].used = 1;
+
+    //Pick a step number from the chosen question
     const stepNumber = Math.floor(Math.random()*(key.order[questionNumber].solution.length));
     
     const problemParagraph = document.createElement('p');
