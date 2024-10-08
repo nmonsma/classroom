@@ -1,6 +1,7 @@
 // Variables
 const calcSpace = document.getElementById('calc-space');
 const orderSpace = document.getElementById('order-space');
+let testIdentifier = '';   
 
 
 const key = {
@@ -103,6 +104,9 @@ function createCalculationQuestion() {
     createdDiv.appendChild(problemParagraph);
     createdDiv.appendChild(solutionParagraph);
 
+    //Add to testIdentifier
+    testIdentifier += `${questionNumber.toString(32)}`; 
+
     return createdDiv;
 }
 
@@ -136,6 +140,9 @@ function createResolutionQuestion() {
     //Put all the DOM elements together
     createdDiv.appendChild(problemParagraph);
     createdDiv.appendChild(solutionParagraph);
+
+    //Add to testIdentifier
+    testIdentifier += `${questionNumber.toString(32)}`;
 
     return createdDiv;
 }
@@ -171,6 +178,9 @@ function createOrderQuestion() {
     createdDiv.appendChild(problemParagraph);
     createdDiv.appendChild(solutionParagraph);
 
+    //Add to testIdentifier
+    testIdentifier += `${questionNumber}${stepNumber}`; 
+
     return createdDiv;
 }
 
@@ -186,25 +196,33 @@ function toggleSolution () {
     this.classList.toggle('invisible');
 }
 
-// Main Actions
-for (i=0;i<7;i++) {
-    const childElement = createCalculationQuestion();
-    calcSpace.appendChild(childElement);
-}
-for (i=0;i<13;i++) {
-    const childElement = createResolutionQuestion();
-    calcSpace.appendChild(childElement);
-}
-const titleSpace = document.createElement('p');
-titleSpace.innerHTML = `Name: ________________<br><br>Date: __________`;
-orderSpace.appendChild(titleSpace);
-for (i=0;i<5;i++) {
-    const childElement = createOrderQuestion();
-    orderSpace.appendChild(childElement);
+function createTest() {
+    testIdentifier = '';   
+    for (i=0;i<7;i++) {
+        const childElement = createCalculationQuestion();
+        calcSpace.appendChild(childElement);
+    }
+    for (i=0;i<13;i++) {
+        const childElement = createResolutionQuestion();
+        calcSpace.appendChild(childElement);
+    }
+    const titleSpace = document.createElement('p');
+    titleSpace.innerHTML = `Name: ________________<br><br>Date: __________`;
+    orderSpace.appendChild(titleSpace);
+    for (i=0;i<5;i++) {
+        const childElement = createOrderQuestion();
+        orderSpace.appendChild(childElement);
+    }
+    
+    const solutionsObjects = document.getElementsByClassName('solution');
+    titleSpace.addEventListener('dblclick', toggleSolutions);
+    for (i=0;i<solutionsObjects.length;i++) {
+        solutionsObjects[i].addEventListener('dblclick', toggleSolution)
+    }
+
+    console.log(testIdentifier);
 }
 
-const solutionsObjects = document.getElementsByClassName('solution');
-titleSpace.addEventListener('dblclick', toggleSolutions);
-for (i=0;i<solutionsObjects.length;i++) {
-    solutionsObjects[i].addEventListener('dblclick', toggleSolution)
-}
+
+// Main Actions
+createTest();
