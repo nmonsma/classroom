@@ -179,8 +179,9 @@ function createOrderQuestion() {
     createdDiv.appendChild(solutionParagraph);
 
     //Add to testIdentifier
-    testIdentifier += `${questionNumber}${stepNumber}`; 
-
+    const questionIdentifier = (questionNumber*4)+stepNumber;
+    testIdentifier += `${questionIdentifier.toString(32)}`;
+    
     return createdDiv;
 }
 
@@ -209,18 +210,22 @@ function createTest() {
     const titleSpace = document.createElement('p');
     titleSpace.innerHTML = `Name: ________________<br><br>Date: __________`;
     orderSpace.appendChild(titleSpace);
+
     for (i=0;i<5;i++) {
         const childElement = createOrderQuestion();
         orderSpace.appendChild(childElement);
     }
+
+    const identifierSpace = document.createElement('p');
+    identifierSpace.innerText = `Test identifier: ${testIdentifier}`;
+    identifierSpace.id = "id";
+    orderSpace.appendChild(identifierSpace);
     
     const solutionsObjects = document.getElementsByClassName('solution');
     titleSpace.addEventListener('dblclick', toggleSolutions);
     for (i=0;i<solutionsObjects.length;i++) {
         solutionsObjects[i].addEventListener('dblclick', toggleSolution)
     }
-
-    console.log(testIdentifier);
 }
 
 
