@@ -12,20 +12,31 @@
     <body>
         <main>
             <div id="main-image">
-                <svg id="square-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000" style="background-color:fff">
+                <svg id="square-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 1000" style="background-color:fff">
                     <defs>
                         <symbol id="arrow" viewBox="0 0 30 60" transform-origin="center" height="50" width="50" >
                             <path fill="none" stroke-width="10" d="M10,10 L25,30 L10,50"/>
                         </symbol>
                     </defs>
                     <polygon points="200,200 800,200 800,800 200,800" stroke-width="10" stroke="black" fill="none"/>
-                    <text class="element label" id="a" x="30" y="150">A</text>
+                    <text class="element label" id="a" x="105" y="150">A</text>
                     <text class="element label" id="e" x="840" y="150">E</text>
-                    <text class="element label" id="i" x="70" y="970">I</text>
-                    <text class="element label" id="o" x="830" y="970">O</text>
+                    <text class="element label" id="i" x="115" y="900">I</text>
+                    <text class="element label" id="o" x="830" y="900">O</text>
 
+                    <text class="element sarep" id="a" x="70" y="50">All S are P</text>
+                    <text class="element sarep" id="e" x="750" y="50">No S are P</text>
+                    <text class="element sarep" id="i" x="70" y="970">Some S are P</text>
+                    <text class="element sarep" id="o" x="650" y="970">Some S are not P</text>
 
-                    <g class="contrariety" id="contrariety-universal" transform="translate(500,125)">
+                    <g class="types">
+                        <text class="element quantity" x="400" y="50">universal</text>    
+                        <text class="element quantity" x="400" y="970">particular</text>    
+                        <text class="element quality" x="0" y="0" transform="translate(50,610) rotate(270)">affirmative</text>    
+                        <text class="element quality" x="0" y="0" transform="translate(950,400) rotate(90)">negative</text>    
+                    </g>
+
+                    <g class="contrariety" id="contrariety" transform="translate(500,125)">
                         <text class="element relationship-label" transform="translate(-75,8)">contrariety</text>
                  
                         <g class="element">
@@ -44,7 +55,7 @@
                             <text class="t" transform="translate(270,45)">T</text>
                         </g>
                     </g>
-                    <g class="contrariety" id="contrariety-universal" transform="translate(500,875)">
+                    <g class="contrariety" id="subcontrariety" transform="translate(500,875)">
                         <text class="element relationship-label" transform="translate(-75,8)">subcontrariety</text>
 
                         <g class="element">

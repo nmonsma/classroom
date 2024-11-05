@@ -45,7 +45,14 @@ a {
 }
 
 .label {
-    font-size: 180px;
+    font-size: 80px;
+    stroke: none;
+    fill: black;
+    font-family: serif;
+}
+
+.sarep {
+    font-size: 40px;
     stroke: none;
     fill: black;
     font-family: serif;
@@ -56,6 +63,14 @@ a {
     stroke: none;
     fill: #ccc;
     font-family: sans-serif;
+}
+
+.quantity, .quality {
+    stroke:none; 
+    fill:green; 
+    font-size:50px;
+    font-family: sans-serif;
+    font-style: italic;
 }
 
 .relationship-label {
