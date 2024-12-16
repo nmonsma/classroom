@@ -62,7 +62,7 @@ function isMiddle(syllogismFigure) {
     else if (syllogismFigure==2) return [[false,true],[false,true],[false,false]];
     else if (syllogismFigure==3) return [[true,false],[true,false],[false,false]];
     else if (syllogismFigure==4) return [[false,true],[true,false],[false,false]];
-    else {console.log('syllogismFigure is not valid'); return "error"};
+    else {console.log('syllogismFigure is not valid'); return [[false,false],[false,false],[false,false]]};
 }
 
     //return the figure of the categorical syllogism represented by the categoricalSyllogism JSON
@@ -228,7 +228,7 @@ function changeType() {
         i++; 
     }
     if (this.innerText>0&&this.innerText<4) this.innerText++; 
-    else if (this.innerText==4) this.innerText=1; 
+    else if (this.innerText==4) this.innerText=0; 
     applyForm();
 }
 
