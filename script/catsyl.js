@@ -39,11 +39,11 @@ const aeioButton = document.getElementById('aeio-button');
 const syllogismButton = document.getElementById('syllogism-button');
 const spmButton = document.getElementById('spm-button');
 const distributionButton = document.getElementById('distribution-button');
-const formButton = document.getElementsByClassName('form-button');
+const moodButton = document.getElementsByClassName('mood-button');
+const figureButton = document.getElementById('figure');
 
 let showAEIO = 0;
-
-
+let figure = 0;
 
 // Helper Functions
 
@@ -171,10 +171,10 @@ function ironOutForm() {
 }
 
 function applyForm() {
-    categoricalForm[0] = formButton[0].innerText;
-    categoricalForm[1] = formButton[1].innerText;
-    categoricalForm[2] = formButton[2].innerText;
-    categoricalForm[3] = formButton[4].innerText;
+    categoricalForm[0] = moodButton[0].innerText;
+    categoricalForm[1] = moodButton[1].innerText;
+    categoricalForm[2] = moodButton[2].innerText;
+    categoricalForm[3] = figure;
     ironOutSyllogism();
 }
 
@@ -215,7 +215,7 @@ function changeDistribution() {
 
 }
 
-function changeType() { 
+function changeMood() { 
     let i = 0;
     let exitNow = 0;
     console.log (this.innerText);    
@@ -227,8 +227,13 @@ function changeType() {
         };
         i++; 
     }
-    if (this.innerText>0&&this.innerText<4) this.innerText++; 
-    else if (this.innerText==4) this.innerText=0; 
+    applyForm();
+}
+
+function changeFigure() {
+    figure++;
+    if (figure==5) figure=0;
+    if (figure==0) {this.innerText=""} else {this.innerText=figure};
     applyForm();
 }
 
@@ -245,6 +250,10 @@ for (i=0;i<terms.length;i++) {
 //     squares[i].addEventListener('click',changeType)
 // }
 
-for (i=0;i<formButton.length;i++) {
-    formButton[i].addEventListener('click',changeType);
+for (i=0;i<moodButton.length;i++) {
+    moodButton[i].addEventListener('click',changeMood);
 }
+
+figureButton.addEventListener('click',changeFigure);
+
+
