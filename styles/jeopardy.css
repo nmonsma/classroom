@@ -174,10 +174,19 @@ header {
 }
 
 #score5 {
-    background-color: #712a79;
+    background-color: #aa3333;
     color: #fff;
 }
 
+#score6 {
+    background-color: #55b;
+    color: #fff;
+}
+
+#score7 {
+    background-color: #c50;
+    color: #fff;
+}
 .red {
     background-color: var(--darkRed) !important;
 }
