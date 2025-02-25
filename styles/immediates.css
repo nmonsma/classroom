@@ -81,4 +81,13 @@ button:active {
     background-color: #555;
 }
 
+.non {
+    color: rgba(0,0,0,0.5);
+    text-decoration: line-through;
+    padding-right: 35px;
+}
 
+.checked {
+    color: rgba(0,0,0,1);
+    text-decoration: none;
+}

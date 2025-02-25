@@ -124,7 +124,9 @@ function createStatement (){
     if (type=='I'||type=='O') {universal=false};
     const subject = document.getElementById('term1').value;
     const predicate = document.getElementById('term2').value;
-    activeStatement = new Statement(affirmative,universal,subject,false,predicate,false);
+    const subjectComplement = document.getElementById('term1-complement').checked;
+    const predicateComplement = document.getElementById('term2-complement').checked;
+    activeStatement = new Statement(affirmative,universal,subject,subjectComplement,predicate,predicateComplement);
     consoleBox.value+=naturalLanguage(activeStatement)+'\n';
     updatePossibilities();
 }
@@ -151,6 +153,20 @@ function insertName() {
     activeStatement.s.term = `${names[selector]}`     
 }
 
+function reflectChecked (){
+    const subjectLabel = document.getElementById('term1-complement-label');
+    const predicateLabel = document.getElementById('term2-complement-label');
+    if (document.getElementById('term1-complement').checked) {
+        subjectLabel.classList.add('checked');
+    } else {
+        subjectLabel.classList.remove('checked');
+    }
+    if (document.getElementById('term2-complement').checked) {
+        predicateLabel.classList.add('checked');
+    } else {
+        predicateLabel.classList.remove('checked');
+    }
+}
 
 
 document.getElementById('create-statement').addEventListener('click', createStatement);
@@ -159,3 +175,5 @@ converseButton.addEventListener('click', createConverse);
 document.getElementById('obverse').addEventListener('click', createObverse);
 contrapositiveButton.addEventListener('click', createContrapositive);
 document.getElementById('clear').addEventListener('click',()=>{consoleBox.value=''})
+document.getElementById('term1-complement').addEventListener('click', reflectChecked);
+document.getElementById('term2-complement').addEventListener('click', reflectChecked);
