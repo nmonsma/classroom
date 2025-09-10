@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Changing Circle</title>
+    <title>Teach Timer</title>
+    <link rel="icon" type="image/png" id="favicon">
     <style>
         
         @keyframes flashAnimation {
@@ -82,11 +83,7 @@
             "09:50": "#FFA500", // Orange - Finish Up
             "10:00": "#FF6347", // Tomato - Give Homework
             "10:02": "#2F4F4F",  // Dark Slate Gray - Break
-
-            "10:28": "#FF6347", // Tomato - Give Homework
-            "10:30": "#FFA500", // Orange - Finish Up
-            "10:35": "#32CD32", // Lime Green - Go
-            "10:36": "#2F4F4F",  // Dark Slate Gray - Break
+        
         },{
             "06:00": "#FFD700", // Gold - Morning
             "09:00": "#87CEEB", // Sky Blue - Work start
@@ -140,6 +137,36 @@
             };
         }
 
+        function generateFavicon(color) {
+            // Create a canvas element
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size (favicon size)
+            canvas.width = 32;
+            canvas.height = 32;
+            
+            // Draw circle favicon
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(16, 16, 14, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Add subtle border for better visibility
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // Convert canvas to data URL
+            return canvas.toDataURL('image/png');
+        }
+
+        function updateFavicon(color) {
+            const favicon = document.getElementById('favicon');
+            const faviconUrl = generateFavicon(color);
+            favicon.href = faviconUrl;
+        }
+
         function updateCircleColor() {
             const circle = document.getElementById('colorCircle');
             const timeDisplay = document.getElementById('timeDisplay');
@@ -152,16 +179,28 @@
             circle.style.backgroundColor = colorInfo.color;
             if (colorInfo.color === "#FFA500") { // Orange color for finishing up
                 circle.classList.add('flash');
+                const seconds = now.getSeconds();
+                const pageTitle = document.getElementsByTagName('title')[0];
+                if (seconds % 2 === 0) {
+                    updateFavicon('#FFA500');
+                    pageTitle.textContent = "Teach Timer";
+                } else {
+                    updateFavicon('#000000');
+                    pageTitle.textContent = "██████████████";
+                }
             } else {
                 circle.classList.remove('flash');
+                updateFavicon(colorInfo.color);
             }
             timeDisplay.textContent = currentTime;
             scheduleInfo.textContent = `Current schedule: ${colorInfo.timeString} - ${colorInfo.color}`;
+        
+            // Update favicon to match circle color
         }
 
         // Update immediately and then every ten seconds
         updateCircleColor();
-        setInterval(updateCircleColor, 10000);
+        setInterval(updateCircleColor, 1000);
     </script>
 </body>
 </html>
