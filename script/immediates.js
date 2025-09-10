@@ -13,22 +13,7 @@ let activeStatement = {
     }
 };
 
-const names = [
-    'Jeremiah',
-    'Rowan',
-    'Caleb',
-    'Levi',
-    'Abby',
-    'Eli',
-    'Ireland',
-    'Brogan',
-    'Isaac',
-    'Asher',
-    'Maddie',
-    'Ave',
-    'Danny',
-    'Jules'
-]
+const names = []
 
 const consoleBox = document.getElementById('console');
 const converseButton = document.getElementById('converse');
