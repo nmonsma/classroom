@@ -58,6 +58,7 @@
         <div class="circle" id="colorCircle"></div>
         <div class="time-display" id="timeDisplay"></div>
         <div class="schedule-info" id="scheduleInfo"></div>
+        <div class="schedule-info" id="nextScheduleInfo"></div>
     </div>
 
     <script>
@@ -136,10 +137,12 @@
             
             // Find the appropriate color based on current time
             let activeSchedule = scheduleEntries[scheduleEntries.length - 1]; // Default to last entry
-            
+            let nextSchedule = scheduleEntries[0]; // Default to first entry
+
             for (let i = 0; i < scheduleEntries.length; i++) {
                 if (currentMinutes >= scheduleEntries[i].timeInMinutes) {
                     activeSchedule = scheduleEntries[i];
+                    if (i < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(i + 1)];
                 } else {
                     break;
                 }
@@ -147,7 +150,9 @@
             
             return {
                 color: activeSchedule.color,
-                timeString: activeSchedule.timeString
+                timeString: activeSchedule.timeString,
+                nextColor: nextSchedule.color,
+                nextTimeString: nextSchedule.timeString
             };
         }
 
@@ -185,6 +190,7 @@
             const circle = document.getElementById('colorCircle');
             const timeDisplay = document.getElementById('timeDisplay');
             const scheduleInfo = document.getElementById('scheduleInfo');
+            const nextScheduleInfo = document.getElementById('nextScheduleInfo');
             
             const now = new Date();
             const currentTime = now.toLocaleTimeString();
@@ -194,12 +200,12 @@
             
             //Get meaning of color
             let meaning = "Unknown";
+            let nextMeaning = "Unknown";
             for (let i = 0; i < colorMeaning.length; i++) {
-                if (colorMeaning[i][colorInfo.color]) {
-                    meaning = colorMeaning[i][colorInfo.color];
-                    break;
-                }
+                if (colorMeaning[i][colorInfo.color]) meaning = colorMeaning[i][colorInfo.color];
+                if (colorMeaning[i][colorInfo.nextColor]) nextMeaning = colorMeaning[i][colorInfo.nextColor];
             }
+            
 
             // Update favicon and page title
             const pageTitle = document.getElementsByTagName('title')[0];
@@ -221,7 +227,8 @@
                 pageTitle.textContent = meaning;
             }
             timeDisplay.textContent = currentTime;
-            scheduleInfo.textContent = `Indicator: ${meaning} (${colorInfo.timeString})`;
+            scheduleInfo.textContent = `Current: ${meaning} (${colorInfo.timeString})`;
+            nextScheduleInfo.textContent = `Next: ${nextMeaning} (${colorInfo.nextTimeString})`;
         
         }
 
