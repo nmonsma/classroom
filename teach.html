@@ -201,11 +201,13 @@
                 }
             }
 
-            // Update favicon to match circle color
+            // Update favicon and page title
+            const pageTitle = document.getElementsByTagName('title')[0];
+            
             if (colorInfo.color === "#FFA500") { // Orange color for finishing up
                 circle.classList.add('flash');
                 const seconds = now.getSeconds();
-                const pageTitle = document.getElementsByTagName('title')[0];
+
                 if (seconds % 2 === 0) {
                     updateFavicon('#FFA500');
                     pageTitle.textContent = meaning;
