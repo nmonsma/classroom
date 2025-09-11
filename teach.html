@@ -201,13 +201,14 @@
                 }
             }
 
+            // Update favicon to match circle color
             if (colorInfo.color === "#FFA500") { // Orange color for finishing up
                 circle.classList.add('flash');
                 const seconds = now.getSeconds();
                 const pageTitle = document.getElementsByTagName('title')[0];
                 if (seconds % 2 === 0) {
                     updateFavicon('#FFA500');
-                    pageTitle.textContent = "Teach Timer";
+                    pageTitle.textContent = meaning;
                 } else {
                     updateFavicon('#000000');
                     pageTitle.textContent = "██████████████";
@@ -215,11 +216,11 @@
             } else {
                 circle.classList.remove('flash');
                 updateFavicon(colorInfo.color);
+                pageTitle.textContent = meaning;
             }
             timeDisplay.textContent = currentTime;
             scheduleInfo.textContent = `Indicator: ${meaning} (${colorInfo.timeString})`;
         
-            // Update favicon to match circle color
         }
 
         // Update immediately and then every ten seconds
