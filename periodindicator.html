@@ -70,56 +70,44 @@
     <script>
         // Time schedule JSON object
         const colorScheduleComplete = [{  
-            "00:00": "#2F4F4F",  // None
-            "08:00": "#FFD700", // Gold - First Period
-            "08:53": "#87CEEB", // Sky Blue - Second Period
-            "09:40": "#FFA500", // Orange - Third Period
-            "10:27": "#32CD32", // Lime Green - Fourth Period
-            "11:14": "#9370DB", // Medium Purple - Fifth Period/Elementary Lunch
+            "00:00": "#333333",  // None
+            "08:00": "#191970", // Gold - First Period
+            "08:53": "#0d4f3c", // Sky Blue - Second Period
+            "09:40": "#722f37", // Orange - Third Period
+            "10:27": "#36454f", // Lime Green - Fourth Period
+            "11:14": "#4b0082", // Medium Purple - Fifth Period/Elementary Lunch
             "11:58": "#AFCFCF",  // Light Slate Gray - Secondary Lunch
-            "12:34": "#FF6347", // Tomato - Sixth Period
-            "13:21": "#4682B4", // Steel Blue - Seventh Period
-            "14:08": "#20B2AA", // Light Sea Green - Eighth
-            "14:52": "#2F4F4F"  // None
+            "12:34": "#2d5016", // Tomato - Sixth Period
+            "13:21": "#8b4513", // Steel Blue - Seventh Period
+            "14:08": "#4682b4", // Light Sea Green - Eighth
+            "14:52": "#333333"  // None
         },{
-            "00:00": "#2F4F4F",  // None
-            "08:00": "#FFD700", // Gold - First Period
-            "08:45": "#DC143C", // Crimson - Chapel      
-            "09:23": "#87CEEB", // Sky Blue - Second Period
-            "10:05": "#FFA500", // Orange - Third Period
-            "10:47": "#32CD32", // Lime Green - Fourth Period
-            "11:29": "#9370DB", // Medium Purple - Fifth Period/Elementary Lunch
+            "00:00": "#333333",  // None
+            "08:00": "#191970", // Gold - First Period
+            "08:45": "#555555", // Crimson - Chapel      
+            "09:23": "#0d4f3c", // Sky Blue - Second Period
+            "10:05": "#722f37", // Orange - Third Period
+            "10:47": "#36454f", // Lime Green - Fourth Period
+            "11:29": "#4b0082", // Medium Purple - Fifth Period/Elementary Lunch
             "12:08": "#AFCFCF", // Light Slate Gray - Secondary Lunch
-            "12:44": "#FF6347", // Tomato - Sixth Period
-            "13:26": "#4682B4", // Steel Blue - Seventh Period
-            "14:08": "#20B2AA", // Light Sea Green - Eighth
-            "14:52": "#2F4F4F"  // None
-        },{
-            "00:00": "#2F4F4F",  // None
-            "07:57": "#FFD700", // Gold - First Period
-            "08:50": "#87CEEB", // Sky Blue - Second Period
-            "09:37": "#FFA500", // Orange - Third Period
-            "10:24": "#32CD32", // Lime Green - Fourth Period
-            "11:11": "#9370DB", // Medium Purple - Fifth Period/Elementary Lunch
-            "11:58": "#AFCFCF",  // Light Slate Gray - Secondary Lunch
-            "12:31": "#FF6347", // Tomato - Sixth Period
-            "13:18": "#4682B4", // Steel Blue - Seventh Period
-            "14:05": "#20B2AA", // Light Sea Green - Eighth
-            "14:52": "#2F4F4F"  // None
+            "12:44": "#2d5016", // Tomato - Sixth Period
+            "13:26": "#8b4513", // Steel Blue - Seventh Period
+            "14:08": "#4682b4", // Light Sea Green - Eighth
+            "14:52": "#333333"  // None
         }];
 
         const colorMeaning = [
-            {"#2F4F4F": "-"},
-            {"#87CEEB": "2nd Period"},
-            {"#32CD32": "4th Period"},
-            {"#FFA500": "3rd Period"},
-            {"#FF6347": "6th Period"},
-            {"#FFD700": "1st Period"},
-            {"#9370DB": "5th Period / Elem Lunch"},
+            {"#333333": " "},
+            {"#0d4f3c": "2nd Period"},
+            {"#36454f": "4th Period"},
+            {"#722f37": "3rd Period"},
+            {"#2d5016": "6th Period"},
+            {"#191970": "1st Period"},
+            {"#4b0082": "5th Period / Elem Lunch"},
             {"#AFCFCF": "Lunch"},
-            {"#4682B4": "7th Period"},
-            {"#20B2AA": "8th Period"},
-            {"#DC143C": "Chapel"},
+            {"#8b4513": "7th Period"},
+            {"#4682b4": "8th Period"},
+            {"#555555": "Chapel"},
         ];
 
         function getCurrentColor() {
