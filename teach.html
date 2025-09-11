@@ -63,7 +63,9 @@
     <script>
         // Time schedule JSON object
         const colorScheduleComplete = [{  
-            "08:00": "#32CD32", // Lime Green - Go
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+            "08:30": "#87CEEB", // Sky Blue - Head to Classroom
+            "08:53": "#32CD32", // Lime Green - Go
             "09:25": "#FFA500", // Orange - Finish Up
             "09:35": "#FF6347", // Tomato - Give Homework
             "09:37": "#2F4F4F",  // Dark Slate Gray - Break
@@ -79,6 +81,8 @@
             "11:11": "#2F4F4F"  // Dark Slate Gray - Break
         
         },{
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+            "08:30": "#87CEEB", // Sky Blue - Head to Classroom
             "09:23": "#32CD32", // Lime Green - Go
             "09:50": "#FFA500", // Orange - Finish Up
             "10:00": "#FF6347", // Tomato - Give Homework
@@ -93,6 +97,16 @@
             "21:00": "#9370DB", // Medium Purple - Night
             "00:00": "#2F4F4F"  // Dark Slate Gray - Late night
         }];
+
+        const colorMeaning = [
+            {"#2F4F4F": "Break"},
+            {"#87CEEB": "Get Gready"},
+            {"#32CD32": "Teach"},
+            {"#FFA500": "Finish Up"},
+            {"#FF6347": "Assign Homework"},
+            {"#FFD700": "Morning"},
+            {"#9370DB": "Night"},
+        ];
 
         function getCurrentColor() {
             const now = new Date();
@@ -177,6 +191,16 @@
             const colorInfo = getCurrentColor();
             
             circle.style.backgroundColor = colorInfo.color;
+            
+            //Get meaning of color
+            let meaning = "Unknown";
+            for (let i = 0; i < colorMeaning.length; i++) {
+                if (colorMeaning[i][colorInfo.color]) {
+                    meaning = colorMeaning[i][colorInfo.color];
+                    break;
+                }
+            }
+
             if (colorInfo.color === "#FFA500") { // Orange color for finishing up
                 circle.classList.add('flash');
                 const seconds = now.getSeconds();
@@ -193,7 +217,7 @@
                 updateFavicon(colorInfo.color);
             }
             timeDisplay.textContent = currentTime;
-            scheduleInfo.textContent = `Current schedule: ${colorInfo.timeString} - ${colorInfo.color}`;
+            scheduleInfo.textContent = `Indicator: ${meaning} (${colorInfo.timeString})`;
         
             // Update favicon to match circle color
         }
