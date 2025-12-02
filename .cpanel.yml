@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/nickjufg/public_html/classroom
+    - /bin/cp -R /home/nickjufg/repositories/classroom/omnibus $DEPLOYPATH
+    - /bin/cp -R /home/nickjufg/repositories/classroom/img     $DEPLOYPATH
+    - /bin/cp -R /home/nickjufg/repositories/classroom/script  $DEPLOYPATH
+    - /bin/cp -R /home/nickjufg/repositories/classroom/styles  $DEPLOYPATH
+    - /bin/cp /home/nickjufg/repositories/classroom/*.html     $DEPLOYPATH
+    - /bin/cp /home/nickjufg/repositories/classroom/*.htm      $DEPLOYPATH

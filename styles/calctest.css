@@ -1,0 +1,89 @@
+@import url(colors.css);
+
+body {
+    width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+main {
+    width: 800px;
+    height:1200px;
+    display: grid;
+    grid-template-columns: 300px 500px;
+}
+
+#calc-space {
+    display: flex;
+    flex-direction: column;
+}
+
+#order-space {
+    height: 1020px;
+    display: grid;
+    grid-template-rows: 100px repeat(5, 175px) 145;
+}
+
+#title-space {
+    user-select: none;
+}
+
+p {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.question {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.calculation {
+    width: 200px;
+}
+
+.resolution {
+    width: 300px;
+}
+
+.order {
+    width: 500px;
+}
+
+.resolution .solution {
+    width: 50px;
+}
+
+.order .solution, .calculation .solution {
+    width: 35px;
+}
+
+.problem, .solution {
+    padding: 5px;
+    margin: 5px;
+}
+
+.solution {
+    border: solid 2px black;
+}
+
+.invisible {
+    color: rgba(0,0,0,0);
+    user-select: none;
+}
+
+.order-problem, .order-solution {
+    width: 500px;
+}
+
+#id {
+    font-weight: normal;
+    font-size: 10px;
+    align-self: flex-end;
+}

@@ -1,0 +1,135 @@
+@import url(colors.css);
+
+* {
+    transition: opacity 1s, stroke 1s, transform 2s;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+#categorical-syllogism {
+    height: 80vh;
+    width: auto;
+}
+
+#conclusion.bottom {
+    transform: translate(0,500px);
+}
+
+.undistributed {
+    fill: url(#undist) !important;
+    stroke: none !important;
+}
+
+.premise {
+    opacity: 0;
+}
+
+.shown {
+    opacity: 1 !important;
+}
+
+.red {
+    fill: url(#red);
+}
+
+.blue {
+    fill: url(#blue);
+}
+
+.yellow {
+    fill: url(#yellow);
+}
+
+footer {
+    position: fixed;
+    margin: 0 auto;
+    top: 85vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: fr repeat(15vw,3) fr repeat(5vw,2) fr;
+    grid-template-areas: 'emptySpace syllogismToggle aeioToggle spmToggle distributionToggle moreEmptySpace moodA moodB moodC moodD moodE anotherEmptySpace';    
+}
+
+.form-button {
+    font-size: 1.5em;
+    font-family: serif;
+    font-weight: bold;
+    width: 5vw;
+    padding: 1vw;
+    text-align: center;
+    background-color: #f0b219;
+    color: black;
+}
+
+.toggle {
+    width: 14vw;
+    background-color: #ddd;
+    color: black;
+}
+
+.toggle.depressed {
+    background-color: #888;
+    color: black;
+}
+
+button {
+    border: none;
+    padding: 1vw;
+}
+
+button:hover {
+    background-color: #712a79;
+    color: white;
+}
+
+#aeio-button {
+    grid-area: aeioToggle;
+}
+
+#syllogism-button {
+    grid-area: syllogismToggle;
+}
+
+#spm-button {
+    grid-area: spmToggle;
+}
+
+#distribution-button {
+    grid-area: distributionToggle;
+}
+
+#mood-1 {
+    grid-area: moodA;
+}
+
+#mood-2 {
+    grid-area: moodB;
+}
+
+#mood-3 {
+    grid-area: moodC;
+}
+
+#form-dash {
+    grid-area: moodD;
+}
+
+#figure {
+    grid-area: moodE;
+}

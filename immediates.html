@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="styles/immediates.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+
+        </header>
+        <main>
+            <form id="statement-creator">
+                <p class="input-part">
+                    <input type="radio" id="all" name="word1" value="A">
+                    <label for="all">All</label><br>
+                    <input type="radio" id="no" name="word1" value="E">
+                    <label for="no">No</label><br>
+                    <input type="radio" id="some" name="word1" value="I">
+                    <label for="some">Some</label><br>
+                    <input type="radio" id="somenot" name="word1" value="O">
+                    <label for="somenot">Some (not)</label>
+                </p>
+                <p class="input-part">
+                    <input type="checkbox" id="term1-complement">
+                    <label class="non" id="term1-complement-label" for="term1-complement">non-</label>
+                    <label for="term1">Subject term:</label><br>
+                    <input type="text" id="term1" name="word2">
+                </p>
+                <p class="input-part"><br>are</p>
+                <p class="input-part">
+                    <input type="checkbox" id="term2-complement">
+                    <label class="non" id="term2-complement-label" for="term2-complement">non-</label>
+                    <label for="term2">Predicate term:</label><br>
+                    <input type="text" id="term2" name="word4">
+                </p>
+            </form>            
+            <div class="buttons">
+                <button id="create-statement" type="button" form="statement-creator" value="create">Create Statement</button>
+                            </div>
+            <form id="console-area">
+                <textarea id="console" name="console" rows="15" cols="70"></textarea>
+            </form>
+            <div class="buttons">
+                <p id="type-indicator">-</p>
+                <button id="converse" type="button" form="console" value="converse">Converse</button>
+                <button id="obverse" type="button" form="console" value="obverse">Obverse</button>
+                <button id="contrapositive" type="button" form="console" value="contrapositive">Contrapositive</button>
+                <button id="clear" type="button" form="console" value="clear">Clear</button>
+            </div>
+
+        </main>
+        <footer>
+        </footer>
+        <script src="script/immediates.js"></script>
+    </body>
+</html>

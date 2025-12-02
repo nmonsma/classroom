@@ -1,0 +1,169 @@
+@import url(colors.css);
+
+/* Definitions: */
+.goldleaf {
+    background-image: linear-gradient(160deg,
+        hsl(43,88%,52%) 0%,
+        hsl(43,88%,32%) 7%,
+        hsl(43,88%,52%) 14%,
+        hsl(43,88%,72%) 20%,
+        hsl(43,88%,52%) 24%,
+        hsl(43,88%,72%) 30%,
+        hsl(43,88%,52%) 31%,
+        hsl(43,88%,32%) 36%,
+        hsl(43,88%,72%) 55%,
+        hsl(43,88%,32%) 57%,
+        hsl(43,88%,72%) 72%,
+        hsl(43,88%,32%) 79%,
+        hsl(43,88%,52%) 90%,
+        hsl(43,88%,72%) 94%,
+        hsl(43,88%,52%) 100%);
+}
+
+
+.silverleaf {
+    background-image: linear-gradient(160deg,
+        hsl(43,0%,72%) 0%,
+        hsl(43,0%,352%) 7%,
+        hsl(43,0%,72%) 14%,
+        hsl(43,0%,92%) 20%,
+        hsl(43,0%,72%) 24%,
+        hsl(43,0%,92%) 30%,
+        hsl(43,0%,72%) 31%,
+        hsl(43,0%,52%) 36%,
+        hsl(43,0%,92%) 55%,
+        hsl(43,0%,52%) 57%,
+        hsl(43,0%,92%) 72%,
+        hsl(43,0%,72%) 79%,
+        hsl(43,0%,52%) 90%,
+        hsl(43,0%,72%) 94%,
+        hsl(43,0%,92%) 100%);
+}
+
+.copperleaf {
+    background-image: linear-gradient(160deg,
+        hsl(33,88%,52%) 0%,
+        hsl(33,88%,32%) 7%,
+        hsl(33,88%,52%) 14%,
+        hsl(33,88%,72%) 20%,
+        hsl(33,88%,52%) 24%,
+        hsl(33,88%,72%) 30%,
+        hsl(33,88%,52%) 31%,
+        hsl(33,88%,32%) 36%,
+        hsl(33,88%,72%) 55%,
+        hsl(33,88%,32%) 57%,
+        hsl(33,88%,72%) 72%,
+        hsl(33,88%,32%) 79%,
+        hsl(33,88%,52%) 80%,
+        hsl(33,88%,72%) 94%,
+        hsl(33,88%,52%) 100%);
+}
+
+.cobaltleaf {
+    background-image: linear-gradient(160deg,
+        hsl(200,88%,52%) 0%,
+        hsl(200,88%,72%) 7%,
+        hsl(200,88%,52%) 14%,
+        hsl(200,88%,32%) 20%,
+        hsl(200,88%,52%) 24%,
+        hsl(200,88%,32%) 30%,
+        hsl(200,88%,52%) 31%,
+        hsl(200,88%,32%) 36%,
+        hsl(200,88%,52%) 55%,
+        hsl(200,88%,32%) 57%,
+        hsl(200,88%,72%) 72%,
+        hsl(200,88%,52%) 79%,
+        hsl(200,88%,32%) 80%,
+        hsl(200,88%,72%) 94%,
+        hsl(200,88%,52%) 100%);
+}
+
+
+@keyframes increase {
+    20% {transform: scale(1.2, 1.5) rotate(-2deg)}
+    80% {transform: scale(1.5, 1.2) rotate(2deg)}
+}
+
+@keyframes decrease {
+    20% {transform: scale(0.8, 0.6) rotate(-2deg)}
+    80% {transform: scale(0.6, 0.8) rotate(2deg)}
+}
+
+.increased {
+    animation: increase 0.5s;
+}
+
+.decreased {
+    animation: decrease 0.5s;
+}
+
+
+body {
+    margin: 0 auto;
+    background-color: #000;
+}
+
+a {
+    all: unset;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#score-1 {
+    color: #000;
+}
+
+#score-2 {
+    color: #000;
+}
+
+#score-3 {
+    color: #000;
+}
+
+#score-4 {
+    color: #000;
+}
+
+#score-1, #score-2, #score-3, #score-4 {
+    padding: 10vh;
+    width: 8vw;
+    border-radius: 5%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    font-size: 5em;
+    text-align: center;
+}
+
+.item {
+    padding: 10%;
+    border-radius: 25%;
+    background-color: white;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    font-size: 5em;
+}

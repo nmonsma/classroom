@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title>Categorical Syllogisms</title>
+
+<!-- NOTE: In order to coordinate with the square of opposition and Venn diagrams, the quantifier should be a square, and the terms should be circles. This could leave the copula as a diamond.-->
+
+        <link rel="stylesheet" href="styles/catsyl.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <div id="main-image">
+                <svg id="categorical-syllogism" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900">
+                    <defs>
+                        <symbol id="triangle" viewBox="0 0 36 26" transform-origin="center" height="225" >
+                            <path stroke-width="1" d="M18,1 L35,25 L1,25 Z"/>
+                        </symbol>
+                        <symbol id="diamond" viewBox="0 0 26 26" transform-origin="center" height="225" >
+                            <path stroke-width="1" d="M13,21 L5,13 L13,5 L21,13 Z"/>
+                        </symbol>
+                        <symbol id="circle" viewBox="0 0 26 26" transform-origin="center" height="225">
+                            <circle stroke-width="1" cx="13" cy="13" r="12"/>
+                        </symbol>
+                        <symbol id="rectangle" viewBox="0 0 40 26" transform-origin="center" height="225">
+                            <path stroke-width="1" d="M1,1 L39,1 L39,25 L1,25 Z"/>
+                        </symbol>
+                        <symbol id="square" viewBox="0 0 80 31.2" transform-origin="center" height="270">
+                            <path stroke-width="1" d="M25,25 L1,25 L1,1 L25,1 Z"/>  
+                        </symbol>     
+                        <symbol id="aeio" viewBox="0 0 10 10" transform-origin="center" height="50">
+                            <path stroke="none" fill="black" d="M0,0 L0,10 L10,10 L10,0 Z"/>  
+                        </symbol>                            
+                        <symbol id="not" viewBox="0 0 80 31.2" transform-origin="center" height="270">
+                            <path class="not-link" d="M25,25 Q50,32 70,22 L70,18 L74,18 L74,22 L70,22"/>
+                        </symbol>     
+                        <radialGradient id="red" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="80%" style="stop-color:red; stop-opacity:0.25" />
+                            <stop offset="100%" style="stop-color:red; stop-opacity:0" />
+                          </radialGradient>          
+                          <radialGradient id="blue" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="80%" style="stop-color:blue; stop-opacity:0.25" />
+                            <stop offset="100%" style="stop-color:blue; stop-opacity:0" />
+                          </radialGradient>          
+                          <radialGradient id="yellow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="80%" style="stop-color:yellow; stop-opacity:.67" />
+                            <stop offset="100%" style="stop-color:yellow; stop-opacity:0" />
+                          </radialGradient>          
+
+
+                    </defs>
+                    
+                    <!-- Year 1 - Triangle, Square, Circle, Square -->
+                    <!-- <g class="proposition premise" stroke="black" fill="none" id="major-premise">
+                        <use x="-600" y="25" xlink:href="#triangle"/>
+                        <use x="-175" y="25" id="major-subject" class="major term figure-1 figure-3" xlink:href="#rectangle"/>
+                        <use x="200" y="25" xlink:href="#circle"/>
+                        <use x="600" y="25" id="major-predicate" class="major term figure-4 figure-2" xlink:href="#rectangle"/>    
+                    </g>
+                    <g class="proposition premise" stroke="black" fill="none" id="minor-premise">
+                        <use x="-600" y="300" xlink:href="#triangle"/>
+                        <use x="-175" y="300" id="minor-subject" class="minor term figure-4 figure-3" xlink:href="#rectangle"/>
+                        <use x="200" y="300" xlink:href="#circle"/>
+                        <use x="600" y="300" id="minor-predicate" class="minor term figure-1 figure-2" xlink:href="#rectangle"/>    
+                    </g>
+                    <g class="proposition" id="conclusion" fill="none" >
+                        <path fill="none" stroke="black" stroke-width="10" d="M100,600 L1500,600"/>
+                        <use x="-600" y="650" stroke="black" xlink:href="#triangle"/>
+                        <use x="-175" y="650" id="minor-term" class="minor term black" xlink:href="#rectangle"/>
+                        <use x="200" y="650" stroke="black" xlink:href="#circle"/>
+                        <use x="600" y="650" id="major-term" class="major term black" xlink:href="#rectangle"/>    
+                    </g> -->
+
+                    <!-- Later Years - Square, Circle, Diamond, Circle -->
+                    <g class="proposition premise" stroke="black" fill="none" id="major-premise">
+                        <use x="-125" y="25" id="major-square" class="square" xlink:href="#square"/>
+                        <text x="348" y="90" id="major-A" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">A</text>
+                        <text x="490" y="90" id="major-E" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">E</text>
+                        <text x="343" y="230" id="major-I" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">I</text>
+                        <text x="490" y="230" id="major-O" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">O</text>
+
+                        <use x="-100" y="25" id="major-subject" class="major term" xlink:href="#circle"/>
+                        <use x="100" y="25" id="major-copula" xlink:href="#diamond"/>
+                        <use x="300" y="25" id="major-predicate" class="major term" xlink:href="#circle"/>    
+                        <use x="-125" y="25" id="major-not" class="not-indicator" opacity="0" xlink:href="#not"/>
+                    </g>
+                    <g class="proposition premise" stroke="black" fill="none" id="minor-premise">
+                        <use x="-125" y="300" id="minor-square" class="square minor" xlink:href="#square"/>
+                        <text x="348" y="365" id="minor-A" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px" >A</text>
+                        <text x="490" y="365" id="minor-E" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px" >E</text>
+                        <text x="343" y="505" id="minor-I" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px" >I</text>
+                        <text x="490" y="505" id="minor-O" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px" >O</text>
+
+                        <use x="-100" y="300" id="minor-subject" class="minor term" xlink:href="#circle"/>
+                        <use x="100" y="300" id="minor-copula" xlink:href="#diamond"/>
+                        <use x="300" y="300" id="minor-predicate" class="minor term" xlink:href="#circle"/>    
+                        <use x="-125" y="300" id="minor-not" class="not-indicator" opacity="0" xlink:href="#not"/>
+                        <path class="premise" fill="none" stroke="black" stroke-width="10" d="M100,600 L1500,600"/>
+                    </g>
+                    <g class="proposition shown" id="conclusion" stroke="black" fill="none">
+                        <use x="-125" y="150" id="statement-square" class="conclusion square" xlink:href="#square"/>
+                        <text x="348" y="215" id="statement-A" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">A</text>
+                        <text x="490" y="215" id="statement-E" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">E</text>
+                        <text x="343" y="355" id="statement-I" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">I</text>
+                        <text x="490" y="355" id="statement-O" class="aeio conclusion" stroke="none" opacity="0" style="fill:black; font-size:75px">O</text>
+
+                        <use x="-100" y="150" id="statement-subject" class="minor conclusion term" xlink:href="#circle"/>
+                        <use x="100" y="150" id="statement-copula" class="conclusion" xlink:href="#diamond"/>
+                        <use x="300" y="150" id="statement-predicate" class="major conclusion term" xlink:href="#circle"/>    
+                        <use x="-125" y="150" id="statement-not" class="not-indicator conclusion" opacity="0" xlink:href="#not"/>
+                    </g>
+                </svg>
+            </div>
+    </body>
+    <footer>
+        <button class="toggle" id="aeio-button">Quantifiers</button>
+        <button class="toggle" id="syllogism-button">Statement</button>
+        <button class="toggle" id="spm-button">Form</button>
+        <button class="toggle" id="distribution-button">Distribution</button>
+        <button id="mood-1" class="form-button mood-button premise">A</button>
+        <button id="mood-2" class="form-button mood-button premise">A</button>
+        <button id="mood-3" class="form-button mood-button">A</button>
+        <div id="form-dash" class="form-button premise">-</div>
+        <button id="figure" class="form-button premise"></button>
+    </footer>
+    <script src="script/catsyl.js"></script>
+</html>

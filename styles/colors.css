@@ -1,0 +1,70 @@
+:root {
+    --lightGray: #aaaaaa;
+    --lightOrange: #eeddaa;
+    --lightGreen: #aaeebb;
+    --lightBlue: #aabbee;
+    --lightRed: #eeaadd;
+    --darkGray: #474747;
+    --darkOrange: #b28e24;
+    --darkGreen: #24b247;
+    --darkBlue: #2447b2;
+    --darkRed: #b2248e;
+}
+
+.goldleaf {
+    background-color: linear-gradient (180deg,
+        hsl(43,88%,52%) 0%,
+        hsl(43,88%,32%) 7%,
+        hsl(43,88%,52%) 14%,
+        hsl(43,88%,72%) 20%,
+        hsl(43,88%,52%) 24%,
+        hsl(43,88%,72%) 30%,
+        hsl(43,88%,52%) 31%,
+        hsl(43,88%,32%) 36%,
+        hsl(43,88%,72%) 55%,
+        hsl(43,88%,32%) 57%,
+        hsl(43,88%,72%) 72%,
+        hsl(43,88%,32%) 79%,
+        hsl(43,88%,52%) 90%,
+        hsl(43,88%,72%) 94%,
+        hsl(43,88%,52%) 100%);
+}
+
+
+.silverleaf {
+    background-color: linear-gradient (180deg,
+        hsl(43,0%,72%) 0%,
+        hsl(43,0%,352%) 7%,
+        hsl(43,0%,72%) 14%,
+        hsl(43,0%,92%) 20%,
+        hsl(43,0%,72%) 24%,
+        hsl(43,0%,92%) 30%,
+        hsl(43,0%,72%) 31%,
+        hsl(43,0%,52%) 36%,
+        hsl(43,0%,92%) 55%,
+        hsl(43,0%,52%) 57%,
+        hsl(43,0%,92%) 72%,
+        hsl(43,0%,72%) 79%,
+        hsl(43,0%,52%) 90%,
+        hsl(43,0%,72%) 94%,
+        hsl(43,0%,92%) 100%);
+}
+
+.copperleaf {
+    background-color: linear-gradient (180deg,
+        hsl(33,88%,52%) 0%,
+        hsl(33,88%,32%) 7%,
+        hsl(33,88%,52%) 14%,
+        hsl(33,88%,72%) 20%,
+        hsl(33,88%,52%) 24%,
+        hsl(33,88%,72%) 30%,
+        hsl(113,88%,22%) 31%,
+        hsl(33,88%,32%) 36%,
+        hsl(33,88%,72%) 55%,
+        hsl(33,88%,32%) 57%,
+        hsl(33,88%,72%) 72%,
+        hsl(113,88%,22%) 79%,
+        hsl(33,88%,52%) 80%,
+        hsl(33,88%,72%) 94%,
+        hsl(33,88%,52%) 100%);
+}

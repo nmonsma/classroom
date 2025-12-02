@@ -1,0 +1,93 @@
+@import url(colors.css);
+
+@keyframes bubble {
+    100% {
+        transform: scale(1.5, 1.5);
+        opacity: 0;
+    }
+}
+
+html {
+    width: 98vw;
+    height: 98vh;
+}
+
+body {
+    width: 98vw;
+    height: 98vh;
+    background-color: white;
+    color: black;
+    font-family: 'Trebuchet MS', serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+form, .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+#term1, #term2, button, #type-indicator {
+    font-size: 36px;
+}
+
+textarea {
+    font-family: 'Trebuchet MS', serif;
+    font-size: 30px;
+}
+
+.input-part {
+    margin: 15px;
+}
+
+button, #type-indicator {
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 15px;
+    margin: 15px;
+    transition: all 0.4s ease-out;
+}
+
+button {
+    background-color: blue;
+}
+
+button:active {
+    transform: scale(0.8, 0.8) rotate(-1deg);
+    opacity: 0.2;
+    transition: all 0.1s;
+}
+
+#type-indicator {
+    background-color: blueviolet;
+    width: 18px;
+}
+
+.red {
+    background: red;
+}
+
+.gray {
+    background-color: #555;
+}
+
+.non {
+    color: rgba(0,0,0,0.5);
+    text-decoration: line-through;
+    padding-right: 35px;
+}
+
+.checked {
+    color: rgba(0,0,0,1);
+    text-decoration: none;
+}

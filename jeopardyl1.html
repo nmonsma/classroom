@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html style="min-height: 100%">
+    <head>
+        <title>Jeopardy!</title>
+        <link rel="stylesheet" href="styles/jeopardy.css">
+        <link rel="icon" href="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Nick Monsma">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <div class="scores" id="score1">0</div>
+            <div class="scores" id="score2">0</div>
+            <div class="scores" id="score3">0</div>
+            <div class="scores" id="score4">0</div>
+            <div class="scores" id="score5">0</div>
+            <div class="scores" id="score6">0</div>
+            <div class="scores" id="score7">0</div>
+        </header>
+        <main>
+            <div id="answers" class="gameboard">
+                <p class="title">Distraction</p>
+                <p class="title">Ambiguity</p>
+                <p class="title">Form</p>
+                <p class="title">Examples</p>
+                <p class="title">Fears</p>
+
+                <p class="item" id="item-a">100</p>
+                <p class="item" id="item-f">100</p>
+                <p class="item" id="item-k">100</p>
+                <p class="item" id="item-p">100</p>
+                <p class="item" id="item-u">100</p>
+                
+                <p class="item" id="item-b">200</p>
+                <p class="item" id="item-g">200</p>
+                <p class="item" id="item-l">200</p>
+                <p class="item" id="item-q">200</p>
+                <p class="item" id="item-v">200</p>
+                
+                <p class="item" id="item-c">300</p>
+                <p class="item" id="item-h">300</p>
+                <p class="item" id="item-m">300</p>
+                <p class="item" id="item-r">300</p>
+                <p class="item" id="item-w">300</p>
+                
+                <p class="item" id="item-d">400</p>
+                <p class="item" id="item-i">400</p>
+                <p class="item" id="item-n">400</p>
+                <p class="item" id="item-s">400</p>
+                <p class="item" id="item-x">400</p>
+                
+                <p class="item" id="item-e">500</p>
+                <p class="item" id="item-j">500</p>
+                <p class="item" id="item-o">500</p>
+                <p class="item" id="item-t">500</p>
+                <p class="item" id="item-y">500</p>
+            </div>
+            <!-- 1 -->
+            <div id="question-a" class="fullscreen prompt">Appeal to irrelevant authority.</div>
+            <div id="question-b" class="fullscreen prompt">Appeal to fear.</div>
+            <div id="question-c" class="fullscreen prompt">Appeal to hypocrisy.</div>
+            <div id="question-d" class="fullscreen prompt">Argument from silence.</div>
+            <div id="question-e" class="fullscreen prompt">Jumping on the bandwagon.</div>
+            
+            <!-- 2 -->
+            <div id="question-f" class="fullscreen prompt">Changing the meaning of a sentence through emphasis.</div>
+            <div id="question-g" class="fullscreen prompt">Changing the meaning of a sentence by reading the grammar differently.</div>
+            <div id="question-h" class="fullscreen prompt">The fallacy transfering an attribute of a whole to one of the parts.</div>
+            <div id="question-i" class="fullscreen prompt">Changing the meaning of a word in the middle of an argument.</div>
+            <div id="question-j" class="fullscreen prompt">The fallacy of transfering an attribute of a part to the whole.</div>
+
+            <!-- 3 -->
+            <div id="question-k" class="fullscreen prompt">False cause</div>
+            <div id="question-l" class="fullscreen prompt">False dichotomy</div>
+            <div id="question-m" class="fullscreen prompt">Begging the question</div>
+            <div id="question-n" class="fullscreen prompt">Hasty generalization</div>
+            <div id="question-o" class="fullscreen prompt">Black and White Fallacy</div>
+
+            <!-- 4 -->
+            <div id="question-p" class="fullscreen prompt">You don't believe that gender is different than biological sex do you? That's a pretty new idea.</div>
+            <div id="question-q" class="fullscreen prompt">Airbnb description:"5-Room Italianate house with marble floors, wet-bar, and pool, plus small guest and garage in rear."</div>
+            <div id="question-r" class="fullscreen prompt">You just can't admit I'm right because you're jealous of my intelligence.</div>
+            <div id="question-s" class="fullscreen prompt">Asians score higher in math than Americans. She is an Asian, and I'm an American. She must bet better at math than I am.</div>
+            <div id="question-t" class="fullscreen prompt">The rooster thinks his crowing brings up the sun each morning because each morning the sun rises shortly after he crows.</div>
+
+            <!-- 5 -->
+            <div id="question-u" class="fullscreen prompt">Appeal to the fear of being left out.</div>
+            <div id="question-v" class="fullscreen prompt">Appeal to the fear of being out-of-date or trendy.</div>
+            <div id="question-w" class="fullscreen prompt">Appeal to the fear of pain.</div>                 
+            <div id="question-x" class="fullscreen prompt">Appeal to the fear of being associated with someone disruptable.</div>
+            <div id="question-y" class="fullscreen prompt">Appeal to the fear of believing someone who had impure motivations.</div>
+            
+            <!-- Additional -->
+            <div id="question-z" class="fullscreen prompt">"Why does wine make a person sleepy? Because alcohol posesses dormative [sleep-inducing] power."</div>
+            
+        </main>
+        <script src="script/jeopardy.js"></script>
+    </body>
+</html>

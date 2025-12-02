@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach Timer</title>
+    <link rel="icon" type="image/png" id="favicon">
+    <style>
+        
+        @keyframes flashAnimation {
+            0% { }
+            60% { background-color: black;  }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        .circle {
+            color: #fff;
+            font-size: 136px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;            
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px auto;
+            transition: background-color 2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+        
+        .time-display {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+        }
+        
+        .schedule-info {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .flash {
+            animation: flashAnimation .7s infinite;
+        }       
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle" id="colorCircle"></div>
+        <div class="time-display" id="timeDisplay"></div>
+        <div class="schedule-info" id="scheduleInfo"></div>
+        <div class="schedule-info" id="nextScheduleInfo"></div>
+    </div>
+
+    <script>
+        // Time schedule JSON object
+        let testIndex = 0; // Change this index to test different schedules
+        
+        const colorScheduleComplete = [{  
+            "00:00": "#dddddd",  // None
+            "08:00": "#6b1b2b", // First Period
+            "08:53": "#2d5016", // Second Period
+            "09:40": "#5c3317", // Third Period
+            "10:27": "#003049", // Fourth Period
+            "11:14": "#4a1d7c", // Fifth Period/Elementary Lunch
+            "11:58": "#2c2c2c",  // Secondary Lunch
+            "12:34": "#005f5f", // Sixth Period
+            "13:21": "#a84a00", // Seventh Period
+            "14:08": "#1a2332", // Eighth
+            "14:52": "#dddddd"  // None
+        },{
+            "00:00": "#dddddd",  // None
+            "08:00": "#6b1b2b", // First Period
+            "08:45": "#3d4f5c", // Chapel      
+            "09:23": "#2d5016", // Second Period
+            "10:05": "#5c3317", // Third Period
+            "10:47": "#003049", // Fourth Period
+            "11:29": "#4a1d7c", // Fifth Period/Elementary Lunch
+            "12:08": "#2c2c2c", // Secondary Lunch
+            "12:44": "#005f5f", // Sixth Period
+            "13:26": "#a84a00", // Seventh Period
+            "14:08": "#1a2332", // Eighth
+            "14:52": "#dddddd"  // None
+        }];
+
+        const colorMeaning = [
+            {"#dddddd": " "},
+            {"#2d5016": "2nd Period"},
+            {"#003049": "4th Period"},
+            {"#5c3317": "3rd Period"},
+            {"#005f5f": "6th Period"},
+            {"#6b1b2b": "1st Period"},
+            {"#4a1d7c": "5th Period / Elem Lunch"},
+            {"#2c2c2c": "Lunch"},
+            {"#a84a00": "7th Period"},
+            {"#1a2332": "8th Period"},
+            {"#3d4f5c": "Chapel"},
+        ];
+
+        function getCurrentColor() {
+            const now = new Date();
+            //Select schedule based on day of the week (0=Sunday, 6=Saturday)
+            const dayOfWeek = now.getDay();
+            if (dayOfWeek === 3) {
+                var colorSchedule = colorScheduleComplete[1]; // Wednesday schedule
+            } else {
+                var colorSchedule = colorScheduleComplete[0]; // Default schedule
+            }
+            
+            const currentTime = String(now.getHours()).padStart(2, '0') + ':' + 
+                              String(now.getMinutes()).padStart(2, '0');
+            
+            // Convert schedule times to minutes for easier comparison
+            const scheduleEntries = Object.entries(colorSchedule).map(([time, color]) => {
+                const [hours, minutes] = time.split(':').map(Number);
+                return {
+                    timeInMinutes: hours * 60 + minutes,
+                    timeString: time,
+                    color: color
+                };
+            }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
+            
+            // Convert current time to minutes
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            // Find the appropriate color based on current time
+            let activeSchedule = scheduleEntries[scheduleEntries.length - 1]; // Default to last entry
+            let nextSchedule = scheduleEntries[0]; // Default to first entry
+
+            for (let i = 0; i < scheduleEntries.length; i++) {
+                //Adjust index for testing
+                let index = i + testIndex;
+                if (index >= scheduleEntries.length) {
+                    index -= scheduleEntries.length; 
+                }
+                
+                if (currentMinutes >= scheduleEntries[index].timeInMinutes) {
+                    activeSchedule = scheduleEntries[index];
+                    if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
+                } else {
+                    break;
+                }
+            }
+            
+            return {
+                color: activeSchedule.color,
+                timeString: activeSchedule.timeString,
+                nextColor: nextSchedule.color,
+                nextTimeString: nextSchedule.timeString
+            };
+        }
+
+        function generateFavicon(color, meaning) {
+            // Create a canvas element
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size (favicon size)
+            canvas.width = 24;
+            canvas.height = 24;
+            
+            // Draw circle favicon
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(12, 12, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Add subtle border for better visibility
+            // ctx.strokeStyle = '#000000';
+            // ctx.lineWidth = 1;
+            // ctx.stroke();
+
+            // Add text meaning
+            if (meaning && meaning.length > 0) {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(meaning.charAt(0).toUpperCase(), 12, 13.5);
+            }
+
+            // Convert canvas to data URL
+            return canvas.toDataURL('image/png');
+        }
+
+        function updateFavicon(color, meaning) {
+            const favicon = document.getElementById('favicon');
+            const faviconUrl = generateFavicon(color, meaning);
+            favicon.href = faviconUrl;
+        }
+
+        function updateCircleColor() {
+            const circle = document.getElementById('colorCircle');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const scheduleInfo = document.getElementById('scheduleInfo');
+            const nextScheduleInfo = document.getElementById('nextScheduleInfo');
+            
+            const now = new Date();
+            const currentTime = now.toLocaleTimeString();
+            const colorInfo = getCurrentColor();
+            
+            //Change circle color
+            circle.style.backgroundColor = colorInfo.color;
+
+           
+            //Get meaning of color
+            let meaning = "Unknown";
+            let nextMeaning = "Unknown";
+            for (let i = 0; i < colorMeaning.length; i++) {
+                if (colorMeaning[i][colorInfo.color]) meaning = colorMeaning[i][colorInfo.color];
+                if (colorMeaning[i][colorInfo.nextColor]) nextMeaning = colorMeaning[i][colorInfo.nextColor];
+            }
+            
+            //Change text in circle to first letter of meaning
+            circle.textContent = meaning.charAt(0).toUpperCase();
+
+            // Update favicon and page title
+            const pageTitle = document.getElementsByTagName('title')[0]; 
+            updateFavicon(colorInfo.color, meaning);
+            pageTitle.textContent = meaning;
+            timeDisplay.textContent = currentTime;
+
+            scheduleInfo.textContent = `Current: ${meaning} (${colorInfo.timeString})`;
+            nextScheduleInfo.textContent = `Next: ${nextMeaning} (${colorInfo.nextTimeString})`;
+        
+        }
+
+        function advancePeriod(e) {
+            if (e.shiftKey) {
+                testIndex++;
+                if (testIndex >= 11) {
+                    testIndex = 0; // Reset to first schedule if exceeding length
+                }
+                updateCircleColor();    
+            }
+        }
+
+
+        // Update immediately and then every ten seconds
+        updateCircleColor();
+        setInterval(updateCircleColor, 1000);
+
+        // Add click event listener to circle for advancing period for testing
+        document.getElementById('colorCircle').addEventListener('click', advancePeriod);
+    </script>
+</body>
+</html>

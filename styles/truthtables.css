@@ -1,0 +1,62 @@
+body {
+    margin: 0 auto;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+header {
+}
+
+input {
+    width: 9vh;
+    height: 9vh;
+    text-align:center;
+    border: none;
+    border-radius: 0;
+    font-size: 8vh;
+    margin: 0;
+    padding: 0;
+}
+
+#propositions, #truth-values {
+    display: grid;
+    grid-template-columns: repeat(16, 6vh);
+    padding: 2vh;
+}
+
+#propositions {
+    height: 8vh;
+    border-bottom: 5px solid black;
+}
+
+#truth-values {
+    height: 80vh;
+}
+
+.tf {
+    transition: margin 2s, padding 2s, font-size 2s;
+}
+
+
+footer {
+    position: fixed;
+    top: 90vh;
+    left: 1vw;
+    background: none;
+    color: #000;
+    width: 100vw;
+    font-size: 3vh;
+    display: flex;
+    flex-direction: row;
+}
+
+p {
+    font-weight: bolder;
+    padding: 1vh 2vh 0 2vh;
+    margin: 0;
+    height: 5vh;
+    width: 3vh;
+}
