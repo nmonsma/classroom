@@ -143,9 +143,11 @@
             let activeSchedule = scheduleEntries[scheduleEntries.length - 1]; // Default to last entry
             let nextSchedule = scheduleEntries[0]; // Default to first entry
 
+
             for (let i = 0; i < scheduleEntries.length; i++) {
                 //Adjust index for testing
                 let index = i + testIndex;
+                console.log(`Raw index: ${i}, Test index: ${testIndex}, Adjusted index: ${index}`);
                 if (index >= scheduleEntries.length) {
                     index -= scheduleEntries.length; 
                 }
@@ -154,7 +156,7 @@
                     activeSchedule = scheduleEntries[index];
                     if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
                 } else {
-                    break;
+                    activeSchedule = scheduleEntries[0];
                 }
             }
             
@@ -244,6 +246,7 @@
         function advancePeriod(e) {
             if (e.shiftKey) {
                 testIndex++;
+                console.log(`Advancing to test index: ${testIndex}`);
                 if (testIndex >= 11) {
                     testIndex = 0; // Reset to first schedule if exceeding length
                 }
