@@ -71,6 +71,7 @@
     <script>
         // Time schedule JSON object
         let testIndex = 0; // Change this index to test different schedules
+        let testIndexMax = 11;
         
         const colorScheduleComplete = [{  
             "00:00": "#dddddd",  // None
@@ -122,8 +123,8 @@
             } else {
                 var colorSchedule = colorScheduleComplete[0]; // Default schedule
             }
-            
-            const currentTime = String(now.getHours()).padStart(2, '0') + ':' + 
+
+            const currentTime = String(now.getHours()).padStart(2, '0') + ':' +
                               String(now.getMinutes()).padStart(2, '0');
             
             // Convert schedule times to minutes for easier comparison
@@ -135,7 +136,9 @@
                     color: color
                 };
             }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
-            
+
+            testIndexMax = scheduleEntries.length; //Set max index based on schedule in use.
+
             // Convert current time to minutes
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
             
@@ -143,23 +146,24 @@
             let activeSchedule = scheduleEntries[scheduleEntries.length - 1]; // Default to last entry
             let nextSchedule = scheduleEntries[0]; // Default to first entry
 
+            //set schedule position indicator to 0
+            let schedulePosition = 0;
 
+            //Find which array item matches the current time and set schedule position to this item number.
             for (let i = 0; i < scheduleEntries.length; i++) {
-                //Adjust index for testing
-                let index = i + testIndex;
-                console.log(`Raw index: ${i}, Test index: ${testIndex}, Adjusted index: ${index}`);
-                if (index >= scheduleEntries.length) {
-                    index -= scheduleEntries.length; 
-                }
-                
-                if (currentMinutes >= scheduleEntries[index].timeInMinutes) {
-                    activeSchedule = scheduleEntries[index];
-                    if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
-                } else {
-                    activeSchedule = scheduleEntries[0];
+                if (currentMinutes >= scheduleEntries[i].timeInMinutes) {
+                    schedulePosition = i;
                 }
             }
-            
+
+            //Use textIndex to adjust schedule position for testing
+            let index = schedulePosition + testIndex;
+            if (index >= scheduleEntries.length) index -= scheduleEntries.length;
+
+            //Set active and next schedule based on adjusted index
+            activeSchedule = scheduleEntries[index];
+            if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
+
             return {
                 color: activeSchedule.color,
                 timeString: activeSchedule.timeString,
@@ -246,9 +250,10 @@
         function advancePeriod(e) {
             if (e.shiftKey) {
                 testIndex++;
-                console.log(`Advancing to test index: ${testIndex}`);
-                if (testIndex >= 11) {
+                console.log("Advancing to test index: " + testIndex + " with testIndexMax: " + testIndexMax);
+                if (testIndex >= testIndexMax) {
                     testIndex = 0; // Reset to first schedule if exceeding length
+                    console.log("Resetting test index to 0");
                 }
                 updateCircleColor();    
             }
