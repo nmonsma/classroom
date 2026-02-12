@@ -29,7 +29,7 @@ const answers = {
     "o": "A poor comparison to something.",
     
     "p-t": "Fallacy\nExamples",
-    "p": "The weather forcast says next week will be snowy, but I don't believe it because it's been snowing since December, and I hate snow.",
+    "p": "The weather forecast says next week will be snowy, but I don't believe it because it's been snowing since December, and I hate snow.",
     "q": "Life is like a box of chocolates. Therefore, it is overpriced and poor quality.",
     "r": "Mr. Monsma taught Omnibus 2, so we will have him for Omnibus next year.",
     "s": "Only statements in Latin can clearly declare the truth.",
