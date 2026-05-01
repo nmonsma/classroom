@@ -45,7 +45,7 @@ const answers = {
     "z": "True or False: A valid argument can't have a false conclusion."
 },
 
-"categoricalsyllogisms": {
+"catsyllogisms": {
     "a-e": "Definitions",
     "a": "It's made up of premises and a conclusion.",
     "b": "It's the term in a categorical syllogism that is found only in the premises and not in the conclusion.",
@@ -80,11 +80,61 @@ const answers = {
     "w": "DAILY DOUBLE!\n\n\n(4.A.11)",
     "x": "All P is M.\nNo S is M.\nSome S is not P.",
     "y": "Some M is not P.\nAll M is S.\nSome S is not P."
+  },
+
+  "heidelberg": {
+    "a-e": "Heidelberg\nHistory",
+    "a": "The catechism was written in this city.",
+    "b": "The catechism was written for this reason.",
+    "c": "The catechism was risky to write because it did this.",
+    "d": "The catechism was written by these two people.",
+    "e": "The catechism was written in this year.",
+    
+    "f-j": "Heidelberg\nStructure",
+    "f": "",
+    "g": "",
+    "h": "",
+    "i": "",
+    "j": "",
+    
+    "k-o": "Sin",
+    "k": "",
+    "l": "",
+    "m": "",
+    "n": "",
+    "o": "",
+    
+    "p-t": "Salvation",
+    "p": "",
+    "q": "",
+    "r": "",
+    "s": "",
+    "t": "",
+    
+    "u-y": "Service",
+    "u": "This is the reason we are unable to do good works by our own will.",
+    "v": "This is the chief reason believers do good works.",
+    "w": "Believers do good works so that this will happen to their neighbors.",
+    "x": "According to the catechism, this is the most important part of our service to God.",
+    "y": "The catechism's explanation of the 6th commandment says that this is the best way to treat others."
   }
 }
 
+const questionSets = Object.keys(answers);
+
+function populateAnswerSetSelector() {
+    let selector = document.getElementById('answer-set');
+    for (let i=0; i<questionSets.length; i++) {
+        let option = document.createElement('option');
+        option.value = questionSets[i];
+        option.innerText = questionSets[i];
+        selector.appendChild(option);
+    }
+}
+
 function loadQuestions() {
-    let questionSet = answers.quiz22;
+    let questionSet = answers[document.getElementById('answer-set').value];
+    document.getElementById('answer-set').disabled = true;
     let titles = document.getElementsByClassName('title');
     for (let i=0;i<titles.length;i++) {
         titles[i].innerText = questionSet[titles[i].id];
@@ -93,6 +143,7 @@ function loadQuestions() {
     for (let i=0;i<prompts.length;i++) {
         prompts[i].innerText = questionSet[prompts[i].id.substr(9,10)];
     }
+
 }
 
 
@@ -159,7 +210,9 @@ function processChoice(choiceCode) {
 
 // Main Actions
 
-loadQuestions();
+populateAnswerSetSelector();
+
+document.getElementById('answer-set').addEventListener('change', loadQuestions);
 
 document.addEventListener('keydown', (e)=> {
     let keyPressed = e.key;
@@ -181,3 +234,5 @@ for (i=0;i<scoresElements.length;i++) {
     scores.push(0); //Add a list item for each score element in the html.
     scoresElements[i].addEventListener('click',processClick);
 }
+
+

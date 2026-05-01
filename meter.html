@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brownie Meter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color: #00e5a0;
+      --bg: #0a0a0f;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    #ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 60% 50% at 50% 60%, color-mix(in srgb, var(--color) 10%, transparent) 0%, transparent 70%);
+      transition: background 0.6s ease;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title-block {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .title-sub {
+      font-size: 11px;
+      letter-spacing: 6px;
+      color: #555;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 300;
+    }
+
+    .title-main {
+      font-size: 28px;
+      font-weight: 700;
+      color: #e8e8e8;
+      letter-spacing: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      text-shadow: 0 0 30px color-mix(in srgb, var(--color) 60%, transparent);
+      transition: text-shadow 0.6s ease;
+    }
+
+    #title {
+      user-select: none;
+    }
+
+    /* .gauge-wrap {
+      background: linear-gradient(160deg, #13131a 0%, #0d0d14 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px #222,
+                  0 0 60px color-mix(in srgb, var(--color) 18%, transparent),
+                  0 20px 60px #00000080;
+      transition: box-shadow 0.6s ease;
+    } */
+
+    .controls {
+      margin-top: 0;
+      background: #0f0f18;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 28px 36px;
+      width: 380px;
+      box-shadow: 0 8px 32px #00000060;
+    }
+
+    .controls-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .controls-label {
+      color: #444;
+      font-size: 10px;
+      letter-spacing: 4px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+
+    .num-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-btn {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: #1a1a24;
+      border: 1px solid #333;
+      color: #888;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .step-btn:hover { background: #222; color: #ccc; }
+
+    #numInput {
+      width: 60px;
+      text-align: center;
+      background: #13131e;
+      border: 1px solid #333;
+      color: #e8e8e8;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 18px;
+      font-family: 'Share Tech Mono', monospace;
+      outline: none;
+    }
+    #numInput:focus { border-color: var(--color); }
+
+    #slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      background: linear-gradient(to right, var(--color) 0%, var(--color) 42%, #1e1e2e 42%, #1e1e2e 100%);
+      transition: background 0.1s;
+    }
+    #slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--color);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--color) 70%, transparent);
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    #slider::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--color);
+      border: none;
+      cursor: pointer;
+    }
+
+    .presets {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .preset-btn {
+      flex: 1;
+      padding: 8px 0;
+      background: #13131e;
+      border: 1px solid #222;
+      color: #444;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: 'Share Tech Mono', monospace;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .preset-btn:hover { color: #888; border-color: #444; }
+    .preset-btn.active {
+      background: color-mix(in srgb, var(--color) 15%, transparent);
+      border-color: color-mix(in srgb, var(--color) 50%, transparent);
+      color: var(--color);
+    }
+
+    #bgImage {
+    position: fixed;
+    inset: 0;
+    background-image: url('brownies.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    }
+
+    #bgOverlay {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0f;  /* matches your --bg color */
+    opacity: 1;           /* starts fully hidden */
+    transition: opacity 0.1s ease;
+    z-index: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="bgImage"></div>
+<div id="bgOverlay"></div>
+
+<div id="ambient"></div>
+
+<div class="wrapper">
+  <div class="title-block">
+    <div class="title-sub"></div>
+    <div class="title-main" id="title">BROWNIE METER</div>
+  </div>
+
+  <div class="gauge-wrap">
+    <svg id="gauge" width="400" height="280" viewBox="0 0 400 280">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="softglow">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Track background -->
+      <path id="trackBg" fill="#1a1a24"/>
+
+      <!-- Zone arcs -->
+      <path id="zone0" opacity="0.18"/>
+      <path id="zone1" opacity="0.18"/>
+      <path id="zone2" opacity="0.18"/>
+
+      <!-- Fill arc -->
+      <path id="fillArc" opacity="0.9" filter="url(#glow)"/>
+
+      <!-- Ticks group -->
+      <g id="ticks"></g>
+
+      <!-- Needle -->
+      <polygon id="needle" filter="url(#glow)"/>
+
+      <!-- Hub -->
+      <circle cx="200" cy="210" r="14" fill="#1a1a24" stroke="#333" stroke-width="1"/>
+      <circle id="hubGlow" cx="200" cy="210" r="7" filter="url(#softglow)"/>
+      <circle cx="200" cy="210" r="3" fill="#0a0a0f"/>
+
+      <!-- Digital readout -->
+      <text id="readout" x="200" y="256" text-anchor="middle"
+        font-size="38" font-weight="bold" font-family="'Share Tech Mono', monospace"
+        filter="url(#glow)"></text>
+      <text x="200" y="274" text-anchor="middle"
+        fill="#444" font-size="11" font-family="'Rajdhani', sans-serif"
+        letter-spacing="3" font-weight="500">PERCENT</text>
+    </svg>
+  </div>
+
+  <div class="controls">
+    <div class="controls-header">
+      <span class="controls-label">ADJUST</span>
+      <div class="num-row">
+        <button class="step-btn" id="decBtn">−</button>
+        <input type="number" id="numInput" min="0" max="100" value=""/>
+        <button class="step-btn" id="incBtn">+</button>
+      </div>
+    </div>
+    <input type="range" id="slider" min="0" max="100" value=""/>
+    <!-- <div class="presets">
+      <button class="preset-btn" data-val="0">0%</button>
+      <button class="preset-btn" data-val="25">25%</button>
+      <button class="preset-btn" data-val="50">50%</button>
+      <button class="preset-btn" data-val="75">75%</button>
+      <button class="preset-btn" data-val="100">100%</button>
+    </div> -->
+  </div>
+</div>
+
+<script>
+  const successValue = 85; // Adjust this value to set the "success" threshold
+  
+  const meterOptions = [
+    {name: 'Donut', image: 'donuts.png'},
+    {name: 'Snow Cone', image: 'snowcone.jpg'},
+    {name: 'Raisin Pie', image: 'pie.jpg'},
+    {name: 'Brownie', image: 'brownies.jpg'},
+    {name: 'Disney World', image: 'disney.jpg'}
+  ];
+
+  let currentMeter = 0;
+
+  const CX = 200, CY = 210, R = 155;
+  const START_ANGLE = -220, END_ANGLE = 40;
+  const TOTAL_ARC = END_ANGLE - START_ANGLE;
+
+  const toRad = d => d * Math.PI / 180;
+  const polar = (angle, radius = R) => ({
+    x: CX + radius * Math.cos(toRad(angle)),
+    y: CY + radius * Math.sin(toRad(angle))
+  });
+
+  function arcPath(innerR, outerR, fromA, toA) {
+    const p1 = polar(fromA, outerR), p2 = polar(toA, outerR);
+    const p3 = polar(toA, innerR), p4 = polar(fromA, innerR);
+    const large = (toA - fromA) > 180 ? 1 : 0;
+    return `M${p1.x} ${p1.y} A${outerR} ${outerR} 0 ${large} 1 ${p2.x} ${p2.y} L${p3.x} ${p3.y} A${innerR} ${innerR} 0 ${large} 0 ${p4.x} ${p4.y}Z`;
+  }
+
+  function getColor(pct) {
+    if (pct > successValue - 1 ) return '#00e5a0';
+    if (pct > successValue - 6 ) return '#f5c542';
+    return '#ff4d6d';
+  }
+
+  // Static setup
+  document.getElementById('trackBg').setAttribute('d', arcPath(R - 32, R, START_ANGLE, END_ANGLE));
+
+  const zones = [{from:0,to:successValue-6,color:'#ff4d6d'},{from:successValue-6,to:successValue-1,color:'#f5c542'},{from:successValue-1,to:100,color:'#00e5a0'}];
+  zones.forEach((z, i) => {
+    const fa = START_ANGLE + (z.from / 100) * TOTAL_ARC;
+    const ta = START_ANGLE + (z.to / 100) * TOTAL_ARC;
+    const el = document.getElementById(`zone${i}`);
+    el.setAttribute('d', arcPath(R - 32, R - 16, fa, ta));
+    el.setAttribute('fill', z.color);
+  });
+
+  // Ticks
+  const ticksG = document.getElementById('ticks');
+  for (let i = 0; i <= 10; i++) {
+    const pct = i * 10;
+    const angle = START_ANGLE + (pct / 100) * TOTAL_ARC;
+    const isMajor = (i % 2 === 0);
+    const inner = polar(angle, isMajor ? R - 28 : R - 16);
+    const outer = polar(angle, R - 4);
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', inner.x); line.setAttribute('y1', inner.y);
+    line.setAttribute('x2', outer.x); line.setAttribute('y2', outer.y);
+    line.setAttribute('stroke', isMajor ? '#666' : '#3a3a4a');
+    line.setAttribute('stroke-width', isMajor ? 2 : 1);
+    ticksG.appendChild(line);
+    if (isMajor) {
+      const label = polar(angle, R - 44);
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.setAttribute('x', label.x); txt.setAttribute('y', label.y + 4);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('dominant-baseline', 'middle');
+      txt.setAttribute('fill', '#444');
+      txt.setAttribute('font-size', '10');
+      txt.setAttribute('font-family', "'Share Tech Mono', monospace");
+      txt.textContent = pct;
+      ticksG.appendChild(txt);
+    }
+  }
+
+  // Animation state
+  let targetValue = successValue, displayValue = successValue, prevValue = successValue;
+  let animStart = null, animFrom = successValue, animTo = successValue;
+  let rafId = null;
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  }
+
+  function render(disp) {
+    const color = getColor(disp);
+    const fillAngle = START_ANGLE + (disp / 100) * TOTAL_ARC;
+    const needleAngle = fillAngle;
+
+    // Fill arc
+    const fillEl = document.getElementById('fillArc');
+    if (disp > 0.01) {
+      fillEl.setAttribute('d', arcPath(R - 32, R - 4, START_ANGLE, fillAngle));
+      fillEl.setAttribute('fill', color);
+      fillEl.style.display = '';
+    } else {
+      fillEl.style.display = 'none';
+    }
+
+    // Needle
+    const tip = polar(needleAngle, R - 20);
+    const b1 = polar(needleAngle - 90, 14);
+    const b2 = polar(needleAngle + 90, 14);
+    document.getElementById('needle').setAttribute('points', `${tip.x},${tip.y} ${b1.x},${b1.y} ${b2.x},${b2.y}`);
+    document.getElementById('needle').setAttribute('fill', color);
+
+    document.getElementById('hubGlow').setAttribute('fill', color);
+    document.getElementById('readout').textContent = Math.round(disp);
+    document.getElementById('readout').setAttribute('fill', color);
+
+    //Overlay update
+    if (disp > successValue + 1) {
+      document.getElementById('bgOverlay').style.opacity = 0;
+    } else {
+        //Fade out from successValue-3 to successValue+1 for smoother transition
+        if (disp > successValue - 3) {
+          document.getElementById('bgOverlay').style.opacity = 1 - ((disp - (successValue - 3)) / 4);
+        } else {
+          document.getElementById('bgOverlay').style.opacity = 1;
+        }
+    }
+
+    
+    // CSS var update
+    document.documentElement.style.setProperty('--color', color);
+
+    // Slider gradient
+    const slider = document.getElementById('slider');
+    slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${targetValue}%, #1e1e2e ${targetValue}%, #1e1e2e 100%)`;
+
+    // Preset active state
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.classList.toggle('active', parseInt(btn.dataset.val) === Math.round(targetValue));
+    });
+  }
+
+  function animate(ts) {
+    if (!animStart) animStart = ts;
+    const t = Math.min((ts - animStart) / 600, 1);
+    const ease = easeInOutCubic(t);
+    displayValue = animFrom + (animTo - animFrom) * ease;
+    render(displayValue);
+    if (t < 1) {
+      rafId = requestAnimationFrame(animate);
+    } else {
+      displayValue = animTo;
+      prevValue = animTo;
+      render(displayValue);
+    }
+  }
+
+  function setTarget(v) {
+    v = Math.min(100, Math.max(0, Math.round(v)));
+    targetValue = v;
+    animFrom = displayValue;
+    animTo = v;
+    animStart = null;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+
+    // Sync controls
+    document.getElementById('slider').value = v;
+    document.getElementById('numInput').value = v;
+  }
+
+  // Initial render
+  document.getElementById('slider').value = successValue - 2;
+  document.getElementById('numInput').value = successValue - 2;
+  document.getElementById('readout').textContent = successValue -2;
+  document.getElementById('title').textContent = meterOptions[currentMeter].name + ' Meter'; // Set initial title
+  document.getElementById('bgImage').style.backgroundImage = `url('${meterOptions[currentMeter].image}')`; // Set initial background
+  render(successValue - 2);
+
+  // Event listeners
+  document.getElementById('slider').addEventListener('input', e => {
+    setTarget(parseInt(e.target.value));
+  });
+
+  document.getElementById('numInput').addEventListener('input', e => {
+    const v = parseInt(e.target.value);
+    if (!isNaN(v)) setTarget(v);
+  });
+
+  document.getElementById('decBtn').addEventListener('click', () => setTarget(targetValue - 1));
+  document.getElementById('incBtn').addEventListener('click', () => setTarget(targetValue + 1));
+
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => setTarget(parseInt(btn.dataset.val)));
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowRight') setTarget(targetValue + 1);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') setTarget(targetValue - 1);
+  });
+
+  document.getElementById('title').addEventListener('click', () => {
+    currentMeter = (currentMeter + 1) % meterOptions.length;
+    const option = meterOptions[currentMeter];
+    document.getElementById('title').textContent = option.name + ' Meter';
+    document.getElementById('bgImage').style.backgroundImage = `url('${option.image}')`;
+  });
+
+</script>
+</body>
+</html>

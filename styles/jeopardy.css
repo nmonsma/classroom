@@ -131,8 +131,8 @@ header {
     justify-content: space-evenly;
     left: 0;
     top: 0;
-    padding-left: 15vw;
-    width: 85vw;
+    padding-left: 0;
+    width: 100vw;
     height: 13vh;
     background: #000;
     z-index: 49;   
@@ -187,6 +187,13 @@ header {
     background-color: #c50;
     color: #fff;
 }
+
+#answer-form {
+    background-color: #000;
+    color: #fff;
+    font-size: 4vh;
+}
+
 .red {
     background-color: var(--darkRed) !important;
 }

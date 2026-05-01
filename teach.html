@@ -66,6 +66,33 @@
         testIndexMax = 7;
         
         // Time schedule JSON object
+        const bellSchedule = [{  
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:53": "#0f4c9d", // Second Period
+            "09:40": "#da291c", // Third Period
+            "10:27": "#662d91", // Fourth Period
+            "11:14": "#f15a29", // Fifth Period/Elementary Lunch
+            "11:58": "#998877",  // Secondary Lunch
+            "12:34": "#006747", // Sixth Period
+            "13:21": "#702f2c", // Seventh Period
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        },{
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:45": "#887766", // Chapel      
+            "09:23": "#0f4c9d", // Second Period
+            "10:05": "#da291c", // Third Period
+            "10:47": "#662d91", // Fourth Period
+            "11:29": "#f15a29", // Fifth Period/Elementary Lunch
+            "12:08": "#998877", // Secondary Lunch
+            "12:44": "#006747", // Sixth Period
+            "13:26": "#702f2c", // Seventh Period
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        }];        
+        
         const colorScheduleComplete = [{  
             "00:00": "#2F4F4F",  // Dark Slate Gray - Break
             "08:30": "#87CEEB", // Sky Blue - Head to Classroom
@@ -116,6 +143,50 @@
             {"#FF6347": "Send Off"},
             {"#9370DB": "Night"},
         ];
+
+        function getDaySchedule() {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const today = days[new Date().getDay()];
+
+            if (today === "Sunday" || today === "Saturday") {
+                return { day: today, schedule: [] };
+            }
+
+            const bells = today === "Wednesday" ? bellSchedule.Wednesday : bellSchedule.MTTHF;
+
+            function timeToMinutes(timeStr) {
+                const [hours, minutes] = timeStr.split(":").map(Number);
+                return hours * 60 + minutes;
+            }
+
+            function minutesToTime(totalMinutes) {
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+            }
+
+            const lightSchedule = [];
+
+            for (let i = 0; i < bells.length - 1; i++) {
+                const startMinutes = timeToMinutes(bells[i]);
+                const endMinutes = timeToMinutes(bells[i + 1]);
+
+                periodIndicators.forEach(indicator => {
+                const triggerMinutes = indicator.from === "start"
+                    ? startMinutes + indicator.offset
+                    : endMinutes + indicator.offset;
+
+                lightSchedule.push({
+                    time: minutesToTime(triggerMinutes),
+                    name: indicator.name,
+                    color: indicator.color,
+                    colorName: indicator.colorName,
+                });
+                });
+            }
+
+            return { day: today, lightSchedule };
+        }
 
         function getCurrentColor() {
             const now = new Date();
