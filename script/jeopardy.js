@@ -116,7 +116,48 @@ const answers = {
     "v": "This is the chief reason believers do good works.",
     "w": "Believers do good works so that this will happen to their neighbors.",
     "x": "According to the catechism, this is the most important part of our service to God.",
-    "y": "The catechism's explanation of the 6th commandment says that this is the best way to treat others."
+    "y": "The catechism's explanation of the 6th commandment says that this is the best way to treat others.",
+
+    "z": "The law is used to show believers these things, according to the catechism."
+  },
+
+  "syllogisms": {
+    "a-e": "Parts",
+    "a": "This is the statement that is implied by the premises.",
+    "b": "The word \"since\" indicates this kind of statement.",
+    "c": "This is the term shared by the premises.",
+    "d": "This is the subject of the conclusion.",
+    "e": "A categorical syllogism has this many different terms.",
+    
+    "f-j": "Good\nArguments",
+    "f": "An argument that works when the premises are true is a ... argument.",
+    "g": "An argument that is valid and has true premises is a ... argument.",
+    "h": "If an argument is sound, you must do this with the conclusion.",
+    "i": "If you disagree with the conclusion of an argument, you can attack it in these two ways.",
+    "j": "If you disagree with the conclusion of a valid argument, you can attack it in this way.",
+    
+    "k-o": "Aristotle's\nRules",
+    "k": "The middle term must be... at least once.",
+    "l": "If one premise is negative and the other is affirmative, the conclusion must be...",
+    "m": "A middle that is not distributed in either premise is called this.",
+    "n": "If the major term is distributed in the..., it must be distributed in the...",
+    "o": "A term that is distributed in the conclusion but not in the premises is called this.",
+    
+    "p-t": "Counterexamples",
+    "p": "A counterexample has... premises and a... conclusion.",
+    "q": "A counterexample proves that the entire... is invalid (and every argument that belongs to it).",
+    "r": "When trying to create a counterexample, it helps to start by writing a... conclusion.",
+    "s": "To make the premises true, may you use a different middle term in each premise?",
+    "t": "If you can't seem to create a counterexample, that means this.",
+    
+    "u-y": "Other\nSyllogisms",
+    "u": "An argument made up of multiple syllogisms is only valid if each syllogism is...",
+    "v": "If an argument is missing a premise, you should try to figure out what the missing premise is for this reason.",
+    "w": "If a premise is missing in an argument, and that missing premise is false, that means the argument is...",
+    "x": "A syllogism that is missing one of the statements is called an ...",
+    "y": "A chain of syllogisms is called a ...",
+
+    "z": "When someone else makes an argument that you want to challenge, you should start by focusing on perception, clarifying the... of the terms."
   }
 }
 
