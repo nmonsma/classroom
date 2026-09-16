@@ -7,4 +7,3 @@ deployment:
     - /bin/cp -R /home/nickjufg/repositories/classroom/script  $DEPLOYPATH
     - /bin/cp -R /home/nickjufg/repositories/classroom/styles  $DEPLOYPATH
     - /bin/cp /home/nickjufg/repositories/classroom/*.html     $DEPLOYPATH
-    - /bin/cp /home/nickjufg/repositories/classroom/*.htm      $DEPLOYPATH
