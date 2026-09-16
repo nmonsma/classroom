@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach Timer</title>
+    <link rel="icon" type="image/png" id="favicon">
+    <style>
+
+        @keyframes flashAnimation {
+            0% { }
+            60% { background-color: black;  }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            transition: background-color 2s ease;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .circle {
+            color: #fff;
+            font-size: 136px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px auto;
+            transition: background-color 2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .time-display {
+            font-size: 24px;
+            color: black;
+        }
+
+        .schedule-info {
+            margin-top: 10px;
+            color: black;
+            font-size: 16px;
+        }
+
+        .teach-info {
+            margin-top: 6px;
+            color: black;
+            font-size: 16px;
+        }
+
+        .flash {
+            animation: flashAnimation .7s infinite;
+        }
+
+        #textDisplay {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            font-family: 'San Francisco', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        }
+
+    </style>
+</head>
+<body id="pageBody">
+    <div class="container">
+        <div class="circle" id="colorCircle"></div>
+        <div id="textDisplay">
+            <div class="time-display" id="timeDisplay"></div>
+            <div class="schedule-info" id="scheduleInfo"></div>
+            <div class="teach-info" id="teachInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================================
+        // PERIOD SCHEDULE (from periodindicator.html) — drives the circle
+        // =====================================================================
+        let periodTestIndex = 0; // Shift+click the circle to advance (testing)
+        let periodTestIndexMax = 11;
+
+        const colorScheduleComplete = [{
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:53": "#0f4c9d", // Second Period
+            "09:40": "#da291c", // Third Period
+            "10:27": "#662d91", // Fourth Period
+            "11:14": "#f15a29", // Fifth Period/Elementary Lunch
+            "11:58": "#998877",  // Secondary Lunch
+            "12:34": "#006747", // Sixth Period
+            "13:21": "#702f2c", // Seventh Period
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        },{
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:45": "#887766", // Chapel
+            "09:23": "#0f4c9d", // Second Period
+            "10:05": "#da291c", // Third Period
+            "10:47": "#662d91", // Fourth Period
+            "11:29": "#f15a29", // Fifth Period/Elementary Lunch
+            "12:08": "#998877", // Secondary Lunch
+            "12:44": "#006747", // Sixth Period
+            "13:26": "#702f2c", // Seventh Period
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        }];
+
+        const colorMeaning = [
+            {"#eeddcc": " "},
+            {"#0f4c9d": "2nd Period"},
+            {"#662d91": "4th Period"},
+            {"#da291c": "3rd Period"},
+            {"#006747": "6th Period"},
+            {"#fdb913": "1st Period"},
+            {"#f15a29": "5th Period"},
+            {"#998877": "Lunch"},
+            {"#702f2c": "7th Period"},
+            {"#000000": "8th Period"},
+            {"#887766": "Chapel"},
+        ];
+
+        // A short one-character label used for the circle/favicon (matches the
+        // "first letter of the meaning" behavior of the original app).
+        function shortLabel(meaning) {
+            if (!meaning || meaning.trim() === '') return null; // blank/"None" periods get no label
+            if (meaning === 'Lunch') return 'L';
+            const digitMatch = meaning.match(/^(\d+)/); // "1st Period" -> "1", "5th Period / Elem Lunch" -> "5"
+            if (digitMatch) return digitMatch[1];
+            return meaning.charAt(0).toUpperCase(); // e.g. "Chapel" -> "C"
+        }
+
+        function minutesToTimeStr(totalMinutes) {
+            const hours = Math.floor(totalMinutes / 60);
+            const minutes = totalMinutes % 60;
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+        }
+
+        const TRANSITION_MINUTES = 3;
+        const TRANSITION_COLOR = '#5a6268'; // plain neutral gray, distinct from period colors
+
+        // Builds the day's schedule, inserting a short "transition" entry
+        // TRANSITION_MINUTES before each period change (e.g. "1/2" before 2nd
+        // period starts) so the circle can flag the changeover.
+        function buildPeriodScheduleEntries(colorSchedule) {
+            const raw = Object.entries(colorSchedule).map(([time, color]) => {
+                const [hours, minutes] = time.split(':').map(Number);
+                let meaning = " ";
+                for (let i = 0; i < colorMeaning.length; i++) {
+                    if (colorMeaning[i][color]) meaning = colorMeaning[i][color];
+                }
+                return { timeInMinutes: hours * 60 + minutes, timeString: time, color, meaning };
+            }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
+
+            const entries = [];
+
+            for (let i = 0; i < raw.length; i++) {
+                const cur = raw[i];
+
+                if (i > 0) {
+                    const prev = raw[i - 1];
+                    const prevLabel = shortLabel(prev.meaning);
+                    const curLabel = shortLabel(cur.meaning);
+                    const transitionStart = cur.timeInMinutes - TRANSITION_MINUTES;
+
+                    // Only insert a transition if both sides are real, named periods
+                    // (skips the "None" gaps before/after the school day) and there's
+                    // room for it before the previous entry.
+                    if (prevLabel && curLabel && transitionStart > prev.timeInMinutes) {
+                        entries.push({
+                            timeInMinutes: transitionStart,
+                            timeString: minutesToTimeStr(transitionStart),
+                            color: TRANSITION_COLOR,
+                            meaning: `${prev.meaning.substr(0, 3)} / ${cur.meaning.substr(0, 3)}`,
+                            circleLabel: `${prevLabel}/${curLabel}`,
+                            isTransition: true
+                        });
+                    }
+                }
+
+                entries.push({
+                    timeInMinutes: cur.timeInMinutes,
+                    timeString: cur.timeString,
+                    color: cur.color,
+                    meaning: cur.meaning,
+                    circleLabel: shortLabel(cur.meaning) || ' ',
+                    isTransition: false
+                });
+            }
+
+            return entries;
+        }
+
+        function getCurrentPeriodColor() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const colorSchedule = (dayOfWeek === 3) ? colorScheduleComplete[1] : colorScheduleComplete[0];
+
+            const scheduleEntries = buildPeriodScheduleEntries(colorSchedule);
+
+            periodTestIndexMax = scheduleEntries.length;
+
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+            let activeSchedule = scheduleEntries[scheduleEntries.length - 1];
+            let nextSchedule = scheduleEntries[0];
+            let schedulePosition = 0;
+
+            for (let i = 0; i < scheduleEntries.length; i++) {
+                if (currentMinutes >= scheduleEntries[i].timeInMinutes) {
+                    schedulePosition = i;
+                }
+            }
+
+            let index = schedulePosition + periodTestIndex;
+            if (index >= scheduleEntries.length) index -= scheduleEntries.length;
+
+            activeSchedule = scheduleEntries[index];
+            if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
+
+            return {
+                color: activeSchedule.color,
+                timeString: activeSchedule.timeString,
+                meaning: activeSchedule.meaning,
+                circleLabel: activeSchedule.circleLabel,
+                isTransition: activeSchedule.isTransition,
+                nextColor: nextSchedule.color,
+                nextTimeString: nextSchedule.timeString,
+                nextMeaning: nextSchedule.meaning
+            };
+        }
+
+        // =====================================================================
+        // TEACH SCHEDULE (from teach.html) — drives the body background color
+        // =====================================================================
+        let teachTestIndex = 0; // Shift+click anywhere outside the circle to advance (testing)
+        let teachTestIndexMax = 7;
+
+        const teachColorScheduleComplete = [{
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:00": "#FFD700", // Gold - Prayer
+            "08:09": "#32CD32", // Lime Green - Go
+            "08:44": "#FFA500", // Orange - Finish Up
+            "08:48": "#FF6347", // Tomato - Send Off
+            "08:50": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:53": "#FFD700", // Gold - Prayer
+            "08:56": "#32CD32", // Lime Green - Go
+            "09:27": "#FFA500", // Orange - Finish Up
+            "09:34": "#FF6347", // Tomato - Send Off
+            "09:37": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "09:40": "#FFD700", // Gold - Prayer
+            "09:43": "#32CD32", // Lime Green - Go
+            "10:14": "#FFA500", // Orange - Finish Up
+            "10:21": "#FF6347", // Tomato - Send Off
+            "10:24": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "10:27": "#FFD700", // Gold - Prayer
+            "10:30": "#32CD32", // Lime Green - Go
+            "11:05": "#FFA500", // Orange - Finish Up
+            "11:09": "#FF6347", // Tomato - Send Off
+            "11:11": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "11:14": "#FFD700", // Gold - Prayer
+            "11:17": "#32CD32", // Lime Green - Go
+            "11:52": "#FFA500", // Orange - Finish Up
+            "11:56": "#FF6347", // Tomato - Send Off
+            "11:58": "#2F4F4F",  // Dark Slate Gray
+
+            "12:34": "#FFD700", // Gold - Prayer
+            "12:37": "#32CD32", // Lime Green - Go
+            "13:12": "#FFA500", // Orange - Finish Up
+            "13:16": "#FF6347", // Tomato - Send Off
+            "13:18": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "13:21": "#FFD700", // Gold - Prayer
+            "13:24": "#32CD32", // Lime Green - Go
+            "13:59": "#FFA500", // Orange - Finish Up
+            "14:03": "#FF6347", // Tomato - Send Off
+            "14:05": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "14:08": "#FFD700", // Gold - Prayer
+            "14:11": "#32CD32", // Lime Green - Go
+            "14:46": "#FFA500", // Orange - Finish Up
+            "14:50": "#FF6347", // Tomato - Send Off
+            "14:52": "#2F4F4F"  // Dark Slate Gray
+
+        },{
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:00": "#FFD700", // Gold - Prayer
+            "08:08": "#32CD32", // Lime Green - Go
+            "08:39": "#FFA500", // Orange - Finish Up
+            "08:43": "#FF6347", // Tomato - Send Off
+            "08:45": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "09:23": "#FFD700", // Gold - Prayer
+            "09:26": "#32CD32", // Lime Green - Go
+            "09:52": "#FFA500", // Orange - Finish Up
+            "09:59": "#FF6347", // Tomato - Send Off
+            "10:02": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "10:05": "#FFD700", // Gold - Prayer
+            "10:08": "#32CD32", // Lime Green - Go
+            "10:38": "#FFA500", // Orange - Finish Up
+            "10:42": "#FF6347", // Tomato - Send Off
+            "10:44": "#2F4F4F",  // Dark Slate Gray
+
+            "10:47": "#FFD700", // Gold - Prayer
+            "10:50": "#32CD32", // Lime Green - Go
+            "11:20": "#FFA500", // Orange - Finish Up
+            "11:24": "#FF6347", // Tomato - Send Off
+            "11:26": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "11:29": "#FFD700", // Gold - Prayer
+            "11:32": "#32CD32", // Lime Green - Go
+            "12:02": "#FFA500", // Orange - Finish Up
+            "12:06": "#FF6347", // Tomato - Send Off
+            "12:08": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "12:44": "#FFD700", // Gold - Prayer
+            "12:47": "#32CD32", // Lime Green - Go
+            "13:17": "#FFA500", // Orange - Finish Up
+            "13:21": "#FF6347", // Tomato - Send Off
+            "13:23": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "13:26": "#FFD700", // Gold - Prayer
+            "13:29": "#32CD32", // Lime Green - Go
+            "13:59": "#FFA500", // Orange - Finish Up
+            "14:03": "#FF6347", // Tomato - Send Off
+            "14:05": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "14:08": "#FFD700", // Gold - Prayer
+            "14:11": "#32CD32", // Lime Green - Go
+            "14:46": "#FFA500", // Orange - Finish Up
+            "14:50": "#FF6347", // Tomato - Send Off
+            "14:52": "#2F4F4F"  // Dark Slate Gray
+        }];
+
+        const teachColorMeaning = [
+            {"#2F4F4F": "Break"},
+            {"#87CEEB": "Get Ready"},
+            {"#FFD700": "Prayer"},
+            {"#32CD32": "Teach"},
+            {"#FFA500": "Finish Up"},
+            {"#FF6347": "Send Off"},
+            {"#9370DB": "Night"},
+        ];
+
+        function getCurrentTeachColor() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const colorSchedule = (dayOfWeek === 3) ? teachColorScheduleComplete[1] : teachColorScheduleComplete[0];
+
+            const scheduleEntries = Object.entries(colorSchedule).map(([time, color]) => {
+                const [hours, minutes] = time.split(':').map(Number);
+                return { timeInMinutes: hours * 60 + minutes, timeString: time, color: color };
+            }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
+
+            teachTestIndexMax = scheduleEntries.length;
+
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+            let activeSchedule = scheduleEntries[scheduleEntries.length - 1];
+            let nextSchedule = scheduleEntries[0];
+            let schedulePosition = 0;
+
+            for (let i = 0; i < scheduleEntries.length; i++) {
+                if (currentMinutes >= scheduleEntries[i].timeInMinutes) {
+                    schedulePosition = i;
+                }
+            }
+
+            let index = schedulePosition + teachTestIndex;
+            if (index >= scheduleEntries.length) index -= scheduleEntries.length;
+
+            activeSchedule = scheduleEntries[index];
+            if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
+
+            return {
+                color: activeSchedule.color,
+                timeString: activeSchedule.timeString,
+                nextColor: nextSchedule.color,
+                nextTimeString: nextSchedule.timeString
+            };
+        }
+
+        // =====================================================================
+        // Favicon (letter badge, from periodindicator.html)
+        // =====================================================================
+        function generateFavicon(color, meaning) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = 24;
+            canvas.height = 24;
+
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(12, 12, 10, 0, 2 * Math.PI);
+            ctx.fill();
+
+            if (meaning && meaning.length > 0) {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(meaning.charAt(0).toUpperCase(), 12, 13.5);
+            }
+
+            return canvas.toDataURL('image/png');
+        }
+
+        function updateFavicon(color, meaning) {
+            const favicon = document.getElementById('favicon');
+            favicon.href = generateFavicon(color, meaning);
+        }
+
+        // =====================================================================
+        // Combined update loop
+        // =====================================================================
+        function updateDisplay() {
+            const body = document.getElementById('pageBody');
+            const circle = document.getElementById('colorCircle');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const scheduleInfo = document.getElementById('scheduleInfo');
+            const nextScheduleInfo = document.getElementById('nextScheduleInfo');
+            const teachInfo = document.getElementById('teachInfo');
+
+            const now = new Date();
+            const currentTime = now.toLocaleTimeString();
+
+            // --- Period (circle) ---
+            const periodInfo = getCurrentPeriodColor();
+            circle.style.backgroundColor = periodInfo.color;
+            circle.textContent = periodInfo.circleLabel;
+            circle.style.fontSize = periodInfo.isTransition ? '56px' : '136px';
+
+            const pageTitle = document.getElementsByTagName('title')[0];
+            updateFavicon(periodInfo.color, periodInfo.circleLabel);
+            pageTitle.textContent = periodInfo.meaning;
+            timeDisplay.textContent = currentTime;
+            scheduleInfo.textContent = `${periodInfo.meaning} → ${periodInfo.nextTimeString}`;
+
+            // --- Teach schedule drives the body background color ---
+            const teachColorInfo = getCurrentTeachColor();
+            body.style.backgroundColor = teachColorInfo.color;
+
+            let teachMeaning = "Unknown";
+            let nextTeachMeaning = "Unknown";
+            for (let i = 0; i < teachColorMeaning.length; i++) {
+                if (teachColorMeaning[i][teachColorInfo.color]) teachMeaning = teachColorMeaning[i][teachColorInfo.color];
+                if (teachColorMeaning[i][teachColorInfo.nextColor]) nextTeachMeaning = teachColorMeaning[i][teachColorInfo.nextColor];
+            }
+
+            if (teachColorInfo.color === "#FFA500" || teachColorInfo.color === "#FFD700") {
+                body.classList.add('flash');
+            } else {
+                body.classList.remove('flash');
+            }
+
+            teachInfo.textContent = `${teachMeaning} → ${teachColorInfo.nextTimeString}`;
+        }
+
+        function advancePeriod(e) {
+            if (e.shiftKey) {
+                periodTestIndex++;
+                if (periodTestIndex >= periodTestIndexMax) periodTestIndex = 0;
+                updateDisplay();
+            }
+        }
+
+        function advanceTeach(e) {
+            // Shift+click anywhere outside the circle advances the teach (body) schedule
+            if (e.shiftKey && e.target.id !== 'colorCircle') {
+                teachTestIndex++;
+                if (teachTestIndex >= teachTestIndexMax) teachTestIndex = 0;
+                updateDisplay();
+            }
+        }
+
+        // Update immediately and then every second
+        updateDisplay();
+        setInterval(updateDisplay, 1000);
+
+        // Shift+click the circle to advance the period test index
+        document.getElementById('colorCircle').addEventListener('click', advancePeriod);
+        // Shift+click anywhere else on the page to advance the teach test index
+        document.body.addEventListener('click', advanceTeach);
+    </script>
+</body>
+</html>
