@@ -228,6 +228,18 @@
             activeSchedule = scheduleEntries[index];
             if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
 
+            //Calculate time until next schedule time
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
+            const nextTimeParts = nextSchedule.timeString.split(':').map(Number);
+            const nextTimeMinutes = nextTimeParts[0] * 60 + nextTimeParts[1];
+            let minutesRemaining = nextTimeMinutes - nowMinutes;
+            if (minutesRemaining < 0) {
+                minutesRemaining += 24 * 60; // Wrap around to the next day
+            }
+            const hoursRemaining = Math.floor(minutesRemaining / 60);
+            const minutesOnlyRemaining = minutesRemaining % 60;
+            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining}`;
+
             return {
                 color: activeSchedule.color,
                 timeString: activeSchedule.timeString,
@@ -236,7 +248,8 @@
                 isTransition: activeSchedule.isTransition,
                 nextColor: nextSchedule.color,
                 nextTimeString: nextSchedule.timeString,
-                nextMeaning: nextSchedule.meaning
+                nextMeaning: nextSchedule.meaning,
+                timeRemaining: timeRemainingStr
             };
         }
 
@@ -430,7 +443,7 @@
         {}];
 
         const teachColorMeaning = [
-            {"#2F4F4F": "Break"},
+            {"#2F4F4F": "Free"},
             {"#87CEEB": "Get Ready"},
             {"#FFD700": "Prayer"},
             {"#32CD32": "Teach"},
@@ -469,11 +482,24 @@
             activeSchedule = scheduleEntries[index];
             if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
 
+            //Calculate difference between current time and next schedule time
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
+            const nextTimeParts = nextSchedule.timeString.split(':').map(Number);  
+            const nextTimeMinutes = nextTimeParts[0] * 60 + nextTimeParts[1];
+            let minutesRemaining = nextTimeMinutes - nowMinutes;
+            if (minutesRemaining < 0) {
+                minutesRemaining += 24 * 60; // Wrap around to the next day
+            }
+            const hoursRemaining = Math.floor(minutesRemaining / 60);
+            const minutesOnlyRemaining = minutesRemaining % 60;
+            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining}`;
+
             return {
                 color: activeSchedule.color,
                 timeString: activeSchedule.timeString,
                 nextColor: nextSchedule.color,
-                nextTimeString: nextSchedule.timeString
+                nextTimeString: nextSchedule.timeString,
+                timeRemaining: timeRemainingStr
             };
         }
 
@@ -532,7 +558,7 @@
             updateFavicon(periodInfo.color, periodInfo.circleLabel);
             pageTitle.textContent = periodInfo.meaning;
             timeDisplay.textContent = currentTime;
-            scheduleInfo.textContent = `${periodInfo.meaning} → ${periodInfo.nextTimeString}`;
+            scheduleInfo.textContent = `${periodInfo.meaning} → ${periodInfo.nextTimeString} (-${periodInfo.timeRemaining})`;
 
             // --- Teach schedule drives the body background color ---
             const teachColorInfo = getCurrentTeachColor();
@@ -551,7 +577,7 @@
                 body.classList.remove('flash');
             }
 
-            teachInfo.textContent = `${teachMeaning} → ${teachColorInfo.nextTimeString}`;
+            teachInfo.textContent = `${teachMeaning} → ${teachColorInfo.nextTimeString} (-${teachColorInfo.timeRemaining})`;
         }
 
         function advancePeriod(e) {
