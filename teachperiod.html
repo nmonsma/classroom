@@ -238,7 +238,7 @@
             }
             const hoursRemaining = Math.floor(minutesRemaining / 60);
             const minutesOnlyRemaining = minutesRemaining % 60;
-            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining}`;
+            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining.toString().padStart(2, '0')}`;
 
             return {
                 color: activeSchedule.color,
@@ -491,8 +491,10 @@
                 minutesRemaining += 24 * 60; // Wrap around to the next day
             }
             const hoursRemaining = Math.floor(minutesRemaining / 60);
+            
+            //Calculate minutes only remaining as a string with leading zero if necessary
             const minutesOnlyRemaining = minutesRemaining % 60;
-            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining}`;
+            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining.toString().padStart(2, '0')}`;
 
             return {
                 color: activeSchedule.color,
