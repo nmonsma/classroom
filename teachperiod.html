@@ -81,8 +81,8 @@
         <div class="circle" id="colorCircle"></div>
         <div id="textDisplay">
             <div class="time-display" id="timeDisplay"></div>
-            <div class="schedule-info" id="scheduleInfo"></div>
             <div class="teach-info" id="teachInfo"></div>
+            <div class="schedule-info" id="scheduleInfo"></div>
         </div>
     </div>
 
@@ -96,26 +96,41 @@
         const colorScheduleComplete = [{
             "00:00": "#eeddcc",  // None
             "08:00": "#fdb913", // First Period
+            "08:50": "#5a6268", // Transition: 1st / 2nd
             "08:53": "#0f4c9d", // Second Period
+            "09:37": "#5a6268", // Transition: 2nd / 3rd
             "09:40": "#da291c", // Third Period
+            "10:24": "#5a6268", // Transition: 3rd / 4th
             "10:27": "#662d91", // Fourth Period
+            "11:11": "#5a6268", // Transition: 4th / 5th
             "11:14": "#f15a29", // Fifth Period/Elementary Lunch
-            "11:58": "#998877",  // Secondary Lunch
+            "11:58": "#998877", // Secondary Lunch
+            "12:31": "#5a6268", // Transition: Lunch / 6th
             "12:34": "#006747", // Sixth Period
+            "13:18": "#5a6268", // Transition: 6th / 7th
             "13:21": "#702f2c", // Seventh Period
+            "14:05": "#5a6268", // Transition: 7th / 8th
             "14:08": "#000000", // Eighth
             "14:52": "#eeddcc"  // None
         },{
             "00:00": "#eeddcc",  // None
             "08:00": "#fdb913", // First Period
+            "08:42": "#5a6268", // Transition: 1st / Chapel
             "08:45": "#887766", // Chapel
+            "09:20": "#5a6268", // Transition: Chapel / 2nd
             "09:23": "#0f4c9d", // Second Period
+            "10:02": "#5a6268", // Transition: 2nd / 3rd
             "10:05": "#da291c", // Third Period
+            "10:44": "#5a6268", // Transition: 3rd / 4th
             "10:47": "#662d91", // Fourth Period
+            "11:26": "#5a6268", // Transition: 4th / 5th
             "11:29": "#f15a29", // Fifth Period/Elementary Lunch
             "12:08": "#998877", // Secondary Lunch
+            "12:41": "#5a6268", // Transition: Lunch / 6th
             "12:44": "#006747", // Sixth Period
+            "13:23": "#5a6268", // Transition: 6th / 7th
             "13:26": "#702f2c", // Seventh Period
+            "14:05": "#5a6268", // Transition: 7th / 8th
             "14:08": "#000000", // Eighth
             "14:52": "#eeddcc"  // None
         }];
@@ -132,6 +147,7 @@
             {"#702f2c": "7th Period"},
             {"#000000": "8th Period"},
             {"#887766": "Chapel"},
+            {"#5a6268": "Transition"},
         ];
 
         // A short one-character label used for the circle/favicon (matches the
@@ -153,56 +169,36 @@
         const TRANSITION_MINUTES = 3;
         const TRANSITION_COLOR = '#5a6268'; // plain neutral gray, distinct from period colors
 
-        // Builds the day's schedule, inserting a short "transition" entry
-        // TRANSITION_MINUTES before each period change (e.g. "1/2" before 2nd
-        // period starts) so the circle can flag the changeover.
-        function buildPeriodScheduleEntries(colorSchedule) {
-            const raw = Object.entries(colorSchedule).map(([time, color]) => {
+        function getScheduleEntries(colorSchedule) {
+            const entries = Object.entries(colorSchedule).map(([time, color]) => {
                 const [hours, minutes] = time.split(':').map(Number);
                 let meaning = " ";
                 for (let i = 0; i < colorMeaning.length; i++) {
                     if (colorMeaning[i][color]) meaning = colorMeaning[i][color];
                 }
-                return { timeInMinutes: hours * 60 + minutes, timeString: time, color, meaning };
+                return {
+                    timeInMinutes: hours * 60 + minutes,
+                    timeString: time,
+                    color,
+                    meaning,
+                    circleLabel: shortLabel(meaning) || ' ',
+                    isTransition: color === TRANSITION_COLOR
+                };
             }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
 
-            const entries = [];
+            return entries.map((entry, index, all) => {
+                if (!entry.isTransition) return entry;
 
-            for (let i = 0; i < raw.length; i++) {
-                const cur = raw[i];
+                const prev = all[index - 1];
+                const next = all[index + 1];
+                if (!prev || !next) return entry;
 
-                if (i > 0) {
-                    const prev = raw[i - 1];
-                    const prevLabel = shortLabel(prev.meaning);
-                    const curLabel = shortLabel(cur.meaning);
-                    const transitionStart = cur.timeInMinutes - TRANSITION_MINUTES;
-
-                    // Only insert a transition if both sides are real, named periods
-                    // (skips the "None" gaps before/after the school day) and there's
-                    // room for it before the previous entry.
-                    if (prevLabel && curLabel && transitionStart > prev.timeInMinutes) {
-                        entries.push({
-                            timeInMinutes: transitionStart,
-                            timeString: minutesToTimeStr(transitionStart),
-                            color: TRANSITION_COLOR,
-                            meaning: `${prev.meaning.substr(0, 3)} / ${cur.meaning.substr(0, 3)}`,
-                            circleLabel: `${prevLabel}/${curLabel}`,
-                            isTransition: true
-                        });
-                    }
-                }
-
-                entries.push({
-                    timeInMinutes: cur.timeInMinutes,
-                    timeString: cur.timeString,
-                    color: cur.color,
-                    meaning: cur.meaning,
-                    circleLabel: shortLabel(cur.meaning) || ' ',
-                    isTransition: false
-                });
-            }
-
-            return entries;
+                const prevLabel = shortLabel(prev.meaning);
+                const nextLabel = shortLabel(next.meaning);
+                entry.meaning = `${prev.meaning.substr(0, 3)} / ${next.meaning.substr(0, 3)}`;
+                entry.circleLabel = `${prevLabel || ''}/${nextLabel || ''}`;
+                return entry;
+            });
         }
 
         function getCurrentPeriodColor() {
@@ -210,7 +206,7 @@
             const dayOfWeek = now.getDay();
             const colorSchedule = (dayOfWeek === 3) ? colorScheduleComplete[1] : colorScheduleComplete[0];
 
-            const scheduleEntries = buildPeriodScheduleEntries(colorSchedule);
+            const scheduleEntries = getScheduleEntries(colorSchedule);
 
             periodTestIndexMax = scheduleEntries.length;
 
