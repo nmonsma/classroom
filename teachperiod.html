@@ -558,7 +558,7 @@
             updateFavicon(periodInfo.color, periodInfo.circleLabel);
             pageTitle.textContent = periodInfo.meaning;
             timeDisplay.textContent = currentTime;
-            scheduleInfo.textContent = `${periodInfo.meaning} → ${periodInfo.nextTimeString} (-${periodInfo.timeRemaining})`;
+            scheduleInfo.textContent = `${periodInfo.meaning} (-${periodInfo.timeRemaining}) → ${periodInfo.nextTimeString}`;
 
             // --- Teach schedule drives the body background color ---
             const teachColorInfo = getCurrentTeachColor();
@@ -577,7 +577,7 @@
                 body.classList.remove('flash');
             }
 
-            teachInfo.textContent = `${teachMeaning} → ${teachColorInfo.nextTimeString} (-${teachColorInfo.timeRemaining})`;
+            teachInfo.textContent = `${teachMeaning} (-${teachColorInfo.timeRemaining}) → ${teachColorInfo.nextTimeString}`;
         }
 
         function advancePeriod(e) {
