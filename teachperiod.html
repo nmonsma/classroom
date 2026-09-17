@@ -246,14 +246,21 @@
         let teachTestIndex = 0; // Shift+click anywhere outside the circle to advance (testing)
         let teachTestIndexMax = 7;
 
-        const teachColorScheduleComplete = [{
+        const teachColorScheduleComplete = [
+        {},
+        { // Monday/Friday schedule
             "00:00": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "08:00": "#FFD700", // Gold - Prayer
-            "08:09": "#32CD32", // Lime Green - Go
-            "08:44": "#FFA500", // Orange - Finish Up
-            "08:48": "#FF6347", // Tomato - Send Off
-            "08:50": "#2F4F4F",  // Dark Slate Gray - Break
+        },{ //Tuesday/Thursday schedule
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+
+            // "08:00": "#FFD700", // Gold - Prayer
+            // "08:09": "#32CD32", // Lime Green - Go
+            // "08:44": "#FFA500", // Orange - Finish Up
+            // "08:48": "#FF6347", // Tomato - Send Off
+            // "08:50": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:43": "#87CEEB", // Blue - Get Ready
 
             "08:53": "#FFD700", // Gold - Prayer
             "08:56": "#32CD32", // Lime Green - Go
@@ -261,17 +268,19 @@
             "09:34": "#FF6347", // Tomato - Send Off
             "09:37": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "09:40": "#FFD700", // Gold - Prayer
-            "09:43": "#32CD32", // Lime Green - Go
-            "10:14": "#FFA500", // Orange - Finish Up
-            "10:21": "#FF6347", // Tomato - Send Off
-            "10:24": "#2F4F4F",  // Dark Slate Gray - Break
+            // "09:40": "#FFD700", // Gold - Prayer
+            // "09:43": "#32CD32", // Lime Green - Go
+            // "10:14": "#FFA500", // Orange - Finish Up
+            // "10:21": "#FF6347", // Tomato - Send Off
+            // "10:24": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "10:27": "#FFD700", // Gold - Prayer
-            "10:30": "#32CD32", // Lime Green - Go
-            "11:05": "#FFA500", // Orange - Finish Up
-            "11:09": "#FF6347", // Tomato - Send Off
-            "11:11": "#2F4F4F",  // Dark Slate Gray - Break
+            // "10:27": "#FFD700", // Gold - Prayer
+            // "10:30": "#32CD32", // Lime Green - Go
+            // "11:05": "#FFA500", // Orange - Finish Up
+            // "11:09": "#FF6347", // Tomato - Send Off
+            // "11:11": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "11:04": "#87CEEB", // Blue - Get Ready
 
             "11:14": "#FFD700", // Gold - Prayer
             "11:17": "#32CD32", // Lime Green - Go
@@ -279,11 +288,13 @@
             "11:56": "#FF6347", // Tomato - Send Off
             "11:58": "#2F4F4F",  // Dark Slate Gray
 
-            "12:34": "#FFD700", // Gold - Prayer
-            "12:37": "#32CD32", // Lime Green - Go
-            "13:12": "#FFA500", // Orange - Finish Up
-            "13:16": "#FF6347", // Tomato - Send Off
-            "13:18": "#2F4F4F",  // Dark Slate Gray - Break
+            // "12:34": "#FFD700", // Gold - Prayer
+            // "12:37": "#32CD32", // Lime Green - Go
+            // "13:12": "#FFA500", // Orange - Finish Up
+            // "13:16": "#FF6347", // Tomato - Send Off
+            // "13:18": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "13:11": "#87CEEB", // Blue - Get Ready
 
             "13:21": "#FFD700", // Gold - Prayer
             "13:24": "#32CD32", // Lime Green - Go
@@ -291,20 +302,22 @@
             "14:03": "#FF6347", // Tomato - Send Off
             "14:05": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "14:08": "#FFD700", // Gold - Prayer
-            "14:11": "#32CD32", // Lime Green - Go
-            "14:46": "#FFA500", // Orange - Finish Up
-            "14:50": "#FF6347", // Tomato - Send Off
-            "14:52": "#2F4F4F"  // Dark Slate Gray
+            // "14:08": "#FFD700", // Gold - Prayer
+            // "14:11": "#32CD32", // Lime Green - Go
+            // "14:46": "#FFA500", // Orange - Finish Up
+            // "14:50": "#FF6347", // Tomato - Send Off
+            // "14:52": "#2F4F4F"  // Dark Slate Gray
 
-        },{
+        },{ // Wednesday (Chapel) schedule
             "00:00": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "08:00": "#FFD700", // Gold - Prayer
-            "08:08": "#32CD32", // Lime Green - Go
-            "08:39": "#FFA500", // Orange - Finish Up
-            "08:43": "#FF6347", // Tomato - Send Off
-            "08:45": "#2F4F4F",  // Dark Slate Gray - Break
+            // "08:00": "#FFD700", // Gold - Prayer
+            // "08:08": "#32CD32", // Lime Green - Go
+            // "08:39": "#FFA500", // Orange - Finish Up
+            // "08:43": "#FF6347", // Tomato - Send Off
+            // "08:45": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:35": "#87CEEB", // Blue - Get Ready
 
             "09:23": "#FFD700", // Gold - Prayer
             "09:26": "#32CD32", // Lime Green - Go
@@ -312,17 +325,19 @@
             "09:59": "#FF6347", // Tomato - Send Off
             "10:02": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "10:05": "#FFD700", // Gold - Prayer
-            "10:08": "#32CD32", // Lime Green - Go
-            "10:38": "#FFA500", // Orange - Finish Up
-            "10:42": "#FF6347", // Tomato - Send Off
-            "10:44": "#2F4F4F",  // Dark Slate Gray
+            // "10:05": "#FFD700", // Gold - Prayer
+            // "10:08": "#32CD32", // Lime Green - Go
+            // "10:38": "#FFA500", // Orange - Finish Up
+            // "10:42": "#FF6347", // Tomato - Send Off
+            // "10:44": "#2F4F4F",  // Dark Slate Gray
 
-            "10:47": "#FFD700", // Gold - Prayer
-            "10:50": "#32CD32", // Lime Green - Go
-            "11:20": "#FFA500", // Orange - Finish Up
-            "11:24": "#FF6347", // Tomato - Send Off
-            "11:26": "#2F4F4F",  // Dark Slate Gray - Break
+            // "10:47": "#FFD700", // Gold - Prayer
+            // "10:50": "#32CD32", // Lime Green - Go
+            // "11:20": "#FFA500", // Orange - Finish Up
+            // "11:24": "#FF6347", // Tomato - Send Off
+            // "11:26": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "11:19": "#87CEEB", // Blue - Get Ready
 
             "11:29": "#FFD700", // Gold - Prayer
             "11:32": "#32CD32", // Lime Green - Go
@@ -330,11 +345,13 @@
             "12:06": "#FF6347", // Tomato - Send Off
             "12:08": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "12:44": "#FFD700", // Gold - Prayer
-            "12:47": "#32CD32", // Lime Green - Go
-            "13:17": "#FFA500", // Orange - Finish Up
-            "13:21": "#FF6347", // Tomato - Send Off
-            "13:23": "#2F4F4F",  // Dark Slate Gray - Break
+            // "12:44": "#FFD700", // Gold - Prayer
+            // "12:47": "#32CD32", // Lime Green - Go
+            // "13:17": "#FFA500", // Orange - Finish Up
+            // "13:21": "#FF6347", // Tomato - Send Off
+            // "13:23": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "13:16": "#87CEEB", // Blue - Get Ready
 
             "13:26": "#FFD700", // Gold - Prayer
             "13:29": "#32CD32", // Lime Green - Go
@@ -342,12 +359,75 @@
             "14:03": "#FF6347", // Tomato - Send Off
             "14:05": "#2F4F4F",  // Dark Slate Gray - Break
 
-            "14:08": "#FFD700", // Gold - Prayer
-            "14:11": "#32CD32", // Lime Green - Go
-            "14:46": "#FFA500", // Orange - Finish Up
-            "14:50": "#FF6347", // Tomato - Send Off
-            "14:52": "#2F4F4F"  // Dark Slate Gray
-        }];
+            // "14:08": "#FFD700", // Gold - Prayer
+            // "14:11": "#32CD32", // Lime Green - Go
+            // "14:46": "#FFA500", // Orange - Finish Up
+            // "14:50": "#FF6347", // Tomato - Send Off
+            // "14:52": "#2F4F4F"  // Dark Slate Gray
+        },
+        { //Tuesday/Thursday schedule
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+
+            // "08:00": "#FFD700", // Gold - Prayer
+            // "08:09": "#32CD32", // Lime Green - Go
+            // "08:44": "#FFA500", // Orange - Finish Up
+            // "08:48": "#FF6347", // Tomato - Send Off
+            // "08:50": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "08:43": "#87CEEB", // Blue - Get Ready
+
+            "08:53": "#FFD700", // Gold - Prayer
+            "08:56": "#32CD32", // Lime Green - Go
+            "09:27": "#FFA500", // Orange - Finish Up
+            "09:34": "#FF6347", // Tomato - Send Off
+            "09:37": "#2F4F4F",  // Dark Slate Gray - Break
+
+            // "09:40": "#FFD700", // Gold - Prayer
+            // "09:43": "#32CD32", // Lime Green - Go
+            // "10:14": "#FFA500", // Orange - Finish Up
+            // "10:21": "#FF6347", // Tomato - Send Off
+            // "10:24": "#2F4F4F",  // Dark Slate Gray - Break
+
+            // "10:27": "#FFD700", // Gold - Prayer
+            // "10:30": "#32CD32", // Lime Green - Go
+            // "11:05": "#FFA500", // Orange - Finish Up
+            // "11:09": "#FF6347", // Tomato - Send Off
+            // "11:11": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "11:04": "#87CEEB", // Blue - Get Ready
+
+            "11:14": "#FFD700", // Gold - Prayer
+            "11:17": "#32CD32", // Lime Green - Go
+            "11:52": "#FFA500", // Orange - Finish Up
+            "11:56": "#FF6347", // Tomato - Send Off
+            "11:58": "#2F4F4F",  // Dark Slate Gray
+
+            // "12:34": "#FFD700", // Gold - Prayer
+            // "12:37": "#32CD32", // Lime Green - Go
+            // "13:12": "#FFA500", // Orange - Finish Up
+            // "13:16": "#FF6347", // Tomato - Send Off
+            // "13:18": "#2F4F4F",  // Dark Slate Gray - Break
+
+            "13:11": "#87CEEB", // Blue - Get Ready
+
+            "13:21": "#FFD700", // Gold - Prayer
+            "13:24": "#32CD32", // Lime Green - Go
+            "13:59": "#FFA500", // Orange - Finish Up
+            "14:03": "#FF6347", // Tomato - Send Off
+            "14:05": "#2F4F4F",  // Dark Slate Gray - Break
+
+            // "14:08": "#FFD700", // Gold - Prayer
+            // "14:11": "#32CD32", // Lime Green - Go
+            // "14:46": "#FFA500", // Orange - Finish Up
+            // "14:50": "#FF6347", // Tomato - Send Off
+            // "14:52": "#2F4F4F"  // Dark Slate Gray
+
+        },
+        { // Monday/Friday schedule
+            "00:00": "#2F4F4F",  // Dark Slate Gray - Break
+
+        },
+        {}];
 
         const teachColorMeaning = [
             {"#2F4F4F": "Break"},
@@ -362,7 +442,7 @@
         function getCurrentTeachColor() {
             const now = new Date();
             const dayOfWeek = now.getDay();
-            const colorSchedule = (dayOfWeek === 3) ? teachColorScheduleComplete[1] : teachColorScheduleComplete[0];
+            const colorSchedule = teachColorScheduleComplete[dayOfWeek];
 
             const scheduleEntries = Object.entries(colorSchedule).map(([time, color]) => {
                 const [hours, minutes] = time.split(':').map(Number);
@@ -440,7 +520,7 @@
             const teachInfo = document.getElementById('teachInfo');
 
             const now = new Date();
-            const currentTime = now.toLocaleTimeString();
+            const currentTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 
             // --- Period (circle) ---
             const periodInfo = getCurrentPeriodColor();
