@@ -6,7 +6,45 @@ let shiftDepressed = false;
 const items = document.getElementsByClassName('item');
 const scoresElements = document.getElementsByClassName('scores');
 const answers = {
-"quiz22": {
+  "chronicles": {
+    "a-e": "Author\nand Audience",
+    "a": "The book was written for these people who had come back from Babylon.",
+    "b": "Many Christians think Chronicles is this, which is why they skip it.",
+    "c": "The author probably lived in the 5th century B.C., and he had a copy of these two books.",
+    "d": "We know that Chronicles was not written for King Rehoboam for this reason.",
+    "e": "Some people think the author of Chronicles was this man.",
+
+    "f-j": "Structure\nand Emphasis",
+    "f": "The book of Chronicles begins with this kind of text.",
+    "g": "Most of the book of Chronicles is devoted to these two kings.",
+    "h": "The author quoted often from these books.",
+    "i": "This is the main emphasis of Chronicles.",
+    "j": "The genealogies teach the exiles this about themselves.",
+
+    "k-o": "David",
+    "k": "David's adultery with this woman is not mentioned in Chronicles.",
+    "l": "The conspiracy of this son of David is not mentioned in Chronicles.",
+    "m": "The threshing floor of Ornan would become the site of this structure.",
+    "n": "According to Chronicles, this is the ideal king's most important work.",
+    "o": "According to Chronciles, the Law of God and the Throne are related in this way.",
+
+    "p-t": "Solomon\nand the Temple",
+    "p": "This is the famous building that is the focus of Solomon's story in 2 Chronicles.",
+    "q": "Chronicles does not tell about how many of these Solomon had.",
+    "r": "Unlike Kings, Chronicles leaves out the stories of most of the kings from this nation.",
+    "s": "Unlike Kings, Chronicles presents Solomon as being great in this characteristic.",
+    "t": "Chronicles tells the story of this wicked Queen.",
+
+    "u-y": "Kings\nand Christ",
+    "u": "Chronicles tells us that the ideal king is a son of this man.",
+    "v": "In Chronicles, the king enacts the law of God by doing this.",
+    "w": "Chronicles tells us that the ideal king offers a sacrifice to save the people like David did after this event.",
+    "x": "Jesus builds the temple filled with worship by rising from the dead and by doing this.",
+    "y": "In Genesis-Kings, the law and the kingship have this relationship.",
+
+    "z": "FINAL JEOPARDY: Chronicles tells us that Solomon had the support of the people. Similarly, Philippians 2 tells us that this will happen to Jesus at the end."
+  },
+    "quiz22": {
     "a-e": "Definitions",
     "a": "The person whose friends God said \"have not spoken what is right\"",
     "b": "The statement that an argument seems to prove",

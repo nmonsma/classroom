@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach Timer</title>
+    <link rel="icon" type="image/png" id="favicon">
+    <style>
+
+        @keyframes flashAnimation {
+            0% { }
+            60% { background-color: black;  }
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            transition: background-color 2s ease;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .circle {
+            color: #fff;
+            font-size: 136px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px auto;
+            transition: background-color 2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .flash {
+            animation: flashAnimation .7s infinite;
+        }
+
+
+    </style>
+</head>
+<body id="pageBody">
+    <div class="container">
+        <div class="circle" id="colorCircle"></div>
+    </div>
+
+    <script>
+        // =====================================================================
+        // PERIOD SCHEDULE (from periodindicator.html) — drives the circle
+        // =====================================================================
+        let periodTestIndex = 0; // Shift+click the circle to advance (testing)
+        let periodTestIndexMax = 11;
+
+        const colorScheduleComplete = [{
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:50": "#5a6268", // Transition: 1st / 2nd
+            "08:53": "#0f4c9d", // Second Period
+            "09:37": "#5a6268", // Transition: 2nd / 3rd
+            "09:40": "#da291c", // Third Period
+            "10:24": "#5a6268", // Transition: 3rd / 4th
+            "10:27": "#662d91", // Fourth Period
+            "11:11": "#5a6268", // Transition: 4th / 5th
+            "11:14": "#f15a29", // Fifth Period/Elementary Lunch
+            "11:58": "#998877", // Secondary Lunch
+            "12:31": "#5a6268", // Transition: Lunch / 6th
+            "12:34": "#006747", // Sixth Period
+            "13:18": "#5a6268", // Transition: 6th / 7th
+            "13:21": "#702f2c", // Seventh Period
+            "14:05": "#5a6268", // Transition: 7th / 8th
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        },{
+            "00:00": "#eeddcc",  // None
+            "08:00": "#fdb913", // First Period
+            "08:42": "#5a6268", // Transition: 1st / Chapel
+            "08:45": "#887766", // Chapel
+            "09:20": "#5a6268", // Transition: Chapel / 2nd
+            "09:23": "#0f4c9d", // Second Period
+            "10:02": "#5a6268", // Transition: 2nd / 3rd
+            "10:05": "#da291c", // Third Period
+            "10:44": "#5a6268", // Transition: 3rd / 4th
+            "10:47": "#662d91", // Fourth Period
+            "11:26": "#5a6268", // Transition: 4th / 5th
+            "11:29": "#f15a29", // Fifth Period/Elementary Lunch
+            "12:08": "#998877", // Secondary Lunch
+            "12:41": "#5a6268", // Transition: Lunch / 6th
+            "12:44": "#006747", // Sixth Period
+            "13:23": "#5a6268", // Transition: 6th / 7th
+            "13:26": "#702f2c", // Seventh Period
+            "14:05": "#5a6268", // Transition: 7th / 8th
+            "14:08": "#000000", // Eighth
+            "14:52": "#eeddcc"  // None
+        }];
+
+        const colorMeaning = [
+            {"#eeddcc": " "},
+            {"#0f4c9d": "2nd Period"},
+            {"#662d91": "4th Period"},
+            {"#da291c": "3rd Period"},
+            {"#006747": "6th Period"},
+            {"#fdb913": "1st Period"},
+            {"#f15a29": "5th Period"},
+            {"#998877": "Lunch"},
+            {"#702f2c": "7th Period"},
+            {"#000000": "8th Period"},
+            {"#887766": "Chapel"},
+            {"#5a6268": "Transition"},
+        ];
+
+        // A short one-character label used for the circle/favicon (matches the
+        // "first letter of the meaning" behavior of the original app).
+        function shortLabel(meaning) {
+            if (!meaning || meaning.trim() === '') return null; // blank/"None" periods get no label
+            if (meaning === 'Lunch') return 'L';
+            const digitMatch = meaning.match(/^(\d+)/); // "1st Period" -> "1", "5th Period / Elem Lunch" -> "5"
+            if (digitMatch) return digitMatch[1];
+            return meaning.charAt(0).toUpperCase(); // e.g. "Chapel" -> "C"
+        }
+
+        function getScheduleEntries(colorSchedule) {
+            const entries = Object.entries(colorSchedule).map(([time, color]) => {
+                const [hours, minutes] = time.split(':').map(Number);
+                let meaning = " ";
+                for (let i = 0; i < colorMeaning.length; i++) {
+                    if (colorMeaning[i][color]) meaning = colorMeaning[i][color];
+                }
+                return {
+                    timeInMinutes: hours * 60 + minutes,
+                    timeString: time,
+                    color,
+                    meaning,
+                    circleLabel: shortLabel(meaning) || ' ',
+                    isTransition: color === TRANSITION_COLOR
+                };
+            }).sort((a, b) => a.timeInMinutes - b.timeInMinutes);
+
+            return entries.map((entry, index, all) => {
+                if (!entry.isTransition) return entry;
+
+                const prev = all[index - 1];
+                const next = all[index + 1];
+                if (!prev || !next) return entry;
+
+                const prevLabel = shortLabel(prev.meaning);
+                const nextLabel = shortLabel(next.meaning);
+                entry.meaning = `${prev.meaning.substr(0, 3)} / ${next.meaning.substr(0, 3)}`;
+                entry.circleLabel = `${prevLabel || ''}/${nextLabel || ''}`;
+                return entry;
+            });
+        }
+
+        function getCurrentPeriodColor() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const colorSchedule = (dayOfWeek === 3) ? colorScheduleComplete[1] : colorScheduleComplete[0];
+
+            const scheduleEntries = getScheduleEntries(colorSchedule);
+
+            periodTestIndexMax = scheduleEntries.length;
+
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+            let activeSchedule = scheduleEntries[scheduleEntries.length - 1];
+            let nextSchedule = scheduleEntries[0];
+            let schedulePosition = 0;
+
+            for (let i = 0; i < scheduleEntries.length; i++) {
+                if (currentMinutes >= scheduleEntries[i].timeInMinutes) {
+                    schedulePosition = i;
+                }
+            }
+
+            let index = schedulePosition + periodTestIndex;
+            if (index >= scheduleEntries.length) index -= scheduleEntries.length;
+
+            activeSchedule = scheduleEntries[index];
+            if (index < scheduleEntries.length - 1) nextSchedule = scheduleEntries[(index + 1)];
+
+            //Calculate time until next schedule time
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
+            const nextTimeParts = nextSchedule.timeString.split(':').map(Number);
+            const nextTimeMinutes = nextTimeParts[0] * 60 + nextTimeParts[1];
+            let minutesRemaining = nextTimeMinutes - nowMinutes;
+            if (minutesRemaining < 0) {
+                minutesRemaining += 24 * 60; // Wrap around to the next day
+            }
+            const hoursRemaining = Math.floor(minutesRemaining / 60);
+            const minutesOnlyRemaining = minutesRemaining % 60;
+            const timeRemainingStr = `${hoursRemaining}:${minutesOnlyRemaining.toString().padStart(2, '0')}`;
+
+            return {
+                color: activeSchedule.color,
+                timeString: activeSchedule.timeString,
+                meaning: activeSchedule.meaning,
+                circleLabel: activeSchedule.circleLabel,
+                isTransition: activeSchedule.isTransition,
+                nextColor: nextSchedule.color,
+                nextTimeString: nextSchedule.timeString,
+                nextMeaning: nextSchedule.meaning,
+                timeRemaining: timeRemainingStr
+            };
+        }
+
+ 
+
+        // =====================================================================
+        // Favicon (letter badge, from periodindicator.html)
+        // =====================================================================
+        function generateFavicon(color, meaning) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = 24;
+            canvas.height = 24;
+
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(12, 12, 10, 0, 2 * Math.PI);
+            ctx.fill();
+
+            if (meaning && meaning.length > 0) {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(meaning.charAt(0).toUpperCase(), 12, 13.5);
+            }
+
+            return canvas.toDataURL('image/png');
+        }
+
+        function updateFavicon(color, meaning) {
+            const favicon = document.getElementById('favicon');
+            favicon.href = generateFavicon(color, meaning);
+        }
+
+        // =====================================================================
+        // Combined update loop
+        // =====================================================================
+        function updateDisplay() {
+            const body = document.getElementById('pageBody');
+            const circle = document.getElementById('colorCircle');
+
+            // --- Period (circle) ---
+            const periodInfo = getCurrentPeriodColor();
+            circle.style.backgroundColor = periodInfo.color;
+            circle.textContent = periodInfo.circleLabel;
+            circle.style.fontSize = periodInfo.isTransition ? '56px' : '136px';
+
+            const pageTitle = document.getElementsByTagName('title')[0];
+            updateFavicon(periodInfo.color, periodInfo.circleLabel);
+            pageTitle.textContent = periodInfo.meaning;
+            timeDisplay.textContent = currentTime;
+            scheduleInfo.textContent = `${periodInfo.meaning} (-${periodInfo.timeRemaining}) → ${periodInfo.nextTimeString}`;
+
+        }
+
+        function advancePeriod(e) {
+            if (e.shiftKey) {
+                periodTestIndex++;
+                if (periodTestIndex >= periodTestIndexMax) periodTestIndex = 0;
+                updateDisplay();
+            }
+        }
+        // Update immediately and then every second
+        updateDisplay();
+        setInterval(updateDisplay, 1000);
+
+        // Shift+click the circle to advance the period test index
+        document.getElementById('colorCircle').addEventListener('click', advancePeriod);
+    </script>
+</body>
+</html>
